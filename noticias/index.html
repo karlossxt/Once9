@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NOISE MAG | Cultura Sonora</title>
+    <style>
+        /* --- ESTILO BRUTALISTA / EDITORIAL --- */
+        :root {
+            --bg-color: #ffffff;
+            --text-color: #000000;
+            --accent: #ccff00; /* Verde Ácido */
+            --border: 3px solid black;
+            --font-head: 'Arial Black', 'Helvetica Inserat', sans-serif;
+            --font-body: 'Helvetica', 'Arial', sans-serif;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: var(--font-body);
+        }
+
+        a { color: black; text-decoration: none; }
+        a:hover { text-decoration: underline; color: #444; }
+
+        /* --- HEADER --- */
+        header {
+            border-bottom: var(--border);
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            background: white;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-family: var(--font-head);
+            font-size: 2.5rem;
+            letter-spacing: -2px;
+            background: black;
+            color: var(--accent);
+            padding: 0 10px;
+            transform: rotate(-2deg); /* Un toque rebelde */
+        }
+
+        nav a {
+            margin-left: 20px;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+        }
+
+        /* --- CINTILLA DE NOTICIAS (MARQUEE) --- */
+        .breaking-news {
+            background: var(--accent);
+            border-bottom: var(--border);
+            padding: 10px 0;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .marquee-content {
+            display: inline-block;
+            animation: scroll 20s linear infinite;
+            font-weight: bold;
+            font-family: var(--font-head);
+            text-transform: uppercase;
+        }
+
+        @keyframes scroll {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+
+        /* --- GRID PRINCIPAL --- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            border-left: var(--border);
+            border-right: var(--border);
+            min-height: 100vh;
+        }
+
+        /* --- ARTÍCULO DESTACADO (HERO) --- */
+        .hero-post {
+            border-bottom: var(--border);
+            position: relative;
+        }
+
+        .hero-img {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            display: block;
+            filter: grayscale(100%);
+            transition: 0.3s;
+        }
+
+        .hero-post:hover .hero-img { filter: grayscale(0%); }
+
+        .hero-title {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            background: white;
+            border: var(--border);
+            padding: 20px;
+            max-width: 70%;
+            box-shadow: 10px 10px 0px var(--accent);
+        }
+
+        .hero-title h1 {
+            margin: 0;
+            font-family: var(--font-head);
+            font-size: 3rem;
+            line-height: 0.9;
+        }
+
+        /* --- SECCIÓN DIVIDIDA (NOTICIAS + SIDEBAR) --- */
+        .grid-layout {
+            display: grid;
+            grid-template-columns: 2fr 1fr; /* 2 partes noticia, 1 parte barra lateral */
+        }
+
+        .main-feed {
+            border-right: var(--border);
+        }
+
+        .sidebar {
+            background: #f4f4f4;
+        }
+
+        /* --- TARJETAS DE NOTICIAS --- */
+        .news-card {
+            display: flex;
+            border-bottom: 1px solid black;
+            padding: 20px;
+            gap: 20px;
+            transition: 0.2s;
+        }
+
+        .news-card:hover { background: #fffde7; }
+
+        .news-thumb {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border: 2px solid black;
+        }
+
+        .news-info h3 {
+            margin-top: 0;
+            font-family: var(--font-head);
+            font-size: 1.5rem;
+            text-transform: uppercase;
+        }
+
+        .tag {
+            background: black;
+            color: white;
+            padding: 2px 8px;
+            font-size: 0.7rem;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        /* --- SIDEBAR LIST --- */
+        .sidebar-box {
+            padding: 20px;
+            border-bottom: var(--border);
+        }
+
+        .top-track {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            border-bottom: 1px dashed #999;
+            padding-bottom: 10px;
+        }
+        
+        .track-number {
+            font-family: var(--font-head);
+            font-size: 2rem;
+            color: #ccc;
+            margin-right: 10px;
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            .grid-layout { grid-template-columns: 1fr; }
+            .hero-title { position: relative; bottom: auto; left: auto; max-width: 100%; border: none; border-top: var(--border); box-shadow: none; }
+            .hero-title h1 { font-size: 2rem; }
+            .news-card { flex-direction: column; }
+            .news-thumb { width: 100%; height: 200px; }
+            .main-feed { border-right: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- CABECERA -->
+    <header>
+        <div class="logo">NOISE MAG</div>
+        <nav>
+            <a href="#">Noticias</a>
+            <a href="#">Reseñas</a>
+            <a href="#">Entrevistas</a>
+            <a href="#" style="background:black; color:white; padding: 5px 10px;">Suscríbete</a>
+        </nav>
+    </header>
+
+    <!-- BARRA DE ÚLTIMA HORA (SCROLLING) -->
+    <div class="breaking-news">
+        <div class="marquee-content">
+            +++ ÚLTIMA HORA: DAFT PUNK ANUNCIA SU REGRESO (ES BROMA) +++ NUEVO DISCO DE THE CURE +++ ENTREVISTA EXCLUSIVA CON TAME IMPALA ESTA NOCHE +++
+        </div>
+    </div>
+
+    <div class="container">
+        
+        <!-- ARTÍCULO PRINCIPAL (HERO) -->
+        <article class="hero-post">
+            <a href="#">
+                <img src="https://images.unsplash.com/photo-1501612780327-45045538702b?q=80&w=1600&auto=format&fit=crop" class="hero-img" alt="Concierto principal">
+                <div class="hero-title">
+                    <span class="tag">REPORTAJE</span>
+                    <h1>EL RENACIMIENTO DEL VINILO EN MÉXICO</h1>
+                    <p>Visitamos las tiendas más icónicas de la Roma y el Centro.</p>
+                </div>
+            </a>
+        </article>
+
+        <!-- CONTENIDO DIVIDIDO -->
+        <div class="grid-layout">
+            
+            <!-- COLUMNA IZQUIERDA: NOTICIAS -->
+            <section class="main-feed">
+                
+                <article class="news-card">
+                    <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=300&auto=format&fit=crop" class="news-thumb" alt="Noticia 1">
+                    <div class="news-info">
+                        <span class="tag">RESEÑA</span>
+                        <a href="#"><h3>Radiohead: ¿Ok Computer sigue vigente?</h3></a>
+                        <p>Analizamos el clásico de 1997 en el contexto de la Inteligencia Artificial moderna.</p>
+                        <small>Por: Juan Pérez • Hace 2 horas</small>
+                    </div>
+                </article>
+
+                <article class="news-card">
+                    <img src="https://images.unsplash.com/photo-1498038432885-c6f3f1b912ee?q=80&w=300&auto=format&fit=crop" class="news-thumb" alt="Noticia 2">
+                    <div class="news-info">
+                        <span class="tag">INDUSTRIA</span>
+                        <a href="#"><h3>Spotify sube precios en Latinoamérica</h3></a>
+                        <p>La plataforma de streaming ajusta sus tarifas a partir del próximo mes.</p>
+                        <small>Por: Ana López • Hace 5 horas</small>
+                    </div>
+                </article>
+
+                <article class="news-card">
+                    <img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?q=80&w=300&auto=format&fit=crop" class="news-thumb" alt="Noticia 3">
+                    <div class="news-info">
+                        <span class="tag">FESTIVALES</span>
+                        <a href="#"><h3>Cartel Oficial: Corona Capital 2025</h3></a>
+                        <p>Filtraciones, rumores y confirmaciones de última hora.</p>
+                        <small>Por: Redacción • Hace 1 día</small>
+                    </div>
+                </article>
+
+            </section>
+
+            <!-- COLUMNA DERECHA: SIDEBAR -->
+            <aside class="sidebar">
+                <div class="sidebar-box">
+                    <h4 style="font-family: var(--font-head); font-size: 1.5rem; margin-top:0;">TOP 5 SEMANAL</h4>
+                    
+                    <div class="top-track">
+                        <span class="track-number">1</span>
+                        <div>
+                            <strong>Kendrick Lamar</strong><br>
+                            <small>Not Like Us</small>
+                        </div>
+                    </div>
+                    
+                    <div class="top-track">
+                        <span class="track-number">2</span>
+                        <div>
+                            <strong>Fontaines D.C.</strong><br>
+                            <small>Starburster</small>
+                        </div>
+                    </div>
+
+                    <div class="top-track">
+                        <span class="track-number">3</span>
+                        <div>
+                            <strong>Charli XCX</strong><br>
+                            <small>360</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="sidebar-box" style="background: black; color: white; text-align: center;">
+                    <h4>¿TIENES UNA BANDA?</h4>
+                    <p>Envía tu demo a nuestra redacción.</p>
+                    <button style="background: var(--accent); border:none; padding: 10px 20px; font-weight:bold; cursor:pointer;">ENVIAR AHORA</button>
+                </div>
+            </aside>
+
+        </div>
+    </div>
+    
+    <footer style="background: black; color: white; padding: 40px; text-align: center; margin-top: 50px;">
+        <h2>NOISE MAG</h2>
+        <p>Periodismo musical independiente.</p>
+    </footer>
+
+</body>
+</html>

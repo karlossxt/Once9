@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SPORT ZONE | El Pulso del Deporte</title>
+    <!-- Fuente deportiva Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary: #0f172a; /* Azul Navy Oscuro */
+            --accent: #ef4444;  /* Rojo Deportivo */
+            --light: #f1f5f9;   /* Gris muy claro */
+            --text-main: #334155;
+            --font-head: 'Oswald', sans-serif; /* Títulos altos y fuertes */
+            --font-body: 'Roboto', sans-serif;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: var(--font-body);
+            background-color: #e2e8f0;
+            color: var(--text-main);
+        }
+
+        a { text-decoration: none; color: inherit; }
+
+        /* --- SCOREBOARD (MARCADOR SUPERIOR) --- */
+        .scoreboard-bar {
+            background: #000;
+            color: white;
+            padding: 8px 0;
+            font-family: var(--font-head);
+            font-size: 0.9rem;
+            display: flex;
+            overflow-x: auto; /* Scroll horizontal en móviles */
+            white-space: nowrap;
+            border-bottom: 3px solid var(--accent);
+        }
+
+        .score-item {
+            display: inline-block;
+            padding: 0 20px;
+            border-right: 1px solid #333;
+        }
+
+        .live-dot {
+            height: 8px; width: 8px; 
+            background-color: var(--accent); 
+            border-radius: 50%; 
+            display: inline-block;
+            margin-right: 5px;
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink { 50% { opacity: 0; } }
+
+        /* --- HEADER & NAV --- */
+        header {
+            background: var(--primary);
+            color: white;
+            padding: 15px 0;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .logo {
+            font-family: var(--font-head);
+            font-size: 2rem;
+            font-weight: bold;
+            font-style: italic;
+            letter-spacing: -1px;
+        }
+        .logo span { color: var(--accent); }
+
+        nav a {
+            color: #cbd5e1;
+            margin-left: 20px;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            transition: 0.3s;
+        }
+        nav a:hover { color: white; border-bottom: 2px solid var(--accent); }
+
+        /* --- LAYOUT PRINCIPAL --- */
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr; /* 2/3 Contenido, 1/3 Sidebar */
+            gap: 20px;
+            padding: 0 20px;
+        }
+
+        /* --- HERO SECTION (NOTICIA PRINCIPAL) --- */
+        .hero-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .hero-img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .hero-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(transparent, rgba(15, 23, 42, 0.95));
+            padding: 20px;
+            color: white;
+            box-sizing: border-box;
+        }
+
+        .category-tag {
+            background: var(--accent);
+            color: white;
+            padding: 4px 12px;
+            font-family: var(--font-head);
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            display: inline-block;
+            margin-bottom: 10px;
+            transform: skew(-10deg); /* EFECTO DE VELOCIDAD */
+        }
+
+        .hero-title {
+            font-family: var(--font-head);
+            font-size: 2.5rem;
+            margin: 0;
+            line-height: 1.1;
+            text-transform: uppercase;
+        }
+
+        /* --- GRID DE NOTICIAS SECUNDARIAS --- */
+        .news-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .news-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            transition: transform 0.2s;
+        }
+
+        .news-card:hover { transform: translateY(-3px); }
+
+        .news-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+
+        .news-body { padding: 15px; }
+
+        .news-title {
+            font-family: var(--font-head);
+            font-size: 1.2rem;
+            margin: 0 0 10px 0;
+            color: var(--primary);
+        }
+
+        /* --- SIDEBAR (TABLA DE POSICIONES) --- */
+        .sidebar-widget {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
+        }
+
+        .widget-title {
+            font-family: var(--font-head);
+            color: var(--primary);
+            border-left: 5px solid var(--accent);
+            padding-left: 10px;
+            margin-top: 0;
+            text-transform: uppercase;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+
+        th { text-align: left; color: #888; font-size: 0.8rem; padding-bottom: 10px;}
+        td { padding: 10px 0; border-bottom: 1px solid #eee; font-weight: bold; }
+        
+        .team-logo {
+            width: 20px; height: 20px;
+            background: #ccc;
+            display: inline-block;
+            border-radius: 50%;
+            margin-right: 10px;
+            vertical-align: middle;
+        }
+
+        /* --- MATCH CARD (PARTIDO EN VIVO) --- */
+        .match-card {
+            background: var(--primary);
+            color: white;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .teams-vs {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin: 20px 0;
+        }
+
+        .team-badge {
+            font-family: var(--font-head);
+            font-size: 1.5rem;
+        }
+
+        .vs-score {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--accent);
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .container { grid-template-columns: 1fr; }
+            .hero-title { font-size: 1.8rem; }
+            .news-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- MARCADOR -->
+    <div class="scoreboard-bar">
+        <div class="score-item"><span class="live-dot"></span>LIGA MX: AME 2 - 1 CAZ (85')</div>
+        <div class="score-item">PREMIER: MCI 3 - 0 MUN (FINAL)</div>
+        <div class="score-item"><span class="live-dot"></span>F1: VERSTAPPEN P1 (VUELTA 30)</div>
+        <div class="score-item">NBA: LAKERS VS WARRIORS (20:00 PM)</div>
+        <div class="score-item">NFL: CHIEFS 24 - 10 BILLS (FINAL)</div>
+    </div>
+
+    <!-- NAVEGACIÓN -->
+    <header>
+        <div class="nav-container">
+            <div class="logo">SPORT<span>ZONE</span></div>
+            <nav>
+                <a href="#">FÚTBOL</a>
+                <a href="#">F1</a>
+                <a href="#">NBA</a>
+                <a href="#">NFL</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        
+        <!-- CONTENIDO PRINCIPAL (IZQUIERDA) -->
+        <main>
+            <!-- HERO CARD -->
+            <div class="hero-card">
+                <img src="https://images.unsplash.com/photo-1517466787929-bc90951d0974?q=80&w=1200&auto=format&fit=crop" class="hero-img" alt="Estadio">
+                <div class="hero-content">
+                    <span class="category-tag">CHAMPIONS LEAGUE</span>
+                    <h1 class="hero-title">Noche mágica en Europa: El Madrid remonta en el último minuto</h1>
+                </div>
+            </div>
+
+            <!-- GRID DE NOTICIAS -->
+            <div class="news-grid">
+                <article class="news-card">
+                    <img src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?q=80&w=600&auto=format&fit=crop" alt="Auto F1">
+                    <div class="news-body">
+                        <span class="category-tag" style="background:#f59e0b;">FÓRMULA 1</span>
+                        <h3 class="news-title">Checo Pérez busca la Pole Position en Mónaco este fin de semana</h3>
+                    </div>
+                </article>
+
+                <article class="news-card">
+                    <img src="https://images.unsplash.com/photo-1546519638-68e109498ffc?q=80&w=600&auto=format&fit=crop" alt="Basket">
+                    <div class="news-body">
+                        <span class="category-tag" style="background:#ea580c;">NBA PLAYOFFS</span>
+                        <h3 class="news-title">LeBron James rompe otro récord histórico de anotación</h3>
+                    </div>
+                </article>
+
+                <article class="news-card">
+                    <img src="https://images.unsplash.com/photo-1628891435222-065912dcb419?q=80&w=600&auto=format&fit=crop" alt="Tenis">
+                    <div class="news-body">
+                        <span class="category-tag" style="background:#16a34a;">TENIS</span>
+                        <h3 class="news-title">Alcaraz avanza a la final tras un partido de 5 horas</h3>
+                    </div>
+                </article>
+
+                <article class="news-card">
+                    <img src="https://images.unsplash.com/photo-1566577739112-5180d4bf9390?q=80&w=600&auto=format&fit=crop" alt="Gym">
+                    <div class="news-body">
+                        <span class="category-tag" style="background:#333;">OPINIÓN</span>
+                        <h3 class="news-title">¿Es necesaria la tecnología en el arbitraje moderno?</h3>
+                    </div>
+                </article>
+            </div>
+        </main>
+
+        <!-- SIDEBAR (DERECHA) -->
+        <aside>
+            <!-- WIDGET PARTIDO EN VIVO -->
+            <div class="match-card">
+                <div style="font-size:0.8rem; opacity:0.8; letter-spacing:1px;">EN VIVO - MIN 72'</div>
+                <div class="teams-vs">
+                    <div>
+                        <div class="team-badge">BAR</div>
+                    </div>
+                    <div class="vs-score">2 - 2</div>
+                    <div>
+                        <div class="team-badge">MUN</div>
+                    </div>
+                </div>
+                <button style="background:var(--accent); border:none; color:white; padding:10px 20px; font-weight:bold; cursor:pointer; width:100%;">VER ESTADÍSTICAS</button>
+            </div>
+
+            <!-- WIDGET TABLA GENERAL -->
+            <div class="sidebar-widget">
+                <h3 class="widget-title">Tabla General</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Equipo</th>
+                            <th>Pts</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td><span class="team-logo" style="background:yellow;"></span> América</td>
+                            <td>35</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td><span class="team-logo" style="background:blue;"></span> Cruz Azul</td>
+                            <td>32</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td><span class="team-logo" style="background:red;"></span> Toluca</td>
+                            <td>30</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td><span class="team-logo" style="background:orange;"></span> Tigres</td>
+                            <td>28</td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td><span class="team-logo" style="background:green;"></span> Santos</td>
+                            <td>25</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <a href="#" style="display:block; text-align:center; margin-top:15px; font-size:0.8rem; font-weight:bold; color:var(--accent);">VER TABLA COMPLETA &rarr;</a>
+            </div>
+
+            <!-- WIDGET PUBLICIDAD O VIDEO -->
+            <div class="sidebar-widget" style="text-align:center;">
+                <p style="font-size:0.8rem; color:#888;">ESPACIO PUBLICITARIO</p>
+                <div style="background:#ddd; height:250px; display:flex; align-items:center; justify-content:center; font-weight:bold; color:#888;">
+                    BANNER 300x250
+                </div>
+            </div>
+        </aside>
+
+    </div>
+
+    <footer style="background:#0f172a; color:white; padding:40px; text-align:center; margin-top:40px;">
+        <div class="logo" style="margin-bottom:20px;">SPORT<span>ZONE</span></div>
+        <p style="opacity:0.6;">&copy; 2025 SportZone Media. Todos los derechos reservados.</p>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ABISMO DE ACERO | Official Site</title>
+    <style>
+        /* --- ESTÉTICA METAL / INDUSTRIAL --- */
+        :root {
+            --bg-color: #050505;
+            --text-color: #dcdcdc;
+            --accent-color: #8a0303; /* Rojo Sangre Oscuro */
+            --highlight: #ff0000;    /* Rojo Brillante */
+            --metal-grey: #2a2a2a;
+            --font-head: 'Impact', 'Haettenschweiler', 'Arial Narrow Bold', sans-serif;
+            --font-body: 'Verdana', sans-serif;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: var(--font-body);
+            /* Fondo con textura sutil de rejilla */
+            background-image: radial-gradient(#1a1a1a 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+
+        h1, h2, h3 {
+            font-family: var(--font-head);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            /* Estiramos la letra verticalmente para que se vea más agresiva */
+            transform: scaleY(1.2); 
+            margin: 0;
+        }
+
+        /* --- NAVEGACIÓN --- */
+        nav {
+            background: black;
+            border-bottom: 3px solid var(--accent-color);
+            padding: 20px;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 5px 20px rgba(138, 3, 3, 0.5);
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-family: var(--font-head);
+            font-size: 1.2rem;
+            margin: 0 15px;
+            transition: 0.3s;
+            display: inline-block;
+        }
+
+        .nav-links a:hover {
+            color: var(--highlight);
+            text-shadow: 0 0 10px var(--highlight);
+            transform: skew(-10deg); /* Inclina el texto al pasar el mouse */
+        }
+
+        /* --- HERO (PORTADA) --- */
+        .hero {
+            height: 85vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.3), #050505), url('https://placehold.co/1920x1080/111/333');
+            background-size: cover;
+            background-position: center;
+            border-bottom: 5px solid var(--accent-color);
+        }
+
+        .hero h1 {
+            font-size: 5rem;
+            color: white;
+            text-shadow: 4px 4px 0px var(--accent-color);
+            margin-bottom: 20px;
+        }
+
+        .btn-metal {
+            background: var(--accent-color);
+            color: white;
+            padding: 15px 40px;
+            font-family: var(--font-head);
+            font-size: 1.5rem;
+            text-decoration: none;
+            border: 2px solid white;
+            /* Corte en las esquinas (estilo futurista/metal) */
+            clip-path: polygon(10% 0, 100% 0, 100% 70%, 90% 100%, 0 100%, 0 30%);
+            transition: 0.3s;
+        }
+
+        .btn-metal:hover {
+            background: var(--highlight);
+            box-shadow: 0 0 20px var(--highlight);
+        }
+
+        /* --- SECCIONES --- */
+        section {
+            padding: 80px 20px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            border-left: 10px solid var(--accent-color);
+            padding-left: 20px;
+            margin-bottom: 50px;
+            color: white;
+        }
+
+        /* --- BIOGRAFÍA CON EFECTO --- */
+        .bio-container {
+            background: var(--metal-grey);
+            padding: 40px;
+            /* Borde izquierdo rojo */
+            border-left: 5px solid var(--accent-color); 
+        }
+
+        /* --- GRID DE MIEMBROS --- */
+        .members-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 30px;
+        }
+
+        .member-card {
+            background: black;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid #333;
+        }
+
+        .member-card img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            filter: grayscale(100%);
+            transition: 0.5s;
+        }
+
+        .member-card:hover img {
+            filter: grayscale(0%) contrast(1.2);
+        }
+
+        .member-info {
+            padding: 15px;
+            background: linear-gradient(to top, var(--accent-color), black);
+            position: absolute;
+            bottom: -50px; /* Oculto parcialmente */
+            width: 100%;
+            transition: 0.3s;
+        }
+
+        .member-card:hover .member-info {
+            bottom: 0; /* Sube al hacer hover */
+        }
+
+        /* --- TOUR (TABLA ESTILO INDUSTRIAL) --- */
+        .tour-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #111;
+        }
+
+        .tour-row {
+            border-bottom: 1px solid #333;
+            transition: 0.2s;
+        }
+
+        .tour-row:hover {
+            background: var(--accent-color);
+            color: white;
+            font-weight: bold;
+        }
+
+        .tour-cell {
+            padding: 20px;
+            text-align: left;
+        }
+
+        .date-box {
+            background: white;
+            color: black;
+            padding: 5px 10px;
+            font-family: var(--font-head);
+            font-weight: bold;
+            display: inline-block;
+            transform: skew(-10deg);
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background: black;
+            border-top: 5px solid var(--accent-color);
+            text-align: center;
+            padding: 50px;
+            margin-top: 50px;
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 3rem; }
+            .nav-links a { display: block; margin: 10px 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="nav-links">
+            <a href="#bio">EL ORIGEN</a>
+            <a href="#members">LA LEGIÓN</a>
+            <a href="#media">MEDIA</a>
+            <a href="#tour">GIRA INFERNAL</a>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <h1>ABISMO<br>DE ACERO</h1>
+        <p style="font-size: 1.2rem; color: #aaa; margin-bottom: 30px;">HEAVY METAL - TRASH - DOOM</p>
+        <a href="#tour" class="btn-metal">VER FECHAS</a>
+    </header>
+
+    <section id="bio">
+        <h2 class="section-title">BIOGRAFÍA</h2>
+        <div class="bio-container">
+            <p>Surgidos de las profundidades industriales en 2023, <strong>Abismo de Acero</strong> combina riffs demoledores con atmósferas opresivas. No tocamos música, forjamos metal.</p>
+            <p style="margin-top:20px;">Nuestras letras exploran la decadencia humana, la guerra eterna y la oscuridad del alma. El volumen no es una opción, es una obligación.</p>
+        </div>
+    </section>
+
+    <section id="members">
+        <h2 class="section-title">LA LEGIÓN</h2>
+        <div class="members-grid">
+            <div class="member-card">
+                <img src="https://placehold.co/400x600/111/fff?text=VOCAL" alt="Vocal">
+                <div class="member-info">
+                    <h3>DRAKO</h3>
+                    <span>GRITOS & CAOS</span>
+                </div>
+            </div>
+            <div class="member-card">
+                <img src="https://placehold.co/400x600/222/fff?text=GUITARRA" alt="Guitarra">
+                <div class="member-info">
+                    <h3>VIKTOR</h3>
+                    <span>GUITARRA LÍDER</span>
+                </div>
+            </div>
+            <div class="member-card">
+                <img src="https://placehold.co/400x600/333/fff?text=BAJO" alt="Bajo">
+                <div class="member-info">
+                    <h3>REX</h3>
+                    <span>BAJO & TRUENO</span>
+                </div>
+            </div>
+            <div class="member-card">
+                <img src="https://placehold.co/400x600/444/fff?text=BATERIA" alt="Bateria">
+                <div class="member-info">
+                    <h3>THOR</h3>
+                    <span>PERCUSIÓN</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="media">
+        <h2 class="section-title">MULTIMEDIA</h2>
+        <!-- Video Container Estilo TV Vieja -->
+        <div style="border: 10px solid #333; box-shadow: 0 0 20px black;">
+            <div style="position: relative; padding-bottom: 56.25%; height: 0;">
+                <iframe style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/dQw4w9WgXcQ?si=muted=1" frameborder="0" allowfullscreen></iframe>
+            </div>
+        </div>
+    </section>
+
+    <section id="tour">
+        <h2 class="section-title">GIRA INFERNAL 2025</h2>
+        <table class="tour-table">
+            <tr class="tour-row">
+                <td class="tour-cell"><span class="date-box">OCT 31</span></td>
+                <td class="tour-cell">FESTIVAL METAL HELL</td>
+                <td class="tour-cell">CDMX</td>
+                <td class="tour-cell" style="text-align:right; color:red;">SOLD OUT</td>
+            </tr>
+            <tr class="tour-row">
+                <td class="tour-cell"><span class="date-box">NOV 15</span></td>
+                <td class="tour-cell">ARENA OBSCURA</td>
+                <td class="tour-cell">BOGOTÁ</td>
+                <td class="tour-cell" style="text-align:right;">TICKETS</td>
+            </tr>
+            <tr class="tour-row">
+                <td class="tour-cell"><span class="date-box">DIC 01</span></td>
+                <td class="tour-cell">CLUB SATANÁS</td>
+                <td class="tour-cell">BUENOS AIRES</td>
+                <td class="tour-cell" style="text-align:right;">TICKETS</td>
+            </tr>
+        </table>
+    </section>
+
+    <footer>
+        <h2 style="font-size: 2rem;">ABISMO DE ACERO</h2>
+        <p>SIGUE LA OSCURIDAD</p>
+        <div style="margin-top: 20px; font-size: 1.5rem;">
+            <!-- Simulación de íconos sociales -->
+            <span style="margin: 0 10px; cursor:pointer;">FB</span>
+            <span style="margin: 0 10px; cursor:pointer;">IG</span>
+            <span style="margin: 0 10px; cursor:pointer;">YT</span>
+        </div>
+        <p style="font-size: 0.8rem; margin-top: 30px; opacity: 0.5;">&copy; 2025 ABISMO DE ACERO. TODOS LOS DERECHOS RESERVADOS.</p>
+    </footer>
+
+</body>
+</html>

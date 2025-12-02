@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Los Ecos Distantes | Radio & Banda</title>
+    <style>
+        /* --- ESTÉTICA INDIE / RAW --- */
+        :root {
+            --bg-color: #121212;
+            --text-color: #f0f0f0;
+            --accent-color: #d63031; /* Rojo apagado */
+            --secondary-bg: #1e1e1e;
+            --font-main: 'Courier New', Courier, monospace; /* Estilo máquina de escribir */
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: var(--font-main);
+            line-height: 1.6;
+        }
+
+        /* --- HEADER & HERO --- */
+        header {
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #333;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            letter-spacing: -1px;
+            text-transform: uppercase;
+            border: 2px solid var(--text-color);
+            padding: 5px 10px;
+        }
+
+        .hero {
+            height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: radial-gradient(circle, #2c2c2c 0%, #121212 100%);
+            position: relative;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin: 0;
+            text-transform: uppercase;
+            /* Efecto "Glitch" simple */
+            text-shadow: 2px 2px var(--accent-color);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            opacity: 0.8;
+            margin-top: 10px;
+        }
+
+        /* --- BOTÓN DE REPRODUCCIÓN --- */
+        .btn-play {
+            margin-top: 30px;
+            padding: 15px 40px;
+            background: transparent;
+            color: var(--accent-color);
+            border: 2px solid var(--accent-color);
+            font-family: var(--font-main);
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: 0.3s;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+
+        .btn-play:hover {
+            background: var(--accent-color);
+            color: var(--bg-color);
+        }
+
+        /* --- SECCIÓN DE FECHAS (GIGS) --- */
+        .dates-section {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+
+        .gig {
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid #333;
+            padding: 15px 0;
+            transition: 0.2s;
+        }
+
+        .gig:hover {
+            background-color: var(--secondary-bg);
+            padding-left: 10px;
+        }
+
+        .date { opacity: 0.6; }
+        .venue { color: var(--accent-color); }
+
+        /* --- REPRODUCTOR FIJO (STICKY PLAYER) --- */
+        .radio-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: var(--secondary-bg);
+            border-top: 2px solid var(--accent-color);
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            z-index: 100;
+        }
+
+        .radio-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .live-indicator {
+            width: 10px;
+            height: 10px;
+            background-color: red;
+            border-radius: 50%;
+            animation: blink 1.5s infinite;
+        }
+
+        @keyframes blink {
+            0% { opacity: 1; }
+            50% { opacity: 0.4; }
+            100% { opacity: 1; }
+        }
+
+        /* Simulación del control de audio */
+        .audio-controls {
+            font-size: 0.9rem;
+            color: #888;
+        }
+        
+        /* Ajuste móvil */
+        @media (max-width: 600px) {
+            .hero h1 { font-size: 2.5rem; }
+            .radio-bar { flex-direction: column; gap: 10px; text-align: center;}
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">LOS ECOS DISTANTES</div>
+        <nav>
+            <a href="#" style="color: white; text-decoration: none; margin-left: 20px;">MERCH</a>
+            <a href="#" style="color: white; text-decoration: none; margin-left: 20px;">TOUR</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h1>Sonido<br>Analógico</h1>
+        <p>Transmitiendo ruido desde el sótano.</p>
+        
+        <!-- Aquí iría la acción para iniciar el stream -->
+        <button class="btn-play">Escuchar Radio en Vivo</button>
+    </section>
+
+    <section class="dates-section">
+        <h2 style="border-bottom: 2px solid white; display: inline-block;">PRÓXIMAS FECHAS</h2>
+        
+        <div class="gig">
+            <span class="date">DIC 15</span>
+            <span class="city">CDMX, Foro Indie</span>
+            <span class="venue">AGOTADO</span>
+        </div>
+        <div class="gig">
+            <span class="date">ENE 22</span>
+            <span class="city">Guadalajara, Anexo</span>
+            <span class="venue">BOLETOS</span>
+        </div>
+        <div class="gig">
+            <span class="date">FEB 05</span>
+            <span class="city">Monterrey, Café Iguana</span>
+            <span class="venue">BOLETOS</span>
+        </div>
+    </section>
+
+    <!-- ESTO ES LO IMPORTANTE PARA TU PROYECTO -->
+    <!-- Barra fija inferior que simula el streaming -->
+    <div class="radio-bar">
+        <div class="radio-info">
+            <div class="live-indicator"></div>
+            <div>
+                <strong>RADIO ONLINE</strong>
+                <div style="font-size: 0.8rem; opacity: 0.7;">Transmitiendo desde PC Master...</div>
+            </div>
+        </div>
+        
+        <div class="audio-controls">
+            <!-- Aquí pegaríamos el reproductor real de Zeno.fm o Icecast -->
+            [ REPRODUCTOR HTML AQUÍ ] 
+            <button style="background:none; border:1px solid #555; color:white; padding:5px 10px; margin-left:10px;">❚❚ PAUSE</button>
+        </div>
+    </div>
+
+</body>
+</html>
