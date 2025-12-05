@@ -134,10 +134,12 @@
             text-transform: uppercase;
         }
 
+        /* CONFIGURACIÓN DEL GRID */
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
             gap: 30px;
+            align-items: start; 
         }
 
         /* --- TARJETAS --- */
@@ -149,7 +151,7 @@
             position: relative;
             display: flex;
             flex-direction: column;
-            height: 100%;
+            height: 100%; 
             overflow: hidden;
             border-radius: 4px;
         }
@@ -238,7 +240,6 @@
 
     <nav>
         <a href="#" class="brand">ONCE<span>9</span></a>
-        
         <div class="nav-actions">
             <a href="https://www.instagram.com/oncenueve_/" target="_blank" class="insta-link">Instagram</a>
             <a href="mailto:karlossxt@gmail.com" class="contact-btn">CONTACTO</a>
@@ -261,7 +262,6 @@
             
             <!-- F1RST SPORTS -->
             <article class="card">
-                <!-- RECUERDA CAMBIAR ESTA IMAGEN POR UNA CAPTURA REAL DE TU SITIO -->
                 <img src="https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?q=80&w=800&auto=format&fit=crop" class="card-img" alt="F1rstSports">
                 <div class="card-content">
                     <span class="card-cat">Sports Media • HTML5</span>
@@ -273,13 +273,34 @@
 
             <!-- EL ROCK DE TODOS LOS DÍAS -->
             <article class="card">
-                <!-- RECUERDA CAMBIAR ESTA IMAGEN POR UNA CAPTURA REAL -->
                 <img src="https://images.unsplash.com/photo-1493225255756-d9584f8606e9?q=80&w=800&auto=format&fit=crop" class="card-img" alt="El Rock">
                 <div class="card-content">
                     <span class="card-cat">Magazine • WordPress</span>
                     <h3>El Rock de Todos los Días</h3>
                     <p>Revista digital con años de trayectoria. Gestión de contenido masivo, reseñas y comunidad activa. Plataforma CMS.</p>
                     <a href="https://elrockdetodoslosdias.com.mx/" target="_blank" class="card-link">Visitar Sitio Web</a>
+                </div>
+            </article>
+
+            <!-- TRADUQUIL -->
+            <article class="card">
+                <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=800&auto=format&fit=crop" class="card-img" alt="Traduquil">
+                <div class="card-content">
+                    <span class="card-cat">Servicios Profesionales</span>
+                    <h3>Traduquil</h3>
+                    <p>Sitio corporativo para agencia de traducción. Diseño enfocado en confianza y claridad de la oferta comercial.</p>
+                    <a href="https://traduquil.com/" target="_blank" class="card-link">Visitar Sitio Web</a>
+                </div>
+            </article>
+
+            <!-- ACTIVATE -->
+            <article class="card">
+                <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=800&auto=format&fit=crop" class="card-img" alt="Activate">
+                <div class="card-content">
+                    <span class="card-cat">Plataforma Digital</span>
+                    <h3>Activate.mx</h3>
+                    <p>Portal interactivo web. Desarrollo de interfaz moderna y optimización de experiencia de usuario (UX).</p>
+                    <a href="https://activate.mx" target="_blank" class="card-link">Visitar Sitio Web</a>
                 </div>
             </article>
 
@@ -295,7 +316,7 @@
 
         <div class="grid">
             
-            <!-- AURORA (CREATIVO) -->
+            <!-- AURORA -->
             <article class="card">
                 <img src="https://images.unsplash.com/photo-1497215728101-856f4ea42174?q=80&w=800&auto=format&fit=crop" class="card-img" alt="Aurora Theme">
                 <div class="card-content">
@@ -317,9 +338,8 @@
                 </div>
             </article>
 
-            <!-- DEMO: METAL (CÓDIGO PURO) -->
+            <!-- METAL -->
             <article class="card">
-                <!-- Asegúrate de tener esta foto en tu carpeta -->
                 <img src="metal/metal-preview.jpg.png" class="card-img" alt="Abismo de Acero">
                 <div class="card-content">
                     <span class="card-cat">Streaming • Código Puro</span>
@@ -329,7 +349,7 @@
                 </div>
             </article>
 
-            <!-- DEMO: INDIE (CÓDIGO PURO) -->
+            <!-- INDIE -->
             <article class="card">
                 <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=800&auto=format&fit=crop" class="card-img" alt="Indie">
                 <div class="card-content">
@@ -340,7 +360,7 @@
                 </div>
             </article>
 
-            <!-- DEMO: BLACK METAL (CÓDIGO PURO) -->
+            <!-- BLACK METAL -->
             <article class="card">
                 <img src="https://images.unsplash.com/photo-1478131143081-80f7f84ca84d?q=80&w=800&auto=format&fit=crop" class="card-img" alt="Black Metal">
                 <div class="card-content">
@@ -351,7 +371,400 @@
                 </div>
             </article>
 
-            <!-- DEMO: FUNK (CÓDIGO PURO) -->
+            <!-- FUNK -->
+            <article class="card">
+                <img src="https://images.unsplash.com/photo-1493225255756-d9584f8606e9?q=80&w=800&auto=format&fit=crop" class="card-img" alt="Parallax Design">
+                <div class="card-content">
+                    <span class="card-cat">Experience • Motion</span>
+                    <h3>Funk Vibes</h3>
+                    <p>Landing page interactiva con efecto Parallax puro en CSS. Estilo visual inspirado en Funk/Soul.</p>
+                    <a href="./funk/index.html" target="_blank" class="card-link">Ver Demo</a>
+                </div>
+            </article>
+
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2025 <strong>ONCE9</strong> - Todos los derechos reservados.</p>
+        <p>Contacto: <a href="mailto:karlossxt@gmail.com">karlossxt@gmail.com</a></p>
+    </footer>
+
+</body>
+</html><!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ONCE9 | Desarrollo Web & Streaming</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg: #050505;       
+            --card-bg: #111111;  
+            --text: #e2e8f0;     
+            --accent: #00f3ff;   
+            --border: 1px solid #333;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            box-sizing: border-box;
+        }
+
+        *, *:before, *:after { box-sizing: inherit; }
+
+        /* --- LOGO Y NAV --- */
+        nav {
+            padding: 30px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .brand {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: -2px;
+            color: white;
+            text-decoration: none;
+        }
+
+        .brand span { color: var(--accent); }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .insta-link {
+            color: #aaa;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: 0.3s;
+            text-transform: uppercase;
+        }
+        .insta-link:hover { color: white; }
+
+        .contact-btn {
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            padding: 8px 20px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: 0.3s;
+            font-weight: bold;
+        }
+        .contact-btn:hover {
+            background: var(--accent);
+            color: black;
+            box-shadow: 0 0 15px var(--accent);
+        }
+
+        /* --- HERO --- */
+        .hero {
+            text-align: center;
+            padding: 80px 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 3.5rem;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: #888;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* --- GRID DE PROYECTOS --- */
+        section {
+            padding: 60px 20px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 40px;
+            border-bottom: 1px solid #222;
+            padding-bottom: 10px;
+        }
+
+        .section-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.5rem;
+            margin: 0;
+            margin-right: 20px;
+            color: white;
+        }
+
+        .badge {
+            background: #222;
+            font-size: 0.7rem;
+            padding: 4px 8px;
+            border-radius: 4px;
+            color: #888;
+            text-transform: uppercase;
+        }
+
+        /* CONFIGURACIÓN DEL GRID */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 30px;
+            align-items: start; 
+        }
+
+        /* --- TARJETAS --- */
+        .card {
+            background: var(--card-bg);
+            border: var(--border);
+            padding: 0; 
+            transition: 0.3s;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            height: 100%; 
+            overflow: hidden;
+            border-radius: 4px;
+        }
+
+        .card:hover {
+            border-color: var(--accent);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px -10px rgba(0, 243, 255, 0.15);
+        }
+
+        .card-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-bottom: 1px solid #222;
+            filter: grayscale(100%);
+            transition: 0.5s;
+            display: block;
+        }
+
+        .card:hover .card-img { filter: grayscale(0%); }
+
+        .card-content {
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .card-cat {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--accent);
+            margin-bottom: 10px;
+            display: block;
+            font-weight: bold;
+        }
+
+        .card h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.4rem;
+            margin: 0 0 10px 0;
+            color: white;
+            line-height: 1.2;
+        }
+
+        .card p {
+            font-size: 0.9rem;
+            color: #aaa;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        .card-link {
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            display: inline-flex;
+            align-items: center;
+            margin-top: auto; 
+            font-size: 0.9rem;
+            transition: 0.3s;
+        }
+
+        .card-link:hover { color: var(--accent); letter-spacing: 1px; }
+        .card-link::after { content: " →"; margin-left: 5px; }
+
+        footer {
+            text-align: center;
+            padding: 60px 20px;
+            border-top: 1px solid #222;
+            margin-top: 60px;
+            color: #555;
+            font-size: 0.9rem;
+        }
+        
+        footer a { color: var(--accent); text-decoration: none; }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="#" class="brand">ONCE<span>9</span></a>
+        <div class="nav-actions">
+            <a href="https://www.instagram.com/oncenueve_/" target="_blank" class="insta-link">Instagram</a>
+            <a href="mailto:karlossxt@gmail.com" class="contact-btn">CONTACTO</a>
+        </div>
+    </nav>
+
+    <div class="hero">
+        <h1>Diseño Web de<br>Alto Rendimiento.</h1>
+        <p class="subtitle">Soluciones digitales ágiles. Especializado en desarrollo web corporativo, portales de medios y experiencias de streaming de audio.</p>
+    </div>
+
+    <!-- SECCIÓN 1: CLIENTES ACTIVOS (PRODUCCIÓN) -->
+    <section>
+        <div class="section-header">
+            <h2 class="section-title">Clientes & Medios</h2>
+            <span class="badge">En Vivo • Producción</span>
+        </div>
+        
+        <div class="grid">
+            
+            <!-- F1RST SPORTS -->
+            <article class="card">
+                <img src="https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?q=80&w=800&auto=format&fit=crop" class="card-img" alt="F1rstSports">
+                <div class="card-content">
+                    <span class="card-cat">Sports Media • HTML5</span>
+                    <h3>F1rstSports</h3>
+                    <p>Portal deportivo de alto rendimiento. Diseño 'Full Width', carrusel interactivo y optimización de carga rápida sin base de datos.</p>
+                    <a href="http://f1rstsports.com.mx/" target="_blank" class="card-link">Visitar f1rstsports.com.mx</a>
+                </div>
+            </article>
+
+            <!-- EL ROCK DE TODOS LOS DÍAS -->
+            <article class="card">
+                <img src="https://images.unsplash.com/photo-1493225255756-d9584f8606e9?q=80&w=800&auto=format&fit=crop" class="card-img" alt="El Rock">
+                <div class="card-content">
+                    <span class="card-cat">Magazine • WordPress</span>
+                    <h3>El Rock de Todos los Días</h3>
+                    <p>Revista digital con años de trayectoria. Gestión de contenido masivo, reseñas y comunidad activa. Plataforma CMS.</p>
+                    <a href="https://elrockdetodoslosdias.com.mx/" target="_blank" class="card-link">Visitar Sitio Web</a>
+                </div>
+            </article>
+
+            <!-- TRADUQUIL -->
+            <article class="card">
+                <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=800&auto=format&fit=crop" class="card-img" alt="Traduquil">
+                <div class="card-content">
+                    <span class="card-cat">Servicios Profesionales</span>
+                    <h3>Traduquil</h3>
+                    <p>Sitio corporativo para agencia de traducción. Diseño enfocado en confianza y claridad de la oferta comercial.</p>
+                    <a href="https://traduquil.com/" target="_blank" class="card-link">Visitar Sitio Web</a>
+                </div>
+            </article>
+
+            <!-- ACTIVATE -->
+            <article class="card">
+                <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=800&auto=format&fit=crop" class="card-img" alt="Activate">
+                <div class="card-content">
+                    <span class="card-cat">Plataforma Digital</span>
+                    <h3>Activate.mx</h3>
+                    <p>Portal interactivo web. Desarrollo de interfaz moderna y optimización de experiencia de usuario (UX).</p>
+                    <a href="https://activate.mx" target="_blank" class="card-link">Visitar Sitio Web</a>
+                </div>
+            </article>
+
+        </div>
+    </section>
+
+    <!-- SECCIÓN 2: LABORATORIO Y PROTOTIPOS -->
+    <section>
+        <div class="section-header">
+            <h2 class="section-title">Desarrollos & Prototipos</h2>
+            <span class="badge">CMS & Código Puro</span>
+        </div>
+
+        <div class="grid">
+            
+            <!-- AURORA -->
+            <article class="card">
+                <img src="https://images.unsplash.com/photo-1497215728101-856f4ea42174?q=80&w=800&auto=format&fit=crop" class="card-img" alt="Aurora Theme">
+                <div class="card-content">
+                    <span class="card-cat">Agencia • Creativo</span>
+                    <h3>Proyecto Aurora</h3>
+                    <p>Prototipo visual enfocado en agencias digitales y portafolios minimalistas. Estructura limpia y moderna.</p>
+                    <a href="https://aurora.elrockdetodoslosdias.com.mx/" target="_blank" class="card-link">Ver Live Demo</a>
+                </div>
+            </article>
+
+            <!-- BIENES RAÍCES -->
+            <article class="card">
+                <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?q=80&w=800&auto=format&fit=crop" class="card-img" alt="Real Estate">
+                <div class="card-content">
+                    <span class="card-cat">Corporativo • Inmobiliaria</span>
+                    <h3>Bienes Raíces / Arquitectura</h3>
+                    <p>Solución web para catálogo de propiedades y servicios corporativos. Enfoque en conversión y contacto.</p>
+                    <a href="https://bienes.elrockdetodoslosdias.com.mx/" target="_blank" class="card-link">Ver Live Demo</a>
+                </div>
+            </article>
+
+            <!-- METAL -->
+            <article class="card">
+                <img src="metal/metal-preview.jpg.png" class="card-img" alt="Abismo de Acero">
+                <div class="card-content">
+                    <span class="card-cat">Streaming • Código Puro</span>
+                    <h3>Abismo de Acero</h3>
+                    <p>Interfaz Dark Mode para radio online. Estética industrial desarrollada 100% en código (sin constructores).</p>
+                    <a href="./metal/index.html" target="_blank" class="card-link">Ver Código/Demo</a>
+                </div>
+            </article>
+
+            <!-- INDIE -->
+            <article class="card">
+                <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=800&auto=format&fit=crop" class="card-img" alt="Indie">
+                <div class="card-content">
+                    <span class="card-cat">Banda • Fanzine</span>
+                    <h3>Ecos Distantes</h3>
+                    <p>Diseño estilo "Raw HTML" para bandas indie. Sección de tour y biografía con estética Grunge.</p>
+                    <a href="./indie/index.html" target="_blank" class="card-link">Ver Código/Demo</a>
+                </div>
+            </article>
+
+            <!-- BLACK METAL -->
+            <article class="card">
+                <img src="https://images.unsplash.com/photo-1478131143081-80f7f84ca84d?q=80&w=800&auto=format&fit=crop" class="card-img" alt="Black Metal">
+                <div class="card-content">
+                    <span class="card-cat">Atmospheric • Cult</span>
+                    <h3>Sorg Och Mörker</h3>
+                    <p>Diseño experimental minimalista con tipografía gótica, efecto de ruido visual y reproductor oculto.</p>
+                    <a href="./blackmetal/index.html" target="_blank" class="card-link">Ver Demo</a>
+                </div>
+            </article>
+
+            <!-- FUNK -->
             <article class="card">
                 <img src="https://images.unsplash.com/photo-1493225255756-d9584f8606e9?q=80&w=800&auto=format&fit=crop" class="card-img" alt="Parallax Design">
                 <div class="card-content">
@@ -372,4 +785,5 @@
 
 </body>
 </html>
+
 
