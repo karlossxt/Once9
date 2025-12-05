@@ -25,9 +25,7 @@
             box-sizing: border-box;
         }
 
-        *, *:before, *:after {
-            box-sizing: inherit;
-        }
+        *, *:before, *:after { box-sizing: inherit; }
 
         /* --- LOGO Y NAV --- */
         nav {
@@ -50,11 +48,10 @@
 
         .brand span { color: var(--accent); }
 
-        /* Contenedor de botones del menú */
         .nav-actions {
             display: flex;
             align-items: center;
-            gap: 20px; /* Espacio entre Instagram y Email */
+            gap: 20px;
         }
 
         .insta-link {
@@ -65,7 +62,6 @@
             transition: 0.3s;
             text-transform: uppercase;
         }
-
         .insta-link:hover { color: white; }
 
         .contact-btn {
@@ -77,7 +73,6 @@
             transition: 0.3s;
             font-weight: bold;
         }
-
         .contact-btn:hover {
             background: var(--accent);
             color: black;
@@ -175,9 +170,7 @@
             display: block;
         }
 
-        .card:hover .card-img {
-            filter: grayscale(0%);
-        }
+        .card:hover .card-img { filter: grayscale(0%); }
 
         .card-content {
             padding: 25px;
@@ -247,9 +240,7 @@
         <a href="#" class="brand">ONCE<span>9</span></a>
         
         <div class="nav-actions">
-            <!-- Link a Instagram -->
             <a href="https://www.instagram.com/oncenueve_/" target="_blank" class="insta-link">Instagram</a>
-            <!-- Link a Correo -->
             <a href="mailto:karlossxt@gmail.com" class="contact-btn">CONTACTO</a>
         </div>
     </nav>
@@ -259,104 +250,7 @@
         <p class="subtitle">Soluciones digitales ágiles. Especializado en desarrollo web corporativo, portales de medios y experiencias de streaming de audio.</p>
     </div>
 
-    <!-- SECCIÓN 1: PROYECTOS ACTIVOS -->
-    <section>
-        <div class="section-header">
-            <h2 class="section-title">Clientes Activos</h2>
-            <span class="badge">Producción Real</span>
-        </div>
-        
-        <div class="grid">
-            
-            <!-- TRADUQUIL -->
-            <article class="card">
-                <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=800&auto=format&fit=crop" class="card-img" alt="Traduquil">
-                <div class="card-content">
-                    <span class="card-cat">Servicios Profesionales</span>
-                    <h3>Traduquil</h3>
-                    <p>Sitio corporativo para agencia de traducción. Diseño enfocado en confianza y claridad de la oferta comercial.</p>
-                    <a href="https://traduquil.com/" target="_blank" class="card-link">Visitar Sitio Web</a>
-                </div>
-            </article>
-
-            <!-- ACTIVATE -->
-            <article class="card">
-                <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=800&auto=format&fit=crop" class="card-img" alt="Activate">
-                <div class="card-content">
-                    <span class="card-cat">Plataforma Digital</span>
-                    <h3>Activate.mx</h3>
-                    <p>Portal interactivo web. Desarrollo de interfaz moderna y optimización de experiencia de usuario (UX).</p>
-                    <a href="https://activate.mx" target="_blank" class="card-link">Visitar Sitio Web</a>
-                </div>
-            </article>
-
-        </div>
-    </section>
-
-    <!-- SECCIÓN 2: LABORATORIO -->
-    <section>
-        <div class="section-header">
-            <h2 class="section-title">Laboratorio de Diseño</h2>
-            <span class="badge">Conceptos & Demos</span>
-        </div>
-
-        <div class="grid">
-            
-            <!-- NOTICIAS -->
-            <article class="card">
-                <img src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?q=80&w=800&auto=format&fit=crop" class="card-img" alt="News Design">
-                <div class="card-content">
-                    <span class="card-cat">Editorial • Media</span>
-                    <h3>El Monitor Global</h3>
-                    <p>Portal de noticias de alta densidad. Jerarquía visual tipo periódico digital optimizado para lectura rápida.</p>
-                    <a href="./noticias/index.html" target="_blank" class="card-link">Ver Demo</a>
-                </div>
-            </article>
-
-            <!-- DEPORTES -->
-            <article class="card">
-                <img src="https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?q=80&w=800&auto=format&fit=crop" class="card-img" alt="Sports Design">
-                <div class="card-content">
-                    <span class="card-cat">Dashboard • Data</span>
-                    <h3>Sport Zone</h3>
-                    <p>Interfaz deportiva con marcadores en tiempo real (Ticker), tablas de datos y diseño de alto contraste.</p>
-                    <a href="./deportes/index.html" target="_blank" class="card-link">Ver Demo</a>
-                </div>
-            </article>
-
-            <!-- INDIE -->
-            <article class="card">
-                <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=800&auto=format&fit=crop" class="card-img" alt="Indie Design">
-                <div class="card-content">
-                    <span class="card-cat">Banda • Fanzine</span>
-                    <h3>Ecos Distantes</h3>
-                    <p>Diseño estilo "Raw HTML" para bandas indie. Sección de tour y biografía con estética Grunge.</p>
-                    <a href="./indie/index.html" target="_blank" class="card-link">Ver Demo</a>
-                </div>
-            </article>
-
-            <!-- METAL -->
-            <article class="card">
-                <img src="https://images.unsplash.com/photo-1470229722913-7ea2d98634ef?q=80&w=800&auto=format&fit=crop" class="card-img" alt="Metal Design">
-                <div class="card-content">
-                    <span class="card-cat">Streaming • UI</span>
-                    <h3>Abismo de Acero</h3>
-                    <p>Interfaz Dark Mode para radio online. Estética industrial con efectos de color interactivos.</p>
-                    <a href="./metal/index.html" target="_blank" class="card-link">Ver Demo</a>
-                </div>
-            </article>
-
-            <!-- BLACK METAL -->
-            <article class="card">
-                <img src="https://images.unsplash.com/photo-1478131143081-80f7f84ca84d?q=80&w=800&auto=format&fit=crop" class="card-img" alt="Black Metal">
-                <div class="card-content">
-                    <span class="card-cat">Atmospheric • Cult</span>
-                    <h3>Sorg Och Mörker</h3>
-                    <p>Diseño experimental minimalista con tipografía gótica, efecto de ruido visual y reproductor oculto.</p>
-                    <a href="./blackmetal/index.html" target="_blank" class="card-link">Ver Demo</a>
-                </div>
-            </article>
-<!-- SECCIÓN 1: CLIENTES ACTIVOS (PRODUCCIÓN) -->
+    <!-- SECCIÓN 1: CLIENTES ACTIVOS (PRODUCCIÓN) -->
     <section>
         <div class="section-header">
             <h2 class="section-title">Clientes & Medios</h2>
@@ -367,7 +261,7 @@
             
             <!-- F1RST SPORTS -->
             <article class="card">
-                <!-- TOMA CAPTURA Y GUARDA COMO: img/f1rst-thumb.jpg -->
+                <!-- RECUERDA CAMBIAR ESTA IMAGEN POR UNA CAPTURA REAL DE TU SITIO -->
                 <img src="https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?q=80&w=800&auto=format&fit=crop" class="card-img" alt="F1rstSports">
                 <div class="card-content">
                     <span class="card-cat">Sports Media • HTML5</span>
@@ -379,7 +273,7 @@
 
             <!-- EL ROCK DE TODOS LOS DÍAS -->
             <article class="card">
-                <!-- TOMA CAPTURA Y GUARDA COMO: img/elrock-thumb.jpg -->
+                <!-- RECUERDA CAMBIAR ESTA IMAGEN POR UNA CAPTURA REAL -->
                 <img src="https://images.unsplash.com/photo-1493225255756-d9584f8606e9?q=80&w=800&auto=format&fit=crop" class="card-img" alt="El Rock">
                 <div class="card-content">
                     <span class="card-cat">Magazine • WordPress</span>
@@ -425,6 +319,7 @@
 
             <!-- DEMO: METAL (CÓDIGO PURO) -->
             <article class="card">
+                <!-- Asegúrate de tener esta foto en tu carpeta -->
                 <img src="metal/metal-preview.jpg.png" class="card-img" alt="Abismo de Acero">
                 <div class="card-content">
                     <span class="card-cat">Streaming • Código Puro</span>
@@ -436,7 +331,6 @@
 
             <!-- DEMO: INDIE (CÓDIGO PURO) -->
             <article class="card">
-                <!-- Asegúrate de tener esta foto o usa una genérica -->
                 <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=800&auto=format&fit=crop" class="card-img" alt="Indie">
                 <div class="card-content">
                     <span class="card-cat">Banda • Fanzine</span>
@@ -446,9 +340,18 @@
                 </div>
             </article>
 
-        </div>
-    </section>
-            <!-- FUNK -->
+            <!-- DEMO: BLACK METAL (CÓDIGO PURO) -->
+            <article class="card">
+                <img src="https://images.unsplash.com/photo-1478131143081-80f7f84ca84d?q=80&w=800&auto=format&fit=crop" class="card-img" alt="Black Metal">
+                <div class="card-content">
+                    <span class="card-cat">Atmospheric • Cult</span>
+                    <h3>Sorg Och Mörker</h3>
+                    <p>Diseño experimental minimalista con tipografía gótica, efecto de ruido visual y reproductor oculto.</p>
+                    <a href="./blackmetal/index.html" target="_blank" class="card-link">Ver Demo</a>
+                </div>
+            </article>
+
+            <!-- DEMO: FUNK (CÓDIGO PURO) -->
             <article class="card">
                 <img src="https://images.unsplash.com/photo-1493225255756-d9584f8606e9?q=80&w=800&auto=format&fit=crop" class="card-img" alt="Parallax Design">
                 <div class="card-content">
@@ -468,5 +371,5 @@
     </footer>
 
 </body>
-
 </html>
+
