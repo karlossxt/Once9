@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ONCE9 | Desarrollo Web & Streaming</title>
+    <title>ONCE9 | Portafolio Full Stack</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
         :root {
@@ -17,221 +18,60 @@
         }
 
         body {
-            margin: 0;
-            padding: 0;
-            background-color: var(--bg);
-            color: var(--text);
+            margin: 0; padding: 0;
+            background-color: var(--bg); color: var(--text);
             font-family: 'Inter', sans-serif;
             box-sizing: border-box;
         }
-
         *, *:before, *:after { box-sizing: inherit; }
 
-        /* --- LOGO Y NAV --- */
-        nav {
-            padding: 30px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1100px;
-            margin: 0 auto;
-        }
-
-        .brand {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 2rem;
-            font-weight: 700;
-            letter-spacing: -2px;
-            color: white;
-            text-decoration: none;
-        }
-
+        /* --- NAV --- */
+        nav { padding: 30px 20px; display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; }
+        .brand { font-family: 'Space Grotesk', sans-serif; font-size: 2rem; font-weight: 700; letter-spacing: -2px; color: white; text-decoration: none; }
         .brand span { color: var(--accent); }
-
-        .nav-actions {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
-
-        .insta-link {
-            color: #aaa;
-            text-decoration: none;
-            font-size: 0.9rem;
-            font-weight: 600;
-            transition: 0.3s;
-            text-transform: uppercase;
-        }
+        .nav-actions { display: flex; align-items: center; gap: 20px; }
+        .insta-link { color: #aaa; text-decoration: none; font-size: 0.9rem; font-weight: 600; transition: 0.3s; text-transform: uppercase; }
         .insta-link:hover { color: white; }
-
-        .contact-btn {
-            border: 1px solid var(--accent);
-            color: var(--accent);
-            padding: 8px 20px;
-            text-decoration: none;
-            font-size: 0.9rem;
-            transition: 0.3s;
-            font-weight: bold;
-        }
-        .contact-btn:hover {
-            background: var(--accent);
-            color: black;
-            box-shadow: 0 0 15px var(--accent);
-        }
+        .contact-btn { border: 1px solid var(--accent); color: var(--accent); padding: 8px 20px; text-decoration: none; font-size: 0.9rem; transition: 0.3s; font-weight: bold; }
+        .contact-btn:hover { background: var(--accent); color: black; box-shadow: 0 0 15px var(--accent); }
 
         /* --- HERO --- */
-        .hero {
-            text-align: center;
-            padding: 80px 20px;
-            max-width: 800px;
-            margin: 0 auto;
-        }
+        .hero { text-align: center; padding: 100px 20px 60px; max-width: 900px; margin: 0 auto; }
+        h1 { font-family: 'Space Grotesk', sans-serif; font-size: 4rem; line-height: 1; margin-bottom: 20px; color: white; letter-spacing: -2px; }
+        .subtitle { font-size: 1.2rem; color: #888; max-width: 600px; margin: 0 auto; line-height: 1.6; }
 
-        h1 {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 3.5rem;
-            line-height: 1.1;
-            margin-bottom: 20px;
-            color: white;
-        }
+        /* --- GRID --- */
+        section { padding: 60px 20px; max-width: 1200px; margin: 0 auto; }
+        .section-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 40px; border-bottom: 1px solid #222; padding-bottom: 15px; }
+        .section-title { font-family: 'Space Grotesk', sans-serif; font-size: 1.8rem; margin: 0; color: white; }
+        .badge { background: var(--accent); color: #000; font-weight: bold; font-size: 0.75rem; padding: 4px 10px; border-radius: 4px; text-transform: uppercase; }
+        .badge.secondary { background: #222; color: #888; }
+        .badge.lab { background: #6366f1; color: white; }
 
-        .subtitle {
-            font-size: 1.2rem;
-            color: #888;
-            max-width: 600px;
-            margin: 0 auto;
-        }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 30px; align-items: start; }
 
-        /* --- GRID DE PROYECTOS --- */
-        section {
-            padding: 60px 20px;
-            max-width: 1100px;
-            margin: 0 auto;
-        }
-
-        .section-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 40px;
-            border-bottom: 1px solid #222;
-            padding-bottom: 10px;
-        }
-
-        .section-title {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 1.5rem;
-            margin: 0;
-            margin-right: 20px;
-            color: white;
-        }
-
-        .badge {
-            background: #222;
-            font-size: 0.7rem;
-            padding: 4px 8px;
-            border-radius: 4px;
-            color: #888;
-            text-transform: uppercase;
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 30px;
-            align-items: start; 
-        }
-
-        /* --- TARJETAS --- */
-        .card {
-            background: var(--card-bg);
-            border: var(--border);
-            padding: 0; 
-            transition: 0.3s;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            height: 100%; 
-            overflow: hidden;
-            border-radius: 4px;
-        }
-
-        .card:hover {
-            border-color: var(--accent);
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px -10px rgba(0, 243, 255, 0.15);
-        }
-
-        .card-img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            border-bottom: 1px solid #222;
-            filter: grayscale(100%);
-            transition: 0.5s;
-            display: block;
-        }
-
-        .card:hover .card-img { filter: grayscale(0%); }
-
-        .card-content {
-            padding: 25px;
-            display: flex;
-            flex-direction: column;
-            flex-grow: 1;
-        }
-
-        .card-cat {
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--accent);
-            margin-bottom: 10px;
-            display: block;
-            font-weight: bold;
-        }
-
-        .card h3 {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 1.4rem;
-            margin: 0 0 10px 0;
-            color: white;
-            line-height: 1.2;
-        }
-
-        .card p {
-            font-size: 0.9rem;
-            color: #aaa;
-            margin-bottom: 20px;
-            line-height: 1.5;
-        }
-
-        .card-link {
-            text-decoration: none;
-            color: white;
-            font-weight: bold;
-            display: inline-flex;
-            align-items: center;
-            margin-top: auto; 
-            font-size: 0.9rem;
-            transition: 0.3s;
-        }
-
-        .card-link:hover { color: var(--accent); letter-spacing: 1px; }
-        .card-link::after { content: " →"; margin-left: 5px; }
-
-        footer {
-            text-align: center;
-            padding: 60px 20px;
-            border-top: 1px solid #222;
-            margin-top: 60px;
-            color: #555;
-            font-size: 0.9rem;
-        }
+        /* --- CARDS --- */
+        .card { background: var(--card-bg); border: var(--border); transition: 0.3s; position: relative; display: flex; flex-direction: column; height: 100%; overflow: hidden; border-radius: 8px; }
+        .card:hover { border-color: var(--accent); transform: translateY(-7px); box-shadow: 0 10px 40px -10px rgba(0, 243, 255, 0.1); }
         
+        .card-img { width: 100%; height: 220px; object-fit: cover; border-bottom: 1px solid #222; filter: grayscale(100%); transition: 0.5s; display: block; }
+        .card:hover .card-img { filter: grayscale(0%); }
+        
+        .card-content { padding: 25px; display: flex; flex-direction: column; flex-grow: 1; }
+        .card-cat { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: var(--accent); margin-bottom: 10px; font-weight: bold; }
+        .card h3 { font-family: 'Space Grotesk', sans-serif; font-size: 1.5rem; margin: 0 0 10px 0; color: white; line-height: 1.1; }
+        .card p { font-size: 0.95rem; color: #aaa; margin-bottom: 25px; line-height: 1.5; }
+        
+        .card-link { text-decoration: none; color: white; font-weight: bold; display: inline-flex; align-items: center; margin-top: auto; font-size: 0.9rem; transition: 0.3s; border: 1px solid #333; padding: 10px 15px; border-radius: 4px; justify-content: center; }
+        .card-link:hover { background: white; color: black; border-color: white; }
+        .card-link i { margin-right: 8px; }
+
+        footer { text-align: center; padding: 60px 20px; border-top: 1px solid #222; margin-top: 60px; color: #555; font-size: 0.9rem; }
         footer a { color: var(--accent); text-decoration: none; }
 
         @media (max-width: 768px) {
-            h1 { font-size: 2.5rem; }
+            h1 { font-size: 2.8rem; }
+            .grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -241,169 +81,198 @@
         <a href="#" class="brand">ONCE<span>9</span></a>
         <div class="nav-actions">
             <a href="https://www.instagram.com/oncenueve_/" target="_blank" class="insta-link">Instagram</a>
-            <a href="mailto:karlossxt@gmail.com" class="contact-btn">CONTACTO</a>
+            <a href="mailto:karlossxt@gmail.com" class="contact-btn">HABLEMOS</a>
         </div>
     </nav>
 
     <div class="hero">
-        <h1>Diseño Web de<br>Alto Rendimiento.</h1>
-        <p class="subtitle">Soluciones digitales ágiles. Especializado en desarrollo web corporativo, portales de medios y experiencias de streaming de audio.</p>
+        <h1>Experiencias Web<br>Inmersivas.</h1>
+        <p class="subtitle">Desarrollo web de próxima generación. Especializado en interfaces cinematográficas, plataformas de streaming y diseño editorial.</p>
     </div>
 
-    <!-- SECCIÓN 1: CLIENTES ACTIVOS (PRODUCCIÓN) -->
+    <!-- ========================================== -->
+    <!-- SECCIÓN 1: NUEVOS LANZAMIENTOS (2026) -->
+    <!-- ========================================== -->
     <section>
         <div class="section-header">
-            <h2 class="section-title">Clientes & Medios</h2>
-            <span class="badge">En Vivo • Producción</span>
+            <h2 class="section-title">Últimos Lanzamientos</h2>
+            <span class="badge">Destacados 2026</span>
         </div>
         
         <div class="grid">
-            
-            <!-- F1RST SPORTS -->
+            <!-- CINEMA ESPIKA -->
             <article class="card">
-                <img src="https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?q=80&w=800&auto=format&fit=crop" class="card-img" alt="F1rstSports">
+                <img src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?q=80&w=800" class="card-img" alt="Cinema Espika">
                 <div class="card-content">
-                    <span class="card-cat">Sports Media • HTML5</span>
-                    <h3>F1rstSports</h3>
-                    <p>Portal deportivo de alto rendimiento. Diseño 'Full Width', carrusel interactivo y optimización de carga rápida sin base de datos.</p>
-                    <a href="http://f1rstsports.com.mx/" target="_blank" class="card-link">Visitar f1rstsports.com.mx</a>
+                    <span class="card-cat">Streaming • Video UI</span>
+                    <h3>Cinema Espika</h3>
+                    <p>Plataforma de cine con video background inmersivo, tráilers integrados y estética oscura tipo Netflix/HBO.</p>
+                    <a href="cinema.html" target="_blank" class="card-link"><i class="fa-solid fa-film"></i> Ver Proyecto</a>
                 </div>
             </article>
 
-            <!-- EL ROCK DE TODOS LOS DÍAS -->
+            <!-- WHITEBOX MUSIC -->
             <article class="card">
-                <img src="https://images.unsplash.com/photo-1493225255756-d9584f8606e9?q=80&w=800&auto=format&fit=crop" class="card-img" alt="El Rock">
+                <img src="pexels-myatezhny39-2938205.jpg" class="card-img" alt="WhiteBox Music">
                 <div class="card-content">
-                    <span class="card-cat">Magazine • WordPress</span>
+                    <span class="card-cat">Studio • Dark Mode</span>
+                    <h3>WhiteBox Music</h3>
+                    <p>Sitio web para estudio musical. Reproductores de audio, galería interactiva y diseño neón moderno.</p>
+                    <a href="whitebox.html" target="_blank" class="card-link"><i class="fa-solid fa-music"></i> Ver Proyecto</a>
+                </div>
+            </article>
+
+            <!-- F1RST SPORTS -->
+            <article class="card">
+                <img src="pexels-pixabay-46798.jpg" class="card-img" alt="F1rstSports">
+                <div class="card-content">
+                    <span class="card-cat">Media • High Performance</span>
+                    <h3>F1rstSports</h3>
+                    <p>Portal deportivo de alto impacto visual. Layout dinámico para F1, Boxeo y Fútbol, optimizado para carga rápida.</p>
+                    <a href="f1rstsports.html" target="_blank" class="card-link"><i class="fa-solid fa-bolt"></i> Ver Proyecto</a>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- SECCIÓN 2: CLIENTES Y CORPORATIVO -->
+    <!-- ========================================== -->
+    <section>
+        <div class="section-header">
+            <h2 class="section-title">Clientes & Producción</h2>
+            <span class="badge secondary">En Vivo</span>
+        </div>
+
+        <div class="grid">
+            <!-- EL ROCK -->
+            <article class="card">
+                <img src="pexels-mickhaupt-6131921.jpg" class="card-img" alt="El Rock">
+                <div class="card-content">
+                    <span class="card-cat">Magazine • CMS</span>
                     <h3>El Rock de Todos los Días</h3>
-                    <p>Revista digital con años de trayectoria. Gestión de contenido masivo, reseñas y comunidad activa. Plataforma CMS.</p>
-                    <a href="https://elrockdetodoslosdias.com.mx/" target="_blank" class="card-link">Visitar Sitio Web</a>
+                    <p>Revista digital con gestión de contenido masivo, reseñas y comunidad activa. Plataforma WordPress.</p>
+                    <a href="https://elrockdetodoslosdias.com.mx/" target="_blank" class="card-link"><i class="fa-solid fa-globe"></i> Visitar Sitio</a>
                 </div>
             </article>
 
             <!-- TRADUQUIL -->
             <article class="card">
-                <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=800&auto=format&fit=crop" class="card-img" alt="Traduquil">
+                <img src="traduquil.jpg" class="card-img" alt="Traduquil">
                 <div class="card-content">
-                    <span class="card-cat">Servicios Profesionales</span>
+                    <span class="card-cat">Servicios Corporativos</span>
                     <h3>Traduquil</h3>
-                    <p>Sitio corporativo para agencia de traducción. Diseño enfocado en confianza y claridad de la oferta comercial.</p>
-                    <a href="https://traduquil.com/" target="_blank" class="card-link">Visitar Sitio Web</a>
+                    <p>Sitio corporativo para agencia de traducción. Diseño limpio enfocado en confianza y conversión comercial.</p>
+                    <a href="https://traduquil.com/" target="_blank" class="card-link"><i class="fa-solid fa-briefcase"></i> Visitar Sitio</a>
                 </div>
             </article>
 
             <!-- ACTIVATE -->
             <article class="card">
-                <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=800&auto=format&fit=crop" class="card-img" alt="Activate">
+                <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=800" class="card-img" alt="Activate">
                 <div class="card-content">
                     <span class="card-cat">Plataforma Digital</span>
                     <h3>Activate.mx</h3>
-                    <p>Portal interactivo web. Desarrollo de interfaz moderna y optimización de experiencia de usuario (UX).</p>
-                    <a href="https://activate.mx" target="_blank" class="card-link">Visitar Sitio Web</a>
+                    <p>Portal web interactivo. Desarrollo de interfaz moderna y optimización de experiencia de usuario (UX).</p>
+                    <a href="https://activate.mx" target="_blank" class="card-link"><i class="fa-solid fa-laptop"></i> Visitar Sitio</a>
                 </div>
             </article>
 
+            <!-- BIENES RAICES -->
+            <article class="card">
+                <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?q=80&w=800" class="card-img" alt="Real Estate">
+                <div class="card-content">
+                    <span class="card-cat">Inmobiliaria • Catálogo</span>
+                    <h3>Bienes Raíces / Arquitectura</h3>
+                    <p>Solución web para catálogo de propiedades y servicios corporativos. Enfoque en ventas y contacto.</p>
+                    <a href="https://bienes.elrockdetodoslosdias.com.mx/" target="_blank" class="card-link"><i class="fa-solid fa-house"></i> Ver Demo</a>
+                </div>
+            </article>
         </div>
     </section>
 
-    <!-- SECCIÓN 2: LABORATORIO Y PROTOTIPOS -->
+    <!-- ========================================== -->
+    <!-- SECCIÓN 3: LABORATORIO CREATIVO -->
+    <!-- ========================================== -->
     <section>
         <div class="section-header">
-            <h2 class="section-title">Desarrollos & Prototipos</h2>
-            <span class="badge">CMS & Código Puro</span>
+            <h2 class="section-title">Laboratorio de Código</h2>
+            <span class="badge lab">Prototipos & Arte</span>
         </div>
 
         <div class="grid">
-            
-            <!-- PUNTO CERO (NUEVO) -->
-            <article class="card">
-                <!-- Toma una captura donde salga el titulo de DUNE -->
-                <img src="https://images.unsplash.com/photo-1544253303-34e8f664a7c1?q=80&w=800&auto=format&fit=crop" class="card-img" alt="Punto Cero Cine">
-                <div class="card-content">
-                    <span class="card-cat">Cinema • Video UI</span>
-                    <h3>Punto Cero</h3>
-                    <p>Experiencia de streaming inmersiva. Video de fondo en pantalla completa (Hero Video), modo oscuro y carrusel de estrenos.</p>
-                    <a href="./puntocero/index.html" target="_blank" class="card-link">Ver Demo</a>
-                </div>
-            </article>
-
-            <!-- AURORA -->
-            <article class="card">
-                <img src="https://images.unsplash.com/photo-1497215728101-856f4ea42174?q=80&w=800&auto=format&fit=crop" class="card-img" alt="Aurora Theme">
-                <div class="card-content">
-                    <span class="card-cat">Agencia • Creativo</span>
-                    <h3>Proyecto Aurora</h3>
-                    <p>Prototipo visual enfocado en agencias digitales y portafolios minimalistas. Estructura limpia y moderna.</p>
-                    <a href="https://aurora.elrockdetodoslosdias.com.mx/" target="_blank" class="card-link">Ver Live Demo</a>
-                </div>
-            </article>
-
-            <!-- BIENES RAÍCES -->
-            <article class="card">
-                <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?q=80&w=800&auto=format&fit=crop" class="card-img" alt="Real Estate">
-                <div class="card-content">
-                    <span class="card-cat">Corporativo • Inmobiliaria</span>
-                    <h3>Bienes Raíces / Arquitectura</h3>
-                    <p>Solución web para catálogo de propiedades y servicios corporativos. Enfoque en conversión y contacto.</p>
-                    <a href="https://bienes.elrockdetodoslosdias.com.mx/" target="_blank" class="card-link">Ver Live Demo</a>
-                </div>
-            </article>
-
-            <!-- METAL -->
+            <!-- ABISMO DE ACERO -->
             <article class="card">
                 <img src="metal/metal-preview.jpg.png" class="card-img" alt="Abismo de Acero">
                 <div class="card-content">
-                    <span class="card-cat">Streaming • Código Puro</span>
+                    <span class="card-cat">Code • Dark UI</span>
                     <h3>Abismo de Acero</h3>
-                    <p>Interfaz Dark Mode para radio online. Estética industrial desarrollada 100% en código (sin constructores).</p>
-                    <a href="./metal/index.html" target="_blank" class="card-link">Ver Código/Demo</a>
+                    <p>Interfaz industrial para radio online. Estética agresiva desarrollada 100% en código puro.</p>
+                    <a href="./metal/index.html" target="_blank" class="card-link"><i class="fa-solid fa-code"></i> Ver Demo</a>
                 </div>
             </article>
 
-            <!-- INDIE -->
+            <!-- ECOS DISTANTES -->
             <article class="card">
-                <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=800&auto=format&fit=crop" class="card-img" alt="Indie">
+                <img src="pexels-savia-rocks-1310041404-25194146.jpg" class="card-img" alt="Indie Band">
                 <div class="card-content">
-                    <span class="card-cat">Banda • Fanzine</span>
+                    <span class="card-cat">Indie • Grunge</span>
                     <h3>Ecos Distantes</h3>
-                    <p>Diseño estilo "Raw HTML" para bandas indie. Sección de tour y biografía con estética Grunge.</p>
-                    <a href="./indie/index.html" target="_blank" class="card-link">Ver Código/Demo</a>
+                    <p>Diseño estilo "Raw HTML" para bandas indie. Sección de tour y biografía con estética Lo-Fi.</p>
+                    <a href="./indie/index.html" target="_blank" class="card-link"><i class="fa-solid fa-guitar"></i> Ver Demo</a>
                 </div>
             </article>
 
-            <!-- BLACK METAL -->
+            <!-- FUNK VIBES -->
             <article class="card">
-                <img src="https://images.unsplash.com/photo-1478131143081-80f7f84ca84d?q=80&w=800&auto=format&fit=crop" class="card-img" alt="Black Metal">
+                <img src="https://images.unsplash.com/photo-1493225255756-d9584f8606e9?q=80&w=800" class="card-img" alt="Funk">
                 <div class="card-content">
-                    <span class="card-cat">Atmospheric • Cult</span>
-                    <h3>Sorg Och Mörker</h3>
-                    <p>Diseño experimental minimalista con tipografía gótica, efecto de ruido visual y reproductor oculto.</p>
-                    <a href="./blackmetal/index.html" target="_blank" class="card-link">Ver Demo</a>
-                </div>
-            </article>
-
-            <!-- FUNK -->
-            <article class="card">
-                <img src="https://images.unsplash.com/photo-1493225255756-d9584f8606e9?q=80&w=800&auto=format&fit=crop" class="card-img" alt="Parallax Design">
-                <div class="card-content">
-                    <span class="card-cat">Experience • Motion</span>
+                    <span class="card-cat">Motion • Parallax</span>
                     <h3>Funk Vibes</h3>
-                    <p>Landing page interactiva con efecto Parallax puro en CSS. Estilo visual inspirado en Funk/Soul.</p>
-                    <a href="./funk/index.html" target="_blank" class="card-link">Ver Demo</a>
+                    <p>Landing page interactiva con efecto Parallax puro en CSS. Estilo visual inspirado en el Soul de los 70s.</p>
+                    <a href="./funk/index.html" target="_blank" class="card-link"><i class="fa-solid fa-record-vinyl"></i> Ver Demo</a>
+                </div>
+            </article>
+            
+            <!-- SORG OCH MORKER -->
+            <article class="card">
+                <img src="https://images.unsplash.com/photo-1478131143081-80f7f84ca84d?q=80&w=800" class="card-img" alt="Black Metal">
+                <div class="card-content">
+                    <span class="card-cat">Atmospheric • Minimal</span>
+                    <h3>Sorg Och Mörker</h3>
+                    <p>Diseño experimental con tipografía gótica y efecto de ruido visual. Reproductor de audio oculto.</p>
+                    <a href="./blackmetal/index.html" target="_blank" class="card-link"><i class="fa-solid fa-skull"></i> Ver Demo</a>
                 </div>
             </article>
 
+            <!-- PROYECTO AURORA -->
+            <article class="card">
+                <img src="https://images.unsplash.com/photo-1497215728101-856f4ea42174?q=80&w=800" class="card-img" alt="Aurora Theme">
+                <div class="card-content">
+                    <span class="card-cat">Agencia • Clean</span>
+                    <h3>Proyecto Aurora</h3>
+                    <p>Diseño conceptual para agencias digitales minimalistas. Estructura de grilla moderna y tipografía suiza.</p>
+                    <a href="https://aurora.elrockdetodoslosdias.com.mx/" target="_blank" class="card-link"><i class="fa-solid fa-layer-group"></i> Ver Demo</a>
+                </div>
+            </article>
+
+            <!-- PUNTO CERO -->
+            <article class="card">
+                <img src="https://images.unsplash.com/photo-1544253303-34e8f664a7c1?q=80&w=800" class="card-img" alt="Punto Cero">
+                <div class="card-content">
+                    <span class="card-cat">Prototype • Video</span>
+                    <h3>Punto Cero</h3>
+                    <p>Primer prototipo de experiencia de streaming. Video de fondo en pantalla completa y carrusel básico.</p>
+                    <a href="./puntocero/index.html" target="_blank" class="card-link"><i class="fa-solid fa-play"></i> Ver Demo</a>
+                </div>
+            </article>
         </div>
     </section>
 
     <footer>
-        <p>© 2025 <strong>ONCE9</strong> - Todos los derechos reservados.</p>
+        <p>© 2026 <strong>ONCE9</strong> - Karlos SXT.</p>
         <p>Contacto: <a href="mailto:karlossxt@gmail.com">karlossxt@gmail.com</a></p>
     </footer>
 
 </body>
 </html>
-
-
-
-
