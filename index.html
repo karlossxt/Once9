@@ -73,6 +73,97 @@
             h1 { font-size: 2.8rem; }
             .grid { grid-template-columns: 1fr; }
         }
+        /* --- SERVICIOS --- */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+        .price-card {
+            background: var(--card-bg);
+            border: var(--border);
+            padding: 40px 30px;
+            border-radius: 12px;
+            text-align: center;
+            transition: 0.3s;
+            position: relative;
+        }
+        .price-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-5px);
+        }
+        .price-card.featured {
+            border: 1px solid var(--accent);
+            background: linear-gradient(145deg, #111 0%, #080808 100%);
+        }
+        .service-icon {
+            font-size: 2.5rem;
+            color: var(--accent);
+            margin-bottom: 20px;
+            display: block;
+        }
+        .price-card h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.6rem;
+            color: white;
+            margin: 0 0 10px 0;
+        }
+        .price-tag {
+            font-size: 0.85rem;
+            color: #888;
+            margin-bottom: 25px;
+            display: block;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .price-tag span {
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        .service-list {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 30px 0;
+            text-align: left;
+        }
+        .service-list li {
+            font-size: 0.9rem;
+            color: #aaa;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .service-list li i {
+            color: var(--accent);
+            font-size: 0.8rem;
+        }
+        .btn-quote {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background: transparent;
+            border: 1px solid #333;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.9rem;
+            transition: 0.3s;
+            border-radius: 4px;
+        }
+        .price-card:hover .btn-quote {
+            background: white;
+            color: black;
+            border-color: white;
+        }
+        .featured .btn-quote {
+            background: var(--accent);
+            color: black;
+            border-color: var(--accent);
+        }
+
     </style>
 </head>
 <body>
@@ -132,6 +223,60 @@
                     <a href="https://f1rstsports.com.mx/" target="_blank" class="card-link"><i class="fa-solid fa-bolt"></i> Ver Proyecto</a>
                 </div>
             </article>
+        </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- SECCIÓN: SERVICIOS & SOLUCIONES -->
+    <!-- ========================================== -->
+    <section>
+        <div class="section-header">
+            <h2 class="section-title">Servicios & Soluciones</h2>
+            <span class="badge lab">Cotizaciones 2026</span>
+        </div>
+
+        <div class="pricing-grid">
+            <!-- Pack 1 -->
+            <div class="price-card">
+                <i class="fa-solid fa-rocket service-icon"></i>
+                <h3>Landing Page</h3>
+                <span class="price-tag">Inversión desde <span>$250 USD</span></span>
+                <ul class="service-list">
+                    <li><i class="fa-solid fa-check"></i> Diseño High-Conversion</li>
+                    <li><i class="fa-solid fa-check"></i> Optimización Mobile</li>
+                    <li><i class="fa-solid fa-check"></i> Integración WhatsApp</li>
+                    <li><i class="fa-solid fa-check"></i> SEO Google Básico</li>
+                </ul>
+                <a href="mailto:karlossxt@://gmail.com en Landing Page" class="btn-quote">SOLICITAR COTIZACIÓN</a>
+            </div>
+
+            <!-- Pack 2 (Destacado) -->
+            <div class="price-card featured">
+                <i class="fa-solid fa-layer-group service-icon"></i>
+                <h3>Sitio Web Pro</h3>
+                <span class="price-tag">Inversión desde <span>$550 USD</span></span>
+                <ul class="service-list">
+                    <li><i class="fa-solid fa-check"></i> Hasta 6 Secciones</li>
+                    <li><i class="fa-solid fa-check"></i> Panel de Administración</li>
+                    <li><i class="fa-solid fa-check"></i> Animaciones Premium</li>
+                    <li><i class="fa-solid fa-check"></i> Reporte Analytics</li>
+                </ul>
+                <a href="mailto:karlossxt@://gmail.com en Sitio Web Pro" class="btn-quote">EMPEZAR AHORA</a>
+            </div>
+
+            <!-- Pack 3 -->
+            <div class="price-card">
+                <i class="fa-solid fa-code service-icon"></i>
+                <h3>Custom Dev</h3>
+                <span class="price-tag">Proyecto <span>A Medida</span></span>
+                <ul class="service-list">
+                    <li><i class="fa-solid fa-check"></i> Web Apps & Dashboards</li>
+                    <li><i class="fa-solid fa-check"></i> E-commerce Completo</li>
+                    <li><i class="fa-solid fa-check"></i> Integración de APIs</li>
+                    <li><i class="fa-solid fa-check"></i> Consultoría Técnica</li>
+                </ul>
+                <a href="mailto:karlossxt@://gmail.com a Medida" class="btn-quote">COTIZAR PROYECTO</a>
+            </div>
         </div>
     </section>
 
@@ -281,6 +426,7 @@
 
 </body>
 </html>
+
 
 
 
