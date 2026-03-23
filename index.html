@@ -114,11 +114,16 @@
 }
 
 .price {
-  font-size: 1.2rem;
+  font-size: 1.1rem; /* Lo bajamos un poquito de 1.2 a 1.1 */
   font-weight: bold;
   color: #fff;
   margin: 15px 0;
+  display: flex; /* Usamos flex para controlar el espacio */
+  flex-wrap: wrap; /* Esto permite que el precio en USD baje si no hay espacio */
+  justify-content: center;
+  gap: 5px;
 }
+
 
 .price span {
   font-size: 0.9rem;
