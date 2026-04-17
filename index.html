@@ -17,7 +17,44 @@
             --accent: #00f3ff;   
             --border: 1px solid #333;
         }
+/* Botón Flotante de WhatsApp */
+.whatsapp-float {
+    position: fixed;
+    width: 60px;
+    height: 60px;
+    bottom: 30px;
+    right: 30px;
+    background-color: #25d366; /* Verde original de WhatsApp */
+    color: #FFF;
+    border-radius: 50px;
+    text-align: center;
+    font-size: 35px;
+    box-shadow: 0 0 20px rgba(37, 211, 102, 0.4);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
 
+.whatsapp-float:hover {
+    transform: scale(1.1);
+    background-color: #128c7e;
+    box-shadow: 0 0 30px rgba(37, 211, 102, 0.6);
+    color: white;
+}
+
+/* Ajuste para móviles para que no estorbe tanto */
+@media (max-width: 768px) {
+    .whatsapp-float {
+        width: 50px;
+        height: 50px;
+        bottom: 20px;
+        right: 20px;
+        font-size: 30px;
+    }
+}
         body {
             margin: 0; padding: 0;
             background-color: var(--bg); color: var(--text);
@@ -198,7 +235,7 @@
     <nav>
         <a href="#" class="brand">ONCE<span>9</span></a>
         <div class="nav-actions">
-            <a href="https://www.instagram.com/oncenueve_/" target="_blank" class="insta-link">Instagram</a>
+            <a href="https://www.facebook.com/once9999" target="_blank" class="insta-link">FACEBOOK</a>
             <a href="mailto:karlossxt@gmail.com" class="contact-btn">HABLEMOS</a>
         </div>
     </nav>
@@ -273,7 +310,8 @@
       <li><i class="fas fa-check"></i> Entrega desde 72hrs</li>
       <li><i class="fas fa-check"></i> Optimización básica SEO (Google)</li>  
     </ul>
-    <a href="https://wa.me🚀%20Me%20interesa%20la%20PROMO%20de%20$2,000%20MXN.%20¿Me%20das%20más%20info?" target="_blank" class="btn-outline">¡QUIERO LA PROMO!</a>
+    <a href="https://wa.me/525588374947?text=Me%20interesa%20la%20PROMO%20de%202000" target="_blank" class="btn-outline">¡QUIERO LA PROMO!</a>
+
   </div>
 
   <!-- Tarjeta 2: LANDING PAGE -->
@@ -292,7 +330,7 @@
        <li><i class="fas fa-check"></i> Entrega 2 a 3 semanas</li>
        <li><i class="fas fa-check"></i> Optimización básica SEO (Google)</li>  
     </ul>
-    <a href="https://wa.me🎯%20Quiero%20cotizar%20una%20Landing%20Page%20para%20mi%20negocio." target="_blank" class="btn-outline">SOLICITAR COTIZACIÓN</a>
+    <a href="https://wa.me/525588374947?text=Quiero%20cotizar%20una%20Landing%20Page" target="_blank" class="btn-outline">SOLICITAR COTIZACIÓN</a>
   </div>
 
   <!-- Tarjeta 3: SITIO WEB PRO (DESTACADA) -->
@@ -309,7 +347,7 @@
       <li><i class="fas fa-check"></i> 12 Meses de Mantenimiento</li>
       <li><i class="fas fa-check"></i> Entrega 3 a 4 semanas</li>
     </ul>
-    <a href="https://wa.me💎%20Me%20interesa%20el%20Sitio%20Web%20Pro%20($550%20USD).%20¿Cómo%20empezamos?" target="_blank" class="btn-filled">EMPEZAR AHORA</a>
+    <a href="https://wa.me/525588374947?text=Me%20interesa%20el%20Sitio%20Web%20Pro" target="_blank" class="btn-filled">EMPEZAR AHORA</a>
   </div>
 
   <!-- Tarjeta 4: CUSTOM DEV -->
@@ -323,7 +361,7 @@
       <li><i class="fas fa-check"></i> Integración de APIs</li>
       <li><i class="fas fa-check"></i> Soporte y Seguridad 365</li>
     </ul>
-    <a href="https://wa.me💻%20Tengo%20un%20proyecto%20a%20medida%20y%20me%20gustaría%20una%20consultoría." target="_blank" class="btn-outline">COTIZAR PROYECTO</a>
+   <a href="https://wa.me/525588374947?text=Tengo%20un%20proyecto%20a%20medida" target="_blank" class="btn-outline">COTIZAR PROYECTO</a>
   </div>
 </section>
 
@@ -470,7 +508,13 @@
         <p>© 2026 <strong>ONCE9</strong> - Karlos SXT.</p>
         <p>Contacto: <a href="mailto:karlossxt@gmail.com">karlossxt@gmail.com</a></p>
     </footer>
-
+<!-- Botón de WhatsApp -->
+<a href="https://wa.me/525588374947?text=Hola%20ONCE9,%20vi%20tu%20portafolio%20y%20me%20gustaría%20cotizar%20un%20proyecto." 
+   class="whatsapp-float" 
+   target="_blank" 
+   rel="noopener noreferrer">
+    <i class="fab fa-whatsapp"></i>
+</a>
 </body>
 </html>
 
