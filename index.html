@@ -8,81 +8,40 @@
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="icon" type="image/x-icon" href="logoonce.jpg">
-    <!-- Etiquetas Open Graph para que se vea bien al compartir -->
-<meta property="og:title" content="ONCE9 | Portafolio Full Stack">
-<meta property="og:description" content="Desarrollo web de próxima generación. Interfaces cinematográficas y alto rendimiento.">
-<meta property="og:image" content="https://tuusuario.github.io/turepo/logoonce.jpg">
-<meta property="og:url" content="https://github.com/karlossxt/Once9/">
+    <meta property="og:title" content="ONCE9 | Portafolio Full Stack">
+    <meta property="og:description" content="Desarrollo web de próxima generación. Interfaces cinematográficas y alto rendimiento.">
+    <meta property="og:image" content="https://karlossxt.github.io/Once9/logoonce.jpg">
+    <meta property="og:url" content="https://once9.com.mx/">
     <style>
         :root {
-            --bg: #050505;       
-            --card-bg: #111111;  
-            --text: #e2e8f0;     
-            --accent: #00f3ff;   
+            --bg: #050505;
+            --card-bg: #111111;
+            --text: #e2e8f0;
+            --accent: #00f3ff;
             --border: 1px solid #333;
         }
-/* Botón Flotante de WhatsApp */
-.whatsapp-float {
-    position: fixed;
-    width: 60px;
-    height: 60px;
-    bottom: 30px;
-    right: 30px;
-    background-color: #25d366; /* Verde original de WhatsApp */
-    color: #FFF;
-    border-radius: 50px;
-    text-align: center;
-    font-size: 35px;
-    box-shadow: 0 0 20px rgba(37, 211, 102, 0.4);
-    z-index: 1000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-decoration: none;
-    transition: all 0.3s ease;
-}
 
-.whatsapp-float:hover {
-    transform: scale(1.1);
-    background-color: #128c7e;
-    box-shadow: 0 0 30px rgba(37, 211, 102, 0.6);
-    color: white;
-}
-
-/* Ajuste para móviles para que no estorbe tanto */
-@media (max-width: 768px) {
-    .whatsapp-float {
-        width: 50px;
-        height: 50px;
-        bottom: 20px;
-        right: 20px;
-        font-size: 30px;
-    }
-}
+        html { scroll-behavior: smooth; }
+        * { box-sizing: border-box; }
         body {
             margin: 0; padding: 0;
             background-color: var(--bg); color: var(--text);
             font-family: 'Inter', sans-serif;
-            box-sizing: border-box;
         }
-        *, *:before, *:after { box-sizing: inherit; }
 
-        /* --- NAV --- */
         nav { padding: 30px 20px; display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; }
         .brand { font-family: 'Space Grotesk', sans-serif; font-size: 2rem; font-weight: 700; letter-spacing: -2px; color: white; text-decoration: none; }
         .brand span { color: var(--accent); }
         .nav-actions { display: flex; align-items: center; gap: 20px; }
-        .insta-link { color: #aaa; text-decoration: none; font-size: 0.9rem; font-weight: 600; transition: 0.3s; text-transform: uppercase; }
-        .insta-link:hover { color: white; }
+        .nav-link { color: #aaa; text-decoration: none; font-size: 0.9rem; font-weight: 600; transition: 0.3s; text-transform: uppercase; }
+        .nav-link:hover { color: white; }
         .contact-btn { border: 1px solid var(--accent); color: var(--accent); padding: 8px 20px; text-decoration: none; font-size: 0.9rem; transition: 0.3s; font-weight: bold; }
         .contact-btn:hover { background: var(--accent); color: black; box-shadow: 0 0 15px var(--accent); }
 
-        /* --- HERO --- */
         .hero { text-align: center; padding: 100px 20px 60px; max-width: 900px; margin: 0 auto; }
         h1 { font-family: 'Space Grotesk', sans-serif; font-size: 4rem; line-height: 1; margin-bottom: 20px; color: white; letter-spacing: -2px; }
         .subtitle { font-size: 1.2rem; color: #888; max-width: 600px; margin: 0 auto; line-height: 1.6; }
 
-        /* --- GRID --- */
         section { padding: 60px 20px; max-width: 1200px; margin: 0 auto; }
         .section-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 40px; border-bottom: 1px solid #222; padding-bottom: 15px; }
         .section-title { font-family: 'Space Grotesk', sans-serif; font-size: 1.8rem; margin: 0; color: white; }
@@ -92,159 +51,113 @@
 
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 30px; align-items: start; }
 
-        /* --- CARDS --- */
-        .card { background: var(--card-bg); border: var(--border); transition: 0.3s; position: relative; display: flex; flex-direction: column; height: 100%; overflow: hidden; border-radius: 8px; }
-        .card:hover { border-color: var(--accent); transform: translateY(-7px); box-shadow: 0 10px 40px -10px rgba(0, 243, 255, 0.1); }
-        
-        .card-img { width: 100%; height: 220px; object-fit: cover; border-bottom: 1px solid #222; filter: grayscale(100%); transition: 0.5s; display: block; }
-        .card:hover .card-img { filter: grayscale(0%); }
-        
-        .card-content { padding: 25px; display: flex; flex-direction: column; flex-grow: 1; }
-        .card-cat { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: var(--accent); margin-bottom: 10px; font-weight: bold; }
-        .card h3 { font-family: 'Space Grotesk', sans-serif; font-size: 1.5rem; margin: 0 0 10px 0; color: white; line-height: 1.1; }
-        .card p { font-size: 0.95rem; color: #aaa; margin-bottom: 25px; line-height: 1.5; }
-        
-        .card-link { text-decoration: none; color: white; font-weight: bold; display: inline-flex; align-items: center; margin-top: auto; font-size: 0.9rem; transition: 0.3s; border: 1px solid #333; padding: 10px 15px; border-radius: 4px; justify-content: center; }
-        .card-link:hover { background: white; color: black; border-color: white; }
-        .card-link i { margin-right: 8px; }
+        .grid-card { background: var(--card-bg); border: var(--border); transition: 0.3s; position: relative; display: flex; flex-direction: column; height: 100%; overflow: hidden; border-radius: 8px; }
+        .grid-card:hover { border-color: var(--accent); transform: translateY(-7px); box-shadow: 0 10px 40px -10px rgba(0, 243, 255, 0.1); }
+        .grid-card .card-img { width: 100%; height: 220px; object-fit: cover; border-bottom: 1px solid #222; filter: grayscale(100%); transition: 0.5s; display: block; }
+        .grid-card:hover .card-img { filter: grayscale(0%); }
+        .grid-card .card-content { padding: 25px; display: flex; flex-direction: column; flex-grow: 1; }
+        .grid-card .card-cat { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: var(--accent); margin-bottom: 10px; font-weight: bold; }
+        .grid-card h3 { font-family: 'Space Grotesk', sans-serif; font-size: 1.5rem; margin: 0 0 10px 0; color: white; line-height: 1.1; }
+        .grid-card p { font-size: 0.95rem; color: #aaa; margin-bottom: 25px; line-height: 1.5; }
+        .grid-card .card-link { text-decoration: none; color: white; font-weight: bold; display: inline-flex; align-items: center; margin-top: auto; font-size: 0.9rem; transition: 0.3s; border: 1px solid #333; padding: 10px 15px; border-radius: 4px; justify-content: center; }
+        .grid-card .card-link:hover { background: white; color: black; border-color: white; }
+        .grid-card .card-link i { margin-right: 8px; }
 
         footer { text-align: center; padding: 60px 20px; border-top: 1px solid #222; margin-top: 60px; color: #555; font-size: 0.9rem; }
         footer a { color: var(--accent); text-decoration: none; }
 
+        .servicios-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 40px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .servicio-card {
+            background: var(--card-bg);
+            border: 1px solid #333;
+            border-radius: 15px;
+            padding: 30px 20px;
+            text-align: center;
+            position: relative;
+            transition: transform 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            overflow: visible;
+            margin-top: 20px;
+        }
+        .servicio-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent);
+        }
+        .servicio-card.featured {
+            border: 2px solid var(--accent);
+            box-shadow: 0 0 20px rgba(0, 242, 255, 0.2);
+        }
+        .servicio-card .icon { font-size: 2.5rem; color: var(--accent); margin-bottom: 15px; }
+        .servicio-card h3 { font-family: 'Space Grotesk', sans-serif; font-size: 1.4rem; margin: 0 0 10px; color: white; }
+        .servicio-card .price {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #fff;
+            margin: 15px 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 5px;
+        }
+        .servicio-card .price span { font-size: 0.9rem; color: var(--accent); }
+        .servicio-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0;
+            text-align: left;
+            flex-grow: 1;
+        }
+        .servicio-card ul li { color: #b0b0b0; margin-bottom: 10px; font-size: 0.9rem; }
+        .servicio-card ul li i { color: var(--accent); margin-right: 8px; }
+        .servicio-card .btn-outline, .servicio-card .btn-filled {
+            padding: 12px; border-radius: 5px; text-decoration: none;
+            font-weight: bold; font-size: 0.8rem; transition: 0.3s;
+        }
+        .servicio-card .btn-outline { border: 1px solid #fff; color: #fff; }
+        .servicio-card .btn-outline:hover { background: #fff; color: #000; }
+        .servicio-card .btn-filled { background: var(--accent); color: #000; }
+        .badge-red, .badge-best {
+            position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+            padding: 5px 15px; font-size: 0.7rem; border-radius: 20px; font-weight: bold;
+        }
+        .badge-red { background: #ff4757; color: white; }
+        .badge-best { background: var(--accent); color: black; }
+
+        .whatsapp-float {
+            position: fixed; width: 60px; height: 60px;
+            bottom: 30px; right: 30px; background-color: #25d366;
+            color: #FFF; border-radius: 50px; text-align: center;
+            font-size: 35px; box-shadow: 0 0 20px rgba(37, 211, 102, 0.4);
+            z-index: 1000; display: flex; align-items: center;
+            justify-content: center; text-decoration: none; transition: all 0.3s ease;
+        }
+        .whatsapp-float:hover {
+            transform: scale(1.1); background-color: #128c7e;
+            box-shadow: 0 0 30px rgba(37, 211, 102, 0.6); color: white;
+        }
         @media (max-width: 768px) {
+            .whatsapp-float { width: 50px; height: 50px; bottom: 20px; right: 20px; font-size: 30px; }
             h1 { font-size: 2.8rem; }
             .grid { grid-template-columns: 1fr; }
         }
-        /* --- SERVICIOS --- */
-       :root {
-  --primary-cyan: #00f2ff;
-  --bg-dark: #0a0a0a;
-  --card-bg: #161616;
-  --text-gray: #b0b0b0;
-}
-
-.servicios-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 20px;
-  padding: 40px 20px;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.card {
-  background: var(--card-bg);
-  border: 1px solid #333;
-  border-radius: 15px;
-  padding: 30px 20px;
-  text-align: center;
-  position: relative;
-  transition: transform 0.3s ease;
-  display: flex;
-  flex-direction: column;
-  overflow: visible; 
-  margin-top: 20px;
-}
-}
-
-.card:hover {
-  transform: translateY(-10px);
-  border-color: var(--primary-cyan);
-}
-
-/* Estilo para la tarjeta destacada (Sitio Web Pro) */
-.card.featured {
-  border: 2px solid var(--primary-cyan);
-  box-shadow: 0 0 20px rgba(0, 242, 255, 0.2);
-}
-
-.price {
-  font-size: 1.1rem; /* Lo bajamos un poquito de 1.2 a 1.1 */
-  font-weight: bold;
-  color: #fff;
-  margin: 15px 0;
-  display: flex; /* Usamos flex para controlar el espacio */
-  flex-wrap: wrap; /* Esto permite que el precio en USD baje si no hay espacio */
-  justify-content: center;
-  gap: 5px;
-}
-
-
-.price span {
-  font-size: 0.9rem;
-  color: var(--primary-cyan);
-}
-
-.card ul {
-  list-style: none;
-  padding: 0;
-  margin: 20px 0;
-  text-align: left;
-  flex-grow: 1; /* Empuja el botón al fondo */
-}
-
-.card ul li {
-  color: var(--text-gray);
-  margin-bottom: 10px;
-  font-size: 0.9rem;
-}
-
-.card ul li i {
-  color: var(--primary-cyan);
-  margin-right: 8px;
-}
-
-/* Botones */
-.btn-outline, .btn-filled {
-  padding: 12px;
-  border-radius: 5px;
-  text-decoration: none;
-  font-weight: bold;
-  font-size: 0.8rem;
-  transition: 0.3s;
-}
-
-.btn-outline {
-  border: 1px solid #fff;
-  color: #fff;
-}
-
-.btn-outline:hover {
-  background: #fff;
-  color: #000;
-}
-
-.btn-filled {
-  background: var(--primary-cyan);
-  color: #000;
-}
-
-/* Badges (Etiquetas) */
-.badge, .badge-best {
-  position: absolute;
-  top: -12px;
-  left: 50%;
-  transform: translateX(-50%);
-  padding: 5px 15px;
-  font-size: 0.7rem;
-  border-radius: 20px;
-  font-weight: bold;
-}
-
-.badge { background: #ff4757; color: white; }
-.badge-best { background: var(--primary-cyan); color: black; }
-html {
-    scroll-behavior: smooth;
-}
-
     </style>
 </head>
 <body>
 
     <nav>
-        <a href="#" class="brand">ONCE<span>9</span></a>
+        <a href="/" class="brand">ONCE<span>9</span></a>
         <div class="nav-actions">
-            <a href="https://www.facebook.com/once9999" target="_blank" class="insta-link">FACEBOOK</a>
+            <a href="https://www.instagram.com/once9.dev/" target="_blank" class="nav-link">INSTAGRAM</a>
+            <a href="https://www.facebook.com/once9999" target="_blank" class="nav-link">FACEBOOK</a>
             <a href="mailto:karlossxt@gmail.com" class="contact-btn">HABLEMOS</a>
         </div>
     </nav>
@@ -254,19 +167,14 @@ html {
         <p class="subtitle">Desarrollo web de próxima generación. Especializado en interfaces cinematográficas, plataformas de streaming y diseño editorial.</p>
     </div>
 
-    <!-- ========================================== -->
-    <!-- SECCIÓN 1: NUEVOS LANZAMIENTOS -->
-    <!-- ========================================== -->
     <section>
         <div class="section-header">
-            <h2 class="section-title">Últimos Lanzamientos</h2>
-            <span class="badge">Destacados 2026</span>
+            <h2 class="section-title">Proyectos en Vivo</h2>
+            <span class="badge">En Producción</span>
         </div>
-        
         <div class="grid">
-            <!-- CINEMA ESPIKA -->
-            <article class="card">
-                <img src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?q=80&w=800" class="card-img" alt="Cinema Espika">
+            <article class="grid-card">
+                <img src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?q=80&w=800" class="card-img" alt="Cinema Espika" loading="lazy">
                 <div class="card-content">
                     <span class="card-cat">Streaming • Video UI</span>
                     <h3>Cinema Espika</h3>
@@ -275,9 +183,8 @@ html {
                 </div>
             </article>
 
-            <!-- WHITEBOX MUSIC -->
-            <article class="card">
-                <img src="pexels-myatezhny39-2938205.jpg" class="card-img" alt="WhiteBox Music">
+            <article class="grid-card">
+                <img src="pexels-myatezhny39-2938205.jpg" class="card-img" alt="WhiteBox Music" loading="lazy">
                 <div class="card-content">
                     <span class="card-cat">Studio • Dark Mode</span>
                     <h3>WhiteBox Music</h3>
@@ -286,9 +193,8 @@ html {
                 </div>
             </article>
 
-            <!-- F1RST SPORTS -->
-            <article class="card">
-                <img src="pexels-pixabay-46798.jpg" class="card-img" alt="F1rstSports">
+            <article class="grid-card">
+                <img src="pexels-pixabay-46798.jpg" class="card-img" alt="F1rstSports" loading="lazy">
                 <div class="card-content">
                     <span class="card-cat">Media • High Performance</span>
                     <h3>F1rstSports</h3>
@@ -296,97 +202,9 @@ html {
                     <a href="https://f1rstsports.com.mx/" target="_blank" class="card-link"><i class="fa-solid fa-bolt"></i> Ver Proyecto</a>
                 </div>
             </article>
-        </div>
-    </section>
 
-    <!-- ========================================== -->
-    <!-- SECCIÓN: SERVICIOS & SOLUCIONES -->
-    <!-- ========================================== -->
-  <section class="servicios-container">
-  <!-- Tarjeta 1: STARTER (PROMO) -->
-  <div class="card promo-card">
-    <div class="badge">OFERTA LIMITADA</div>
-    <i class="fas fa-rocket icon"></i>
-    <h3>Starter (Promo)</h3>
-    <p class="price">$2,000 MXN / <span>$115 USD</span></p>
-    <ul>
-      <li><i class="fas fa-check"></i> Diseño de 1 a 4 Secciones</li>
-      <li><i class="fas fa-check"></i> <b>Hosting y Dominio GRATIS</b></li>
-      <li><i class="fas fa-check"></i> Botón Flotante de WhatsApp</li>
-      <li><i class="fas fa-check"></i> Responsiva Móvil</li>
-      <li><i class="fas fa-check"></i> Entrega en 48-72 hrs</li>
-      <li><i class="fas fa-check"></i> Botón flotante de Whatsapp</li>
-      <li><i class="fas fa-check"></i> Entrega desde 72hrs</li>
-      <li><i class="fas fa-check"></i> Optimización básica SEO (Google)</li>  
-    </ul>
-    <a href="https://wa.me/525588374947?text=Me%20interesa%20la%20PROMO%20de%202000" target="_blank" class="btn-outline">¡QUIERO LA PROMO!</a>
-
-  </div>
-
-  <!-- Tarjeta 2: LANDING PAGE -->
-  <div class="card">
-    <i class="fas fa-bullseye icon"></i>
-    <h3>Landing Page</h3>
-    <p class="price">$4,500 MXN / <span>$250 USD</span></p>
-    <ul>
-      <li><i class="fas fa-check"></i> Diseño High-Conversion</li>
-      <li><i class="fas fa-check"></i> <b>Performance y Rapidez Pro</b></li>
-      <li><i class="fas fa-check"></i> Formulario de Contacto Básico</li>
-      <li><i class="fas fa-check"></i> Integración Redes Sociales</li>
-      <li><i class="fas fa-check"></i> 6 Meses de Mantenimiento</li>
-      <li><i class="fas fa-check"></i> hasta 3 cuentas de correo</li>
-       <li><i class="fas fa-check"></i> Botón flotante de Whatsapp</li> 
-       <li><i class="fas fa-check"></i> Entrega 2 a 3 semanas</li>
-       <li><i class="fas fa-check"></i> Optimización básica SEO (Google)</li>  
-    </ul>
-    <a href="https://wa.me/525588374947?text=Quiero%20cotizar%20una%20Landing%20Page" target="_blank" class="btn-outline">SOLICITAR COTIZACIÓN</a>
-  </div>
-
-  <!-- Tarjeta 3: SITIO WEB PRO (DESTACADA) -->
-  <div class="card featured">
-    <div class="badge-best">MÁS POPULAR</div>
-    <i class="fas fa-layer-group icon"></i>
-    <h3>Sitio Web Pro</h3>
-    <p class="price">$9,800 MXN / <span>$550 USD</span></p>
-    <ul>
-      <li><i class="fas fa-check"></i> Hasta 8 Secciones</li>
-      <li><i class="fas fa-check"></i> <b>Tienda online</b></li>
-      <li><i class="fas fa-check"></i> Formulario Avanzado + CRM</li>
-      <li><i class="fas fa-check"></i> Máxima Velocidad (SEO Score)</li>
-      <li><i class="fas fa-check"></i> 12 Meses de Mantenimiento</li>
-      <li><i class="fas fa-check"></i> Entrega 3 a 4 semanas</li>
-    </ul>
-    <a href="https://wa.me/525588374947?text=Me%20interesa%20el%20Sitio%20Web%20Pro" target="_blank" class="btn-filled">EMPEZAR AHORA</a>
-  </div>
-
-  <!-- Tarjeta 4: CUSTOM DEV -->
-  <div class="card">
-    <i class="fas fa-code icon"></i>
-    <h3>Custom Dev</h3>
-    <p class="price">A MEDIDA</p>
-    <ul>
-      <li><i class="fas fa-check"></i> Web Apps & Dashboards</li>
-      <li><i class="fas fa-check"></i> E-commerce Completo</li>
-      <li><i class="fas fa-check"></i> Integración de APIs</li>
-      <li><i class="fas fa-check"></i> Soporte y Seguridad 365</li>
-    </ul>
-   <a href="https://wa.me/525588374947?text=Tengo%20un%20proyecto%20a%20medida" target="_blank" class="btn-outline">COTIZAR PROYECTO</a>
-  </div>
-</section>
-
-    <!-- ========================================== -->
-    <!-- SECCIÓN 2: CLIENTES -->
-    <!-- ========================================== -->
-    <section>
-        <div class="section-header">
-            <h2 class="section-title">Clientes & Producción</h2>
-            <span class="badge secondary">En Vivo</span>
-        </div>
-
-        <div class="grid">
-            <!-- EL ROCK -->
-            <article class="card">
-                <img src="pexels-mickhaupt-6131921.jpg" class="card-img" alt="El Rock">
+            <article class="grid-card">
+                <img src="pexels-mickhaupt-6131921.jpg" class="card-img" alt="El Rock de Todos los Días" loading="lazy">
                 <div class="card-content">
                     <span class="card-cat">Magazine • CMS</span>
                     <h3>El Rock de Todos los Días</h3>
@@ -395,9 +213,8 @@ html {
                 </div>
             </article>
 
-            <!-- TRADUQUIL -->
-            <article class="card">
-                <img src="traduquil.jpg" class="card-img" alt="Traduquil">
+            <article class="grid-card">
+                <img src="traduquil.jpg" class="card-img" alt="Traduquil" loading="lazy">
                 <div class="card-content">
                     <span class="card-cat">Servicios Corporativos</span>
                     <h3>Traduquil</h3>
@@ -406,9 +223,8 @@ html {
                 </div>
             </article>
 
-            <!-- ACTIVATE -->
-            <article class="card">
-                <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=800" class="card-img" alt="Activate">
+            <article class="grid-card">
+                <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=800" class="card-img" alt="Activate.mx" loading="lazy">
                 <div class="card-content">
                     <span class="card-cat">Plataforma Digital</span>
                     <h3>Activate.mx</h3>
@@ -416,49 +232,117 @@ html {
                     <a href="https://activate.mx" target="_blank" class="card-link"><i class="fa-solid fa-laptop"></i> Visitar Sitio</a>
                 </div>
             </article>
+
+            <article class="grid-card">
+                <img src="https://images.unsplash.com/photo-1589909202802-8f4aadce64e9?q=80&w=800" class="card-img" alt="Rifas Lucha México" loading="lazy">
+                <div class="card-content">
+                    <span class="card-cat">E-commerce • Gamificación</span>
+                    <h3>Rifas Lucha México</h3>
+                    <p>Plataforma interactiva de rifas con boletera digital en tiempo real, pagos integrados y selección de números en vivo.</p>
+                    <a href="https://rifaluchamexico.com.mx/" target="_blank" class="card-link"><i class="fa-solid fa-ticket"></i> Visitar Sitio</a>
+                </div>
+            </article>
         </div>
     </section>
 
-    <!-- ========================================== -->
-    <!-- SECCIÓN 3: LABORATORIO (NUEVO) -->
-    <!-- ========================================== -->
+    <section>
+        <div class="section-header">
+            <h2 class="section-title">Servicios & Soluciones</h2>
+            <span class="badge">Planes</span>
+        </div>
+        <div class="servicios-container">
+            <div class="servicio-card">
+                <div class="badge-red">OFERTA LIMITADA</div>
+                <i class="fas fa-rocket icon"></i>
+                <h3>Starter</h3>
+                <p class="price">$2,000 MXN / <span>$115 USD</span></p>
+                <ul>
+                    <li><i class="fas fa-check"></i> Diseño de 1 a 4 Secciones</li>
+                    <li><i class="fas fa-check"></i> <b>Hosting y Dominio GRATIS</b></li>
+                    <li><i class="fas fa-check"></i> Botón Flotante de WhatsApp</li>
+                    <li><i class="fas fa-check"></i> Responsiva Móvil</li>
+                    <li><i class="fas fa-check"></i> Optimización básica SEO</li>
+                    <li><i class="fas fa-check"></i> Entrega en 72 hrs</li>
+                </ul>
+                <a href="https://wa.me/525588374947?text=Me%20interesa%20la%20PROMO%20de%202000" target="_blank" class="btn-outline">¡QUIERO LA PROMO!</a>
+            </div>
+
+            <div class="servicio-card">
+                <i class="fas fa-bullseye icon"></i>
+                <h3>Landing Page</h3>
+                <p class="price">$4,500 MXN / <span>$250 USD</span></p>
+                <ul>
+                    <li><i class="fas fa-check"></i> Diseño High-Conversion</li>
+                    <li><i class="fas fa-check"></i> <b>Performance y Rapidez Pro</b></li>
+                    <li><i class="fas fa-check"></i> Formulario de Contacto</li>
+                    <li><i class="fas fa-check"></i> Integración Redes Sociales</li>
+                    <li><i class="fas fa-check"></i> 6 Meses de Mantenimiento</li>
+                    <li><i class="fas fa-check"></i> Hasta 3 cuentas de correo</li>
+                    <li><i class="fas fa-check"></i> Optimización básica SEO</li>
+                    <li><i class="fas fa-check"></i> Entrega 2 a 3 semanas</li>
+                </ul>
+                <a href="https://wa.me/525588374947?text=Quiero%20cotizar%20una%20Landing%20Page" target="_blank" class="btn-outline">SOLICITAR COTIZACIÓN</a>
+            </div>
+
+            <div class="servicio-card featured">
+                <div class="badge-best">MÁS POPULAR</div>
+                <i class="fas fa-layer-group icon"></i>
+                <h3>Sitio Web Pro</h3>
+                <p class="price">$9,800 MXN / <span>$550 USD</span></p>
+                <ul>
+                    <li><i class="fas fa-check"></i> Hasta 8 Secciones</li>
+                    <li><i class="fas fa-check"></i> <b>Tienda online</b></li>
+                    <li><i class="fas fa-check"></i> Formulario Avanzado + CRM</li>
+                    <li><i class="fas fa-check"></i> Máxima Velocidad (SEO Score)</li>
+                    <li><i class="fas fa-check"></i> 12 Meses de Mantenimiento</li>
+                    <li><i class="fas fa-check"></i> Entrega 3 a 4 semanas</li>
+                </ul>
+                <a href="https://wa.me/525588374947?text=Me%20interesa%20el%20Sitio%20Web%20Pro" target="_blank" class="btn-filled">EMPEZAR AHORA</a>
+            </div>
+
+            <div class="servicio-card">
+                <i class="fas fa-code icon"></i>
+                <h3>Custom Dev</h3>
+                <p class="price">A MEDIDA</p>
+                <ul>
+                    <li><i class="fas fa-check"></i> Web Apps & Dashboards</li>
+                    <li><i class="fas fa-check"></i> E-commerce Completo</li>
+                    <li><i class="fas fa-check"></i> Integración de APIs</li>
+                    <li><i class="fas fa-check"></i> Soporte y Seguridad 365</li>
+                </ul>
+                <a href="https://wa.me/525588374947?text=Tengo%20un%20proyecto%20a%20medida" target="_blank" class="btn-outline">COTIZAR PROYECTO</a>
+            </div>
+        </div>
+    </section>
+
     <section>
         <div class="section-header">
             <h2 class="section-title">Laboratorio de Código</h2>
             <span class="badge lab">Prototipos & Prácticas</span>
         </div>
-
         <div class="grid">
-            
-            <!-- NUEVO: INMOHOGAR (BIENES RAÍCES) -->
-            <article class="card">
-                <!-- Foto de casa moderna -->
-                <img src="hogarr.jpg" class="card-img" alt="Bienes Raíces">
+            <article class="grid-card">
+                <img src="hogarr.jpg" class="card-img" alt="InmoHogar" loading="lazy">
                 <div class="card-content">
                     <span class="card-cat">App • JS & Tailwind</span>
                     <h3>InmoHogar</h3>
                     <p>Aplicación de Bienes Raíces. Incluye sistema de tarjetas dinámicas, formateo de moneda y filtros de búsqueda en tiempo real.</p>
-                    <!-- ¡IMPORTANTE! Actualiza este link con tu repo real -->
-                    <a href="https://karlossxt.github.io/InmoHogar//" target="_blank" class="card-link"><i class="fa-solid fa-house-chimney"></i> Ver Demo</a>
+                    <a href="https://karlossxt.github.io/InmoHogar/" target="_blank" class="card-link"><i class="fa-solid fa-house-chimney"></i> Ver Demo</a>
                 </div>
             </article>
 
-            <!-- NUEVO: AROMA & GRANO (CAFETERÍA) -->
-            <article class="card">
-                <!-- Foto de café -->
-                <img src="cafeweb.jpg" class="card-img" alt="Cafetería">
+            <article class="grid-card">
+                <img src="cafeweb.jpg" class="card-img" alt="Aroma & Grano" loading="lazy">
                 <div class="card-content">
                     <span class="card-cat">Menu UI • Tabs</span>
                     <h3>Aroma & Grano</h3>
                     <p>Menú digital interactivo. Implementación de filtrado por categorías (Tabs), listas responsive y diseño estilo boutique.</p>
-                    <!-- ¡IMPORTANTE! Actualiza este link con tu repo real -->
                     <a href="./cafeteria/index.html" target="_blank" class="card-link"><i class="fa-solid fa-mug-hot"></i> Ver Demo</a>
                 </div>
             </article>
 
-            <!-- ABISMO DE ACERO -->
-            <article class="card">
-                <img src="metal/metal-preview.jpg.png" class="card-img" alt="Abismo de Acero">
+            <article class="grid-card">
+                <img src="https://images.unsplash.com/photo-1550684376-efcbd6e3f031?q=80&w=800" class="card-img" alt="Abismo de Acero" loading="lazy">
                 <div class="card-content">
                     <span class="card-cat">Code • Dark UI</span>
                     <h3>Abismo de Acero</h3>
@@ -467,9 +351,8 @@ html {
                 </div>
             </article>
 
-            <!-- ECOS DISTANTES -->
-            <article class="card">
-                <img src="pexels-savia-rocks-1310041404-25194146.jpg" class="card-img" alt="Indie Band">
+            <article class="grid-card">
+                <img src="pexels-savia-rocks-1310041404-25194146.jpg" class="card-img" alt="Ecos Distantes" loading="lazy">
                 <div class="card-content">
                     <span class="card-cat">Indie • Grunge</span>
                     <h3>Ecos Distantes</h3>
@@ -478,9 +361,8 @@ html {
                 </div>
             </article>
 
-            <!-- FUNK VIBES -->
-            <article class="card">
-                <img src="https://images.unsplash.com/photo-1493225255756-d9584f8606e9?q=80&w=800" class="card-img" alt="Funk">
+            <article class="grid-card">
+                <img src="https://images.unsplash.com/photo-1493225255756-d9584f8606e9?q=80&w=800" class="card-img" alt="Funk Vibes" loading="lazy">
                 <div class="card-content">
                     <span class="card-cat">Motion • Parallax</span>
                     <h3>Funk Vibes</h3>
@@ -488,10 +370,9 @@ html {
                     <a href="./funk/index.html" target="_blank" class="card-link"><i class="fa-solid fa-record-vinyl"></i> Ver Demo</a>
                 </div>
             </article>
-            
-            <!-- SORG OCH MORKER -->
-            <article class="card">
-                <img src="https://images.unsplash.com/photo-1478131143081-80f7f84ca84d?q=80&w=800" class="card-img" alt="Black Metal">
+
+            <article class="grid-card">
+                <img src="https://images.unsplash.com/photo-1478131143081-80f7f84ca84d?q=80&w=800" class="card-img" alt="Sorg Och Mörker" loading="lazy">
                 <div class="card-content">
                     <span class="card-cat">Atmospheric • Minimal</span>
                     <h3>Sorg Och Mörker</h3>
@@ -500,9 +381,8 @@ html {
                 </div>
             </article>
 
-            <!-- PUNTO CERO -->
-            <article class="card">
-                <img src="puntocero.jpg" class="card-img" alt="Punto Cero">
+            <article class="grid-card">
+                <img src="puntocero.jpg" class="card-img" alt="Punto Cero" loading="lazy">
                 <div class="card-content">
                     <span class="card-cat">Prototype • Video</span>
                     <h3>Punto Cero</h3>
@@ -517,18 +397,13 @@ html {
         <p>© 2026 <strong>ONCE9</strong> - Karlos SXT.</p>
         <p>Contacto: <a href="mailto:karlossxt@gmail.com">karlossxt@gmail.com</a></p>
     </footer>
-<!-- Botón de WhatsApp -->
-<a href="https://wa.me/525588374947?text=Hola%20ONCE9,%20vi%20tu%20portafolio%20y%20me%20gustaría%20cotizar%20un%20proyecto." 
-   class="whatsapp-float" 
-   target="_blank" 
-   rel="noopener noreferrer">
-    <i class="fab fa-whatsapp"></i>
-</a>
+
+    <a href="https://wa.me/525588374947?text=Hola%20ONCE9,%20vi%20tu%20portafolio%20y%20me%20gustaría%20cotizar%20un%20proyecto."
+       class="whatsapp-float"
+       target="_blank"
+       rel="noopener noreferrer"
+       aria-label="Contactar por WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
 </body>
 </html>
-
-
-
-
-
-
