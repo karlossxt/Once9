@@ -3,149 +3,1345 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FUNK VIBES | Parallax Experience</title>
+    <meta name="description" content="SMOOTH GROOVE - La estación más funky del planeta. Soul, R&B y Funk clásico.">
+    <title>SMOOTH GROOVE — Funk Experience</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Space+Grotesk:wght@300;400;500;700&family=VT323&display=swap" rel="stylesheet">
+    
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Poppins:wght@300;700&display=swap');
-
-        body, html {
-            height: 100%;
-            margin: 0;
-            font-family: 'Poppins', sans-serif;
-            color: white;
-            overflow-x: hidden; /* Evitar scroll horizontal */
+        :root {
+            --purple: #7b2ff7;
+            --purple-dark: #4a0e8f;
+            --orange: #ff6b35;
+            --yellow: #ffd23f;
+            --pink: #ff2d87;
+            --cyan: #00d4ff;
+            --black: #0a0015;
+            --dark: #150025;
+            --cream: #fff5e6;
+            --font-display: 'Abril Fatface', cursive;
+            --font-body: 'Space Grotesk', sans-serif;
+            --font-vt: 'VT323', monospace;
         }
 
-        /* --- TRUCO DEL PARALLAX --- */
-        .parallax {
-            /* La imagen se queda quieta (fixed) mientras haces scroll */
-            background-attachment: fixed;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: cover;
-            
-            /* Altura completa de la pantalla */
-            min-height: 100vh; 
-            
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            background: var(--black);
+            color: var(--cream);
+            font-family: var(--font-body);
+            overflow-x: hidden;
+        }
+
+        /* ============ VHS / CRT EFFECTS ============ */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: repeating-linear-gradient(
+                0deg,
+                rgba(0,0,0,0.15) 0px,
+                rgba(0,0,0,0.15) 1px,
+                transparent 1px,
+                transparent 2px
+            );
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        body::after {
+            content: "";
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: linear-gradient(
+                to bottom,
+                transparent 0%,
+                rgba(123, 47, 247, 0.05) 50%,
+                transparent 100%
+            );
+            pointer-events: none;
+            z-index: 9998;
+            animation: tracking 6s linear infinite;
+        }
+
+        @keyframes tracking {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100%); }
+        }
+
+        .screen {
+            position: relative;
+        }
+
+        .screen::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: radial-gradient(
+                ellipse at center,
+                transparent 50%,
+                rgba(10, 0, 21, 0.6) 100%
+            );
+            pointer-events: none;
+            z-index: 9997;
+        }
+
+        /* ============ TOP BAR ============ */
+        .top-bar {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background: linear-gradient(to bottom, var(--black), transparent);
+            font-family: var(--font-vt);
+            font-size: 1.2rem;
+        }
+
+        .time-display {
+            color: var(--yellow);
+            text-shadow: 0 0 10px var(--yellow);
+        }
+
+        .live-badge {
             display: flex;
             align-items: center;
+            gap: 0.5rem;
+            background: var(--pink);
+            padding: 0.4rem 1rem;
+            font-family: var(--font-vt);
+            font-size: 1rem;
+            animation: livePulse 1.5s infinite;
+        }
+
+        @keyframes livePulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        .live-dot {
+            width: 8px; height: 8px;
+            background: white;
+            border-radius: 50%;
+        }
+
+        /* ============ NAV ============ */
+        nav {
+            position: fixed;
+            bottom: 0; left: 0;
+            width: 100%;
+            padding: 1.2rem 2rem;
+            display: flex;
             justify-content: center;
+            gap: 1rem;
+            z-index: 1000;
+            background: linear-gradient(to top, var(--black), transparent);
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            font-family: var(--font-vt);
+            font-size: 1.1rem;
+            color: var(--cream);
+            text-decoration: none;
+            padding: 0.6rem 1.2rem;
+            border: 2px solid transparent;
+            transition: all 0.3s;
+            letter-spacing: 2px;
+        }
+
+        nav a:hover, nav a.active {
+            border-color: var(--orange);
+            color: var(--orange);
+            text-shadow: 0 0 15px var(--orange);
+        }
+
+        /* ============ HERO ============ */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
             position: relative;
+            background: 
+                linear-gradient(135deg, rgba(123, 47, 247, 0.3) 0%, transparent 50%),
+                linear-gradient(225deg, rgba(255, 107, 53, 0.3) 0%, transparent 50%),
+                url('https://images.unsplash.com/photo-1493225255756-d9584f8606e9?w=1920&auto=format&fit=crop&q=80');
+            background-size: cover;
+            background-position: center;
+            padding: 6rem 2rem 8rem;
         }
 
-        /* Imagen 1: Fondo colorido */
-        .bg-1 {
-            background-image: url('https://images.unsplash.com/photo-1493225255756-d9584f8606e9?q=80&w=1920&auto=format&fit=crop');
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: linear-gradient(to bottom, rgba(10, 0, 21, 0.4), rgba(10, 0, 21, 0.8));
         }
 
-        /* Imagen 2: Fondo de concierto/textura */
-        .bg-2 {
-            background-image: url('https://images.unsplash.com/photo-1544965853-a15d73347596?q=80&w=1920&auto=format&fit=crop');
+        .hero-content {
+            position: relative;
+            z-index: 10;
         }
 
-        /* Imagen 3: Otro ambiente */
-        .bg-3 {
-            background-image: url('https://images.unsplash.com/photo-1514525253440-b393452e3383?q=80&w=1920&auto=format&fit=crop');
+        .vhs-label {
+            font-family: var(--font-vt);
+            font-size: 1rem;
+            color: var(--cyan);
+            background: rgba(0, 212, 255, 0.2);
+            padding: 0.4rem 1rem;
+            display: inline-block;
+            margin-bottom: 2rem;
+            border: 1px solid var(--cyan);
+            animation: labelGlitch 3s infinite;
         }
 
-        /* --- CAPAS OSCURAS (OVERLAY) --- */
-        .overlay {
-            background: rgba(0, 0, 0, 0.4); /* Oscurecer la foto */
-            padding: 40px;
-            border: 4px solid #ff9f43; /* Borde Naranja Funk */
-            text-align: center;
-            backdrop-filter: blur(5px); /* Efecto vidrio borroso moderno */
-            max-width: 600px;
+        @keyframes labelGlitch {
+            0%, 90%, 100% { transform: translate(0); }
+            92% { transform: translate(-2px, 1px); }
+            94% { transform: translate(2px, -1px); }
         }
 
-        /* --- TIPOGRAFÍA --- */
-        h1 {
-            font-family: 'Abril Fatface', cursive; /* Fuente estilo años 70s */
-            font-size: 5rem;
-            margin: 0;
-            color: #ff9f43;
-            text-shadow: 4px 4px 0px #5f27cd; /* Sombra sólida morada */
-            line-height: 1;
+        .hero-title {
+            font-family: var(--font-display);
+            font-size: clamp(4rem, 15vw, 12rem);
+            line-height: 0.9;
+            color: var(--yellow);
+            text-shadow: 
+                6px 6px 0 var(--purple),
+                12px 12px 0 var(--orange);
+            margin-bottom: 1.5rem;
+            animation: titleBounce 4s ease-in-out infinite;
         }
 
-        p {
-            font-size: 1.5rem;
-            margin-top: 10px;
+        @keyframes titleBounce {
+            0%, 100% { transform: translateY(0) rotate(-1deg); }
+            50% { transform: translateY(-10px) rotate(1deg); }
         }
 
-        /* --- SECCIONES DE TEXTO PLANO (BUFFER) --- */
-        .content-block {
-            padding: 80px 20px;
-            background-color: #222; /* Fondo sólido oscuro */
-            color: #ddd;
-            text-align: center;
+        .hero-subtitle {
+            font-family: var(--font-body);
+            font-size: clamp(1rem, 3vw, 1.5rem);
+            color: var(--cream);
+            letter-spacing: 8px;
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+        }
+
+        .hero-tagline {
+            font-family: var(--font-vt);
             font-size: 1.2rem;
-            position: relative;
-            z-index: 2; /* Para que pase POR ENCIMA de las fotos */
-            box-shadow: 0 0 20px black;
+            color: var(--orange);
+        }
+
+        .hero-cta {
+            margin-top: 3rem;
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            justify-content: center;
         }
 
         .btn-funk {
-            display: inline-block;
-            margin-top: 20px;
-            padding: 15px 40px;
-            background: #5f27cd;
-            color: white;
+            font-family: var(--font-vt);
+            font-size: 1.2rem;
+            padding: 1rem 2.5rem;
+            background: transparent;
+            border: 3px solid;
+            cursor: pointer;
+            transition: all 0.3s;
             text-transform: uppercase;
-            font-weight: bold;
-            border-radius: 50px;
+            letter-spacing: 3px;
             text-decoration: none;
-            transition: 0.3s;
-            border: 2px solid white;
         }
 
-        .btn-funk:hover {
-            background: #ff9f43;
-            transform: scale(1.1) rotate(-3deg);
+        .btn-funk.primary {
+            background: var(--purple);
+            border-color: var(--purple);
+            color: white;
         }
 
+        .btn-funk.primary:hover {
+            background: var(--orange);
+            border-color: var(--orange);
+            transform: scale(1.05) rotate(-2deg);
+            box-shadow: 0 0 40px var(--orange);
+        }
+
+        .btn-funk.secondary {
+            border-color: var(--yellow);
+            color: var(--yellow);
+        }
+
+        .btn-funk.secondary:hover {
+            background: var(--yellow);
+            color: var(--black);
+            transform: scale(1.05) rotate(2deg);
+        }
+
+        /* ============ DISCO BALL ============ */
+        .disco-ball {
+            position: absolute;
+            top: 5rem;
+            right: 5rem;
+            width: 120px;
+            height: 120px;
+            background: radial-gradient(circle at 30% 30%, #fff 0%, #ddd 30%, #999 60%, #666 100%);
+            border-radius: 50%;
+            box-shadow: 
+                0 0 60px rgba(255, 255, 255, 0.3),
+                inset -10px -10px 30px rgba(0, 0, 0, 0.5);
+            animation: discoSpin 4s linear infinite;
+            z-index: 5;
+        }
+
+        .disco-ball::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 20px;
+            background: #666;
+        }
+
+        @keyframes discoSpin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .disco-ball::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: 
+                radial-gradient(circle at 20% 20%, rgba(255,255,255,0.8) 0%, transparent 20%),
+                radial-gradient(circle at 50% 30%, rgba(255,255,255,0.6) 0%, transparent 15%),
+                radial-gradient(circle at 80% 20%, rgba(255,255,255,0.7) 0%, transparent 18%),
+                radial-gradient(circle at 30% 60%, rgba(255,255,255,0.5) 0%, transparent 20%),
+                radial-gradient(circle at 70% 70%, rgba(255,255,255,0.6) 0%, transparent 15%);
+            border-radius: 50%;
+        }
+
+        /* ============ VISUALIZER ============ */
+        .visualizer {
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            gap: 4px;
+            height: 80px;
+            margin-top: 3rem;
+        }
+
+        .viz-bar {
+            width: 8px;
+            border-radius: 4px 4px 0 0;
+            animation: vizPulse var(--speed) ease-in-out infinite;
+        }
+
+        .viz-bar:nth-child(odd) { background: var(--orange); }
+        .viz-bar:nth-child(even) { background: var(--purple); }
+        .viz-bar:nth-child(3n) { background: var(--yellow); }
+
+        @keyframes vizPulse {
+            0%, 100% { height: var(--min-h); opacity: 0.6; }
+            50% { height: var(--max-h); opacity: 1; }
+        }
+
+        /* ============ SECTIONS ============ */
+        section {
+            padding: 8rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-label {
+            font-family: var(--font-vt);
+            font-size: 1rem;
+            color: var(--cyan);
+            letter-spacing: 4px;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-title {
+            font-family: var(--font-display);
+            font-size: clamp(3rem, 8vw, 5rem);
+            color: var(--yellow);
+            text-shadow: 4px 4px 0 var(--purple);
+            margin-bottom: 3rem;
+        }
+
+        /* ============ ABOUT ============ */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-image {
+            position: relative;
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            border: 6px solid var(--purple);
+            filter: saturate(1.2);
+        }
+
+        .about-image::before {
+            content: '';
+            position: absolute;
+            top: 20px; left: 20px;
+            width: 100%; height: 100%;
+            border: 3px solid var(--orange);
+            z-index: -1;
+        }
+
+        .about-text h3 {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            color: var(--orange);
+            margin-bottom: 1.5rem;
+        }
+
+        .about-text p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--cream);
+            margin-bottom: 1.5rem;
+        }
+
+        .about-text .highlight {
+            color: var(--yellow);
+            font-weight: 700;
+        }
+
+        /* ============ DISCOGRAPHY ============ */
+        .albums-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 3rem;
+        }
+
+        .album-card {
+            background: var(--dark);
+            border: 3px solid var(--purple);
+            transition: all 0.4s;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .album-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .album-card:hover::before {
+            left: 100%;
+        }
+
+        .album-card:hover {
+            border-color: var(--orange);
+            transform: translateY(-10px) rotate(-1deg);
+            box-shadow: 0 20px 60px rgba(123, 47, 247, 0.3);
+        }
+
+        .album-cover {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .album-cover img {
+            width: 100%;
+            aspect-ratio: 1/1;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .album-card:hover .album-cover img {
+            transform: scale(1.1);
+        }
+
+        .album-cover::after {
+            content: '▶ PLAY';
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: var(--font-vt);
+            font-size: 1.5rem;
+            background: var(--purple);
+            color: white;
+            padding: 1rem 2rem;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .album-card:hover .album-cover::after {
+            opacity: 1;
+        }
+
+        .album-info {
+            padding: 1.5rem;
+        }
+
+        .album-year {
+            font-family: var(--font-vt);
+            font-size: 1rem;
+            color: var(--cyan);
+            margin-bottom: 0.5rem;
+        }
+
+        .album-title {
+            font-family: var(--font-display);
+            font-size: 1.8rem;
+            color: var(--yellow);
+            margin-bottom: 1rem;
+        }
+
+        .album-tracks {
+            list-style: none;
+        }
+
+        .album-tracks li {
+            padding: 0.7rem 0;
+            border-bottom: 1px solid rgba(123, 47, 247, 0.3);
+            font-size: 0.9rem;
+            color: var(--cream);
+            display: flex;
+            justify-content: space-between;
+            transition: color 0.2s;
+        }
+
+        .album-tracks li:hover {
+            color: var(--orange);
+        }
+
+        .album-tracks li span {
+            font-family: var(--font-vt);
+            color: var(--purple);
+        }
+
+        .album-links {
+            margin-top: 1.5rem;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .album-links a {
+            font-family: var(--font-vt);
+            font-size: 1rem;
+            color: var(--purple);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border: 2px solid var(--purple);
+            transition: all 0.2s;
+        }
+
+        .album-links a:hover {
+            background: var(--purple);
+            color: white;
+        }
+
+        /* ============ MEMBERS ============ */
+        .members-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+        }
+
+        .member-card {
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .member-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .member-photo {
+            position: relative;
+            overflow: hidden;
+            border: 4px solid var(--purple);
+            margin-bottom: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .member-card:hover .member-photo {
+            border-color: var(--yellow);
+            box-shadow: 0 0 30px var(--yellow);
+        }
+
+        .member-photo img {
+            width: 100%;
+            aspect-ratio: 3/4;
+            object-fit: cover;
+            filter: saturate(0.8);
+            transition: filter 0.5s;
+        }
+
+        .member-card:hover .member-photo img {
+            filter: saturate(1.3);
+        }
+
+        .member-name {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            color: var(--yellow);
+        }
+
+        .member-role {
+            font-family: var(--font-vt);
+            font-size: 1rem;
+            color: var(--orange);
+            letter-spacing: 2px;
+        }
+
+        /* ============ GALLERY ============ */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-auto-rows: 220px;
+            gap: 8px;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .gallery-item:nth-child(1) {
+            grid-column: span 2;
+            grid-row: span 2;
+        }
+
+        .gallery-item img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            transition: all 0.5s;
+            filter: saturate(0.9);
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+            filter: saturate(1.3);
+        }
+
+        .gallery-item::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: linear-gradient(45deg, var(--purple), var(--orange));
+            opacity: 0;
+            transition: opacity 0.3s;
+            mix-blend-mode: overlay;
+        }
+
+        .gallery-item:hover::after {
+            opacity: 0.5;
+        }
+
+        .gallery-item .vhs-time {
+            position: absolute;
+            bottom: 0.8rem; right: 0.8rem;
+            font-family: var(--font-vt);
+            font-size: 1rem;
+            color: var(--yellow);
+            background: rgba(0,0,0,0.7);
+            padding: 0.3rem 0.6rem;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .gallery-item:hover .vhs-time {
+            opacity: 1;
+        }
+
+        /* ============ TOUR ============ */
+        .tour-list {
+            max-width: 900px;
+        }
+
+        .tour-item {
+            display: grid;
+            grid-template-columns: 140px 1fr auto;
+            gap: 2rem;
+            padding: 2rem 0;
+            border-bottom: 2px solid var(--purple);
+            align-items: center;
+            transition: all 0.3s;
+        }
+
+        .tour-item:hover {
+            padding-left: 1.5rem;
+            border-color: var(--orange);
+            background: linear-gradient(90deg, rgba(123, 47, 247, 0.1), transparent);
+        }
+
+        .tour-date {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            color: var(--orange);
+            text-shadow: 3px 3px 0 var(--purple);
+        }
+
+        .tour-venue {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            color: var(--cream);
+            margin-bottom: 0.3rem;
+        }
+
+        .tour-location {
+            font-family: var(--font-vt);
+            font-size: 1rem;
+            color: var(--cyan);
+        }
+
+        .tour-btn {
+            font-family: var(--font-vt);
+            font-size: 1.1rem;
+            padding: 1rem 2rem;
+            background: transparent;
+            border: 3px solid var(--yellow);
+            color: var(--yellow);
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+        }
+
+        .tour-btn:hover {
+            background: var(--yellow);
+            color: var(--black);
+            transform: rotate(-3deg);
+        }
+
+        .tour-btn.sold-out {
+            border-color: var(--pink);
+            color: var(--pink);
+            cursor: default;
+        }
+
+        .tour-btn.sold-out:hover {
+            background: transparent;
+            color: var(--pink);
+            transform: none;
+        }
+
+        /* ============ CONTACT ============ */
+        .contact-section {
+            text-align: center;
+            padding: 10rem 2rem;
+            background: linear-gradient(135deg, var(--purple-dark), var(--dark));
+            margin: 0;
+            max-width: 100%;
+            position: relative;
+        }
+
+        .contact-section::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%237b2ff7' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.5;
+        }
+
+        .contact-title {
+            font-family: var(--font-display);
+            font-size: clamp(3rem, 8vw, 5rem);
+            color: var(--yellow);
+            text-shadow: 4px 4px 0 var(--orange);
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .contact-email {
+            font-family: var(--font-vt);
+            font-size: 1.8rem;
+            color: var(--cream);
+            text-decoration: none;
+            border-bottom: 3px solid var(--orange);
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .contact-email:hover {
+            color: var(--orange);
+            text-shadow: 0 0 20px var(--orange);
+        }
+
+        .social-links {
+            margin-top: 4rem;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            position: relative;
+        }
+
+        .social-links a {
+            font-family: var(--font-vt);
+            font-size: 1.1rem;
+            color: var(--cream);
+            text-decoration: none;
+            padding: 1rem 2rem;
+            border: 2px solid var(--purple);
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            border-color: var(--yellow);
+            color: var(--yellow);
+            transform: scale(1.1);
+        }
+
+        /* ============ FOOTER ============ */
+        footer {
+            padding: 3rem 2rem;
+            text-align: center;
+            border-top: 3px solid var(--purple);
+        }
+
+        footer p {
+            font-family: var(--font-vt);
+            font-size: 1rem;
+            color: var(--purple);
+            letter-spacing: 3px;
+        }
+
+        /* ============ STATIC OVERLAY ============ */
+        .static-overlay {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.1'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 9996;
+            opacity: 0;
+            animation: staticBurst 15s infinite;
+        }
+
+        @keyframes staticBurst {
+            0%, 93%, 100% { opacity: 0; }
+            94% { opacity: 0.5; }
+            95% { opacity: 0; }
+            96% { opacity: 0.3; }
+            97% { opacity: 0; }
+        }
+
+        /* ============ RESPONSIVE ============ */
+        @media (max-width: 900px) {
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .members-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .gallery-item:nth-child(1) {
+                grid-column: span 2;
+            }
+
+            .tour-item {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+                text-align: center;
+            }
+
+            .disco-ball {
+                width: 80px;
+                height: 80px;
+                top: 6rem;
+                right: 2rem;
+            }
+
+            nav {
+                gap: 0.5rem;
+            }
+
+            nav a {
+                font-size: 0.9rem;
+                padding: 0.5rem 0.8rem;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .hero-title {
+                text-shadow: 3px 3px 0 var(--purple);
+            }
+
+            .members-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 1rem;
+            }
+
+            .albums-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .social-links {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        /* ============ ANIMATIONS ============ */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .channel-flash {
+            animation: channelFlash 0.4s ease;
+        }
+
+        @keyframes channelFlash {
+            0% { filter: brightness(1) hue-rotate(0deg); }
+            25% { filter: brightness(2) hue-rotate(90deg); }
+            50% { filter: brightness(0.5) hue-rotate(-90deg); }
+            100% { filter: brightness(1) hue-rotate(0deg); }
+        }
+
+        /* ============ FLOATING NOTES ============ */
+        .floating-notes {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 5;
+            overflow: hidden;
+        }
+
+        .note {
+            position: absolute;
+            font-size: 2rem;
+            opacity: 0.3;
+            animation: floatNote 10s linear infinite;
+        }
+
+        @keyframes floatNote {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.3; }
+            90% { opacity: 0.3; }
+            100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+        }
     </style>
 </head>
 <body>
+    <div class="static-overlay"></div>
+    <div class="floating-notes" id="floatingNotes"></div>
 
-    <!-- SECCIÓN 1: PORTADA PARALLAX -->
-    <div class="parallax bg-1">
-        <div class="overlay">
-            <h1>SMOOTH<br>GROOVE</h1>
-            <p>La estación más funk del planeta</p>
+    <div class="screen">
+        <!-- Top Bar -->
+        <div class="top-bar">
+            <div class="time-display" id="timeDisplay">00:00:00</div>
+            <div class="live-badge">
+                <div class="live-dot"></div>
+                <span>LIVE</span>
+            </div>
         </div>
+
+        <!-- Hero -->
+        <header class="hero">
+            <div class="disco-ball"></div>
+            <div class="hero-content">
+                <div class="vhs-label">▶ RECORDING — 2024</div>
+                <h1 class="hero-title">SMOOTH<br>GROOVE</h1>
+                <p class="hero-subtitle">Funk • Soul • R&B</p>
+                <p class="hero-tagline">LA ESTACIÓN MÁS FUNKY DEL PLANETA</p>
+                <div class="hero-cta">
+                    <a href="#discografia" class="btn-funk primary">Escuchar</a>
+                    <a href="#tour" class="btn-funk secondary">Ver Fechas</a>
+                </div>
+                <div class="visualizer" id="visualizer"></div>
+            </div>
+        </header>
+
+        <!-- Nav -->
+        <nav id="mainNav">
+            <a href="#sobre" class="active">Sobre</a>
+            <a href="#discografia">Música</a>
+            <a href="#miembros">Banda</a>
+            <a href="#galeria">Fotos</a>
+            <a href="#tour">Tour</a>
+            <a href="#contacto">Contacto</a>
+        </nav>
+
+        <!-- About -->
+        <section id="sobre">
+            <div class="about-grid">
+                <div class="about-image reveal">
+                    <img src="https://images.unsplash.com/photo-1504701954957-2010ec3bence?w=800&auto=format&fit=crop&q=80" alt="Smooth Groove en vivo">
+                </div>
+                <div class="about-text reveal">
+                    <div class="section-label">001 — LA HISTORIA</div>
+                    <h2 class="section-title">YES LAWD!</h2>
+                    <h3>Desde California Para El Mundo</h3>
+                    <p>
+                        <span class="highlight">Smooth Groove</span> nació en Los Ángeles en 2019, cuando cuatro músicos decidieron que el mundo necesitaba más bajo, más ritmo y más actitud.
+                    </p>
+                    <p>
+                        Inspirados por <span class="highlight">James Brown, Bootsy Collins</span> y Earth Wind & Fire, mezclamos el funk clásico de los 70s con producción moderna. Cada show es una fiesta, cada canción es un viaje.
+                    </p>
+                    <p>
+                        No tocamos música — creamos experiencias que te obligan a bailar. El bajo no se escucha, se siente en los huesos.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Discography -->
+        <section id="discografia">
+            <div class="section-label">002 — NUESTRA MÚSICA</div>
+            <h2 class="section-title">DISCOGRAFÍA</h2>
+            
+            <div class="albums-grid">
+                <div class="album-card reveal">
+                    <div class="album-cover">
+                        <img src="https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=600&auto=format&fit=crop&q=80" alt="Groove Machine">
+                    </div>
+                    <div class="album-info">
+                        <div class="album-year">2024 • LP</div>
+                        <h3 class="album-title">Groove Machine</h3>
+                        <ol class="album-tracks">
+                            <li>I. Funky Town Revival <span>4:22</span></li>
+                            <li>II. Bass Heaven <span>5:15</span></li>
+                            <li>III. Groove Machine <span>6:08</span></li>
+                            <li>IV. Dancefloor Prophet <span>4:45</span></li>
+                            <li>V. Sunday Morning Funk <span>5:33</span></li>
+                        </ol>
+                        <div class="album-links">
+                            <a href="#">Spotify</a>
+                            <a href="#">Apple</a>
+                            <a href="#">Bandcamp</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="album-card reveal">
+                    <div class="album-cover">
+                        <img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=600&auto=format&fit=crop&q=80" alt="Purple Nights">
+                    </div>
+                    <div class="album-info">
+                        <div class="album-year">2022 • EP</div>
+                        <h3 class="album-title">Purple Nights</h3>
+                        <ol class="album-tracks">
+                            <li>I. Purple Nights <span>4:48</span></li>
+                            <li>II. Electric Feel <span>5:22</span></li>
+                            <li>III. Midnight Groove <span>6:15</span></li>
+                            <li>IV. Neon Dreams <span>4:30</span></li>
+                        </ol>
+                        <div class="album-links">
+                            <a href="#">Spotify</a>
+                            <a href="#">Apple</a>
+                            <a href="#">Bandcamp</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="album-card reveal">
+                    <div class="album-cover">
+                        <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=600&auto=format&fit=crop&q=80" alt="Get Up">
+                    </div>
+                    <div class="album-info">
+                        <div class="album-year">2021 • SINGLE</div>
+                        <h3 class="album-title">Get Up & Dance</h3>
+                        <ol class="album-tracks">
+                            <li>I. Get Up & Dance <span>3:55</span></li>
+                            <li>II. Get Up & Dance (Remix) <span>5:10</span></li>
+                        </ol>
+                        <div class="album-links">
+                            <a href="#">Spotify</a>
+                            <a href="#">Apple</a>
+                            <a href="#">YouTube</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Members -->
+        <section id="miembros">
+            <div class="section-label">003 — LA BANDA</div>
+            <h2 class="section-title">LOS GROOVEMAKERS</h2>
+            
+            <div class="members-grid">
+                <div class="member-card reveal">
+                    <div class="member-photo">
+                        <img src="https://images.unsplash.com/photo-1516280440614-37939bbacd81?w=400&auto=format&fit=crop&q=80" alt="Marcus">
+                    </div>
+                    <h3 class="member-name">MARCUS</h3>
+                    <p class="member-role">VOZ • PERCUSIÓN</p>
+                </div>
+
+                <div class="member-card reveal">
+                    <div class="member-photo">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&auto=format&fit=crop&q=80" alt="Diana">
+                    </div>
+                    <h3 class="member-name">DIANA</h3>
+                    <p class="member-role">TECLADOS • COROS</p>
+                </div>
+
+                <div class="member-card reveal">
+                    <div class="member-photo">
+                        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&auto=format&fit=crop&q=80" alt="Jazz">
+                    </div>
+                    <h3 class="member-name">JAZZ</h3>
+                    <p class="member-role">BAJO • GROOVE</p>
+                </div>
+
+                <div class="member-card reveal">
+                    <div class="member-photo">
+                        <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&auto=format&fit=crop&q=80" alt="Funk">
+                    </div>
+                    <h3 class="member-name">FUNK</h3>
+                    <p class="member-role">BATERÍA • BEATS</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gallery -->
+        <section id="galeria">
+            <div class="section-label">004 — MOMENTOS</div>
+            <h2 class="section-title">GALERÍA FUNKY</h2>
+            
+            <div class="gallery-grid">
+                <div class="gallery-item reveal">
+                    <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=800&auto=format&fit=crop&q=80" alt="Concierto">
+                    <span class="vhs-time">00:42:15</span>
+                </div>
+                <div class="gallery-item reveal">
+                    <img src="https://images.unsplash.com/photo-1501386761578-eac5c94b800a?w=500&auto=format&fit=crop&q=80" alt="Público">
+                    <span class="vhs-time">01:23:42</span>
+                </div>
+                <div class="gallery-item reveal">
+                    <img src="https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?w=500&auto=format&fit=crop&q=80" alt="Escenario">
+                    <span class="vhs-time">00:15:33</span>
+                </div>
+                <div class="gallery-item reveal">
+                    <img src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=500&auto=format&fit=crop&q=80" alt="Luces">
+                    <span class="vhs-time">02:01:08</span>
+                </div>
+                <div class="gallery-item reveal">
+                    <img src="https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=500&auto=format&fit=crop&q=80" alt="Bajo">
+                    <span class="vhs-time">00:08:21</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tour -->
+        <section id="tour">
+            <div class="section-label">005 — FECHAS</div>
+            <h2 class="section-title">GIRA 2026</h2>
+            
+            <div class="tour-list">
+                <div class="tour-item reveal">
+                    <div class="tour-date">MAR 20</div>
+                    <div>
+                        <div class="tour-venue">THE FUNKY BOWL</div>
+                        <div class="tour-location">Los Angeles, USA</div>
+                    </div>
+                    <button class="tour-btn sold-out">Agotado</button>
+                </div>
+
+                <div class="tour-item reveal">
+                    <div class="tour-date">ABR 05</div>
+                    <div>
+                        <div class="tour-venue">SOUL KITCHEN</div>
+                        <div class="tour-location">New York, USA</div>
+                    </div>
+                    <button class="tour-btn">Boletos</button>
+                </div>
+
+                <div class="tour-item reveal">
+                    <div class="tour-date">ABR 22</div>
+                    <div>
+                        <div class="tour-venue">FORO GROOVE</div>
+                        <div class="tour-location">Ciudad de México, México</div>
+                    </div>
+                    <button class="tour-btn">Boletos</button>
+                </div>
+
+                <div class="tour-item reveal">
+                    <div class="tour-date">MAY 10</div>
+                    <div>
+                        <div class="tour-venue">BLUE NOTE</div>
+                        <div class="tour-location">Tokyo, Japón</div>
+                    </div>
+                    <button class="tour-btn">Boletos</button>
+                </div>
+
+                <div class="tour-item reveal">
+                    <div class="tour-date">JUN 01</div>
+                    <div>
+                        <div class="tour-venue">FESTIVAL FUNK</div>
+                        <div class="tour-location">Londres, UK</div>
+                    </div>
+                    <button class="tour-btn">Boletos</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact -->
+        <section id="contacto" class="contact-section">
+            <h2 class="contact-title reveal">¡HAGAMOS RUIDO!</h2>
+            <a href="mailto:booking@smoothgroove.com" class="contact-email reveal">booking@smoothgroove.com</a>
+            <div class="social-links reveal">
+                <a href="#">Instagram</a>
+                <a href="#">Spotify</a>
+                <a href="#">YouTube</a>
+                <a href="#">TikTok</a>
+                <a href="#">Twitter</a>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <p>© 2026 SMOOTH GROOVE — TODOS LOS DERECHOS RESERVADOS</p>
+        </footer>
     </div>
 
-    <!-- BLOQUE DE TEXTO SÓLIDO -->
-    <div class="content-block">
-        <h2 style="font-family: 'Abril Fatface'; font-size: 3rem; color: #ff9f43;">YES LAWD!</h2>
-        <p style="max-width: 700px; margin: 0 auto;">
-            Inspirados en el sonido de California. Mezclamos Soul, R&B y Funk clásico con la tecnología del futuro.
-            Siente el bajo, siente el ritmo.
-        </p>
-    </div>
+    <script>
+        // Time
+        function updateTime() {
+            const now = new Date();
+            const h = String(now.getHours()).padStart(2, '0');
+            const m = String(now.getMinutes()).padStart(2, '0');
+            const s = String(now.getSeconds()).padStart(2, '0');
+            document.getElementById('timeDisplay').textContent = `${h}:${m}:${s}`;
+        }
+        setInterval(updateTime, 1000);
+        updateTime();
 
-    <!-- SECCIÓN 2: PARALLAX -->
-    <div class="parallax bg-2">
-        <div class="overlay" style="border-color: #5f27cd;">
-            <h1 style="color:white; text-shadow: 4px 4px 0px #ff9f43;">LIVE<br>SESSION</h1>
-            <a href="#" class="btn-funk">VER VIDEO</a>
-        </div>
-    </div>
+        // Visualizer
+        const visualizer = document.getElementById('visualizer');
+        for (let i = 0; i < 40; i++) {
+            const bar = document.createElement('div');
+            bar.className = 'viz-bar';
+            bar.style.setProperty('--min-h', `${Math.random() * 10 + 5}px`);
+            bar.style.setProperty('--max-h', `${Math.random() * 50 + 30}px`);
+            bar.style.setProperty('--speed', `${Math.random() * 0.4 + 0.2}s`);
+            bar.style.animationDelay = `${Math.random() * 0.5}s`;
+            visualizer.appendChild(bar);
+        }
 
-    <!-- BLOQUE DE TEXTO SÓLIDO -->
-    <div class="content-block">
-        <h2 style="font-family: 'Abril Fatface'; font-size: 3rem; color: #5f27cd;">TOUR 2025</h2>
-        <p>LOS ANGELES • NEW YORK • MEXICO CITY • TOKYO</p>
-    </div>
+        // Floating notes
+        const notesContainer = document.getElementById('floatingNotes');
+        const notes = ['♪', '♫', '♬', '♩', '♭', '♮'];
+        const colors = ['#ff6b35', '#7b2ff7', '#ffd23f', '#ff2d87', '#00d4ff'];
 
-    <!-- SECCIÓN 3: PARALLAX -->
-    <div class="parallax bg-3">
-        <div class="overlay">
-            <h1>STAY<br>TUNED</h1>
-            <!-- Aquí iría tu reproductor -->
-            <p>Transmitiendo 24/7</p>
-        </div>
-    </div>
+        function createNote() {
+            const note = document.createElement('div');
+            note.className = 'note';
+            note.textContent = notes[Math.floor(Math.random() * notes.length)];
+            note.style.left = Math.random() * 100 + '%';
+            note.style.color = colors[Math.floor(Math.random() * colors.length)];
+            note.style.animationDuration = Math.random() * 10 + 8 + 's';
+            note.style.fontSize = Math.random() * 20 + 15 + 'px';
+            notesContainer.appendChild(note);
+            
+            setTimeout(() => note.remove(), 18000);
+        }
 
+        setInterval(createNote, 2000);
+
+        // Nav active state
+        const navLinks = document.querySelectorAll('nav a');
+        const sections = document.querySelectorAll('section');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (scrollY >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Scroll reveal
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealOnScroll = () => {
+            revealElements.forEach(el => {
+                const elTop = el.getBoundingClientRect().top;
+                if (elTop < window.innerHeight - 100) {
+                    el.classList.add('active');
+                }
+            });
+        };
+        window.addEventListener('scroll', revealOnScroll);
+        window.addEventListener('load', revealOnScroll);
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Channel flash on album click
+        document.querySelectorAll('.album-card').forEach(card => {
+            card.addEventListener('click', () => {
+                document.querySelector('.screen').classList.add('channel-flash');
+                setTimeout(() => document.querySelector('.screen').classList.remove('channel-flash'), 400);
+            });
+        });
+
+        // Static on 'S' key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 's' || e.key === 'S') {
+                const overlay = document.querySelector('.static-overlay');
+                overlay.style.opacity = '1';
+                setTimeout(() => overlay.style.opacity = '0', 200);
+            }
+        });
+    </script>
 </body>
 </html>
