@@ -3,215 +3,1239 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Los Ecos Distantes | Radio & Banda</title>
+    <meta name="description" content="LOS ECOS DISTANTES - Indie Rock desde el sótano. Transmisiones desde 1987.">
+    <title>LOS ECOS DISTANTES — Indie Rock</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=VT323&family=Share+Tech+Mono&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+    
     <style>
-        /* --- ESTÉTICA INDIE / RAW --- */
         :root {
-            --bg-color: #121212;
-            --text-color: #f0f0f0;
-            --accent-color: #d63031; /* Rojo apagado */
-            --secondary-bg: #1e1e1e;
-            --font-main: 'Courier New', Courier, monospace; /* Estilo máquina de escribir */
+            --amber: #ffb000;
+            --amber-dim: #996a00;
+            --cream: #ffe8c8;
+            --black: #0a0800;
+            --dark: #1a1400;
+            --red: #cc3300;
+            --green: #00ff66;
+            --static: #2a2000;
+            --scanline: rgba(0,0,0,0.15);
+            --font-vt: 'VT323', monospace;
+            --font-mono: 'Share Tech Mono', monospace;
+            --font-courier: 'Courier Prime', monospace;
         }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { font-size: 16px; scroll-behavior: smooth; }
 
         body {
-            margin: 0;
-            padding: 0;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            font-family: var(--font-main);
-            line-height: 1.6;
+            background: var(--black);
+            color: var(--amber);
+            font-family: var(--font-mono);
+            overflow-x: hidden;
+            cursor: crosshair;
         }
 
-        /* --- HEADER & HERO --- */
-        header {
-            padding: 20px;
+        /* ============ CRT / VHS EFFECTS ============ */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: repeating-linear-gradient(
+                0deg,
+                var(--scanline) 0px,
+                var(--scanline) 1px,
+                transparent 1px,
+                transparent 2px
+            );
+            pointer-events: none;
+            z-index: 9999;
+            animation: scanFlicker 0.1s infinite;
+        }
+
+        @keyframes scanFlicker {
+            0%, 100% { opacity: 0.8; }
+            50% { opacity: 0.85; }
+        }
+
+        body::after {
+            content: "";
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: linear-gradient(
+                to bottom,
+                transparent 0%,
+                rgba(255, 176, 0, 0.03) 50%,
+                transparent 100%
+            );
+            pointer-events: none;
+            z-index: 9998;
+            animation: vhsTracking 8s linear infinite;
+        }
+
+        @keyframes vhsTracking {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100%); }
+        }
+
+        .screen {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .screen::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: radial-gradient(
+                ellipse at center,
+                transparent 60%,
+                rgba(0,0,0,0.5) 100%
+            );
+            pointer-events: none;
+            z-index: 9997;
+        }
+
+        /* ============ TOP BAR ============ */
+        .top-bar {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%;
+            padding: 1rem 1.5rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid #333;
+            z-index: 1000;
+            background: linear-gradient(to bottom, var(--black) 0%, transparent 100%);
+            font-family: var(--font-vt);
+            font-size: 1.2rem;
         }
 
-        .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-            letter-spacing: -1px;
-            text-transform: uppercase;
-            border: 2px solid var(--text-color);
-            padding: 5px 10px;
+        .time-display {
+            color: var(--amber);
+            text-shadow: 0 0 10px var(--amber);
         }
 
+        .top-right {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .rec-indicator {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--red);
+            font-size: 0.9rem;
+        }
+
+        .rec-dot {
+            width: 8px; height: 8px;
+            background: var(--red);
+            border-radius: 50%;
+            animation: recBlink 1s infinite;
+        }
+
+        @keyframes recBlink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        .play-status {
+            color: var(--green);
+            font-size: 0.9rem;
+        }
+
+        /* ============ NAV ============ */
+        nav {
+            position: fixed;
+            bottom: 0; left: 0;
+            width: 100%;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            z-index: 1000;
+            background: linear-gradient(to top, var(--black) 0%, transparent 100%);
+            font-family: var(--font-vt);
+        }
+
+        nav a {
+            color: var(--amber-dim);
+            text-decoration: none;
+            font-size: 1rem;
+            letter-spacing: 2px;
+            transition: all 0.2s;
+            padding: 0.5rem 1rem;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--amber);
+            text-shadow: 0 0 10px var(--amber);
+        }
+
+        /* ============ HERO ============ */
         .hero {
-            height: 80vh;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
-            background: radial-gradient(circle, #2c2c2c 0%, #121212 100%);
+            padding: 6rem 2rem 8rem;
             position: relative;
+            background: 
+                linear-gradient(to bottom, transparent 40%, var(--black) 100%),
+                url('https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=1920&auto=format&fit=crop&q=80');
+            background-size: cover;
+            background-position: center;
+            filter: grayscale(60%) contrast(110%);
         }
 
-        .hero h1 {
-            font-size: 4rem;
-            margin: 0;
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(10, 8, 0, 0.6);
+        }
+
+        .vhs-label {
+            position: absolute;
+            top: 5rem; left: 2rem;
+            font-family: var(--font-vt);
+            font-size: 1rem;
+            color: var(--cream);
+            background: var(--red);
+            padding: 0.3rem 0.8rem;
+            animation: labelBlink 2s infinite;
+        }
+
+        @keyframes labelBlink {
+            0%, 90%, 100% { opacity: 1; }
+            95% { opacity: 0; }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+        }
+
+        .band-name {
+            font-family: var(--font-vt);
+            font-size: clamp(3.5rem, 12vw, 10rem);
+            color: var(--amber);
+            text-shadow: 
+                0 0 40px var(--amber),
+                0 0 80px rgba(255, 176, 0, 0.3),
+                4px 4px 0 var(--amber-dim);
+            line-height: 0.9;
+            margin-bottom: 1.5rem;
+            animation: textGlitch 8s infinite;
+        }
+
+        @keyframes textGlitch {
+            0%, 92%, 100% { transform: translate(0); filter: none; }
+            93% { transform: translate(-3px, 1px); filter: hue-rotate(90deg); }
+            94% { transform: translate(3px, -1px); filter: hue-rotate(-90deg); }
+            95% { transform: translate(-1px, 2px); filter: none; }
+        }
+
+        .hero-tagline {
+            font-family: var(--font-courier);
+            font-size: clamp(0.9rem, 2vw, 1.3rem);
+            color: var(--cream);
+            letter-spacing: 6px;
             text-transform: uppercase;
-            /* Efecto "Glitch" simple */
-            text-shadow: 2px 2px var(--accent-color);
+            margin-bottom: 2rem;
         }
 
-        .hero p {
+        .hero-year {
+            font-family: var(--font-vt);
+            font-size: 1rem;
+            color: var(--amber-dim);
+            letter-spacing: 4px;
+        }
+
+        .hero-cta {
+            margin-top: 3rem;
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .btn-vhs {
+            font-family: var(--font-vt);
             font-size: 1.2rem;
-            opacity: 0.8;
-            margin-top: 10px;
-        }
-
-        /* --- BOTÓN DE REPRODUCCIÓN --- */
-        .btn-play {
-            margin-top: 30px;
-            padding: 15px 40px;
+            padding: 1rem 2rem;
             background: transparent;
-            color: var(--accent-color);
-            border: 2px solid var(--accent-color);
-            font-family: var(--font-main);
-            font-size: 1.2rem;
+            border: 2px solid var(--amber);
+            color: var(--amber);
             cursor: pointer;
-            transition: 0.3s;
+            transition: all 0.2s;
             text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .btn-vhs:hover {
+            background: var(--amber);
+            color: var(--black);
+            box-shadow: 0 0 30px var(--amber);
+        }
+
+        .btn-vhs.filled {
+            background: var(--amber);
+            color: var(--black);
+        }
+
+        .btn-vhs.filled:hover {
+            background: var(--cream);
+            box-shadow: 0 0 30px var(--amber);
+        }
+
+        /* ============ VISUALIZER ============ */
+        .visualizer-container {
+            margin-top: 3rem;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            gap: 3px;
+            height: 60px;
+        }
+
+        .viz-bar {
+            width: 4px;
+            background: var(--amber);
+            animation: vizPulse var(--speed) ease-in-out infinite;
+            box-shadow: 0 0 8px var(--amber);
+        }
+
+        @keyframes vizPulse {
+            0%, 100% { height: var(--min-h); opacity: 0.5; }
+            50% { height: var(--max-h); opacity: 1; }
+        }
+
+        /* ============ SECTIONS ============ */
+        section {
+            padding: 6rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-label {
+            font-family: var(--font-vt);
+            font-size: 0.9rem;
+            color: var(--amber-dim);
+            letter-spacing: 4px;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-label::before {
+            content: '■';
+            color: var(--amber-dim);
+        }
+
+        .section-title {
+            font-family: var(--font-vt);
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            color: var(--amber);
+            margin-bottom: 3rem;
+            text-shadow: 2px 2px 0 var(--amber-dim);
+        }
+
+        /* ============ ABOUT ============ */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-image {
+            position: relative;
+            border: 3px solid var(--amber-dim);
+            padding: 10px;
+        }
+
+        .about-image::before {
+            content: 'PLAY ▶';
+            position: absolute;
+            top: -15px; left: 15px;
+            font-family: var(--font-vt);
+            font-size: 0.8rem;
+            background: var(--black);
+            padding: 0 0.5rem;
+            color: var(--green);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            filter: grayscale(40%) contrast(110%);
+        }
+
+        .about-text {
+            font-family: var(--font-courier);
+            font-size: 1rem;
+            line-height: 2;
+            color: var(--cream);
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+        }
+
+        .about-text .highlight {
+            color: var(--amber);
             font-weight: bold;
         }
 
-        .btn-play:hover {
-            background: var(--accent-color);
-            color: var(--bg-color);
+        /* ============ DISCOGRAPHY ============ */
+        .albums-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
         }
 
-        /* --- SECCIÓN DE FECHAS (GIGS) --- */
-        .dates-section {
-            max-width: 800px;
-            margin: 50px auto;
-            padding: 20px;
+        .album-card {
+            background: var(--dark);
+            border: 1px solid var(--static);
+            transition: all 0.3s;
+            cursor: pointer;
         }
 
-        .gig {
-            display: flex;
-            justify-content: space-between;
-            border-bottom: 1px solid #333;
-            padding: 15px 0;
-            transition: 0.2s;
+        .album-card:hover {
+            border-color: var(--amber);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 40px rgba(255, 176, 0, 0.1);
         }
 
-        .gig:hover {
-            background-color: var(--secondary-bg);
-            padding-left: 10px;
+        .album-cover {
+            position: relative;
+            overflow: hidden;
         }
 
-        .date { opacity: 0.6; }
-        .venue { color: var(--accent-color); }
-
-        /* --- REPRODUCTOR FIJO (STICKY PLAYER) --- */
-        .radio-bar {
-            position: fixed;
-            bottom: 0;
-            left: 0;
+        .album-cover img {
             width: 100%;
-            background-color: var(--secondary-bg);
-            border-top: 2px solid var(--accent-color);
-            padding: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            z-index: 100;
+            aspect-ratio: 1/1;
+            object-fit: cover;
+            filter: grayscale(50%);
+            transition: filter 0.5s;
         }
 
-        .radio-info {
-            display: flex;
-            align-items: center;
-            gap: 15px;
+        .album-card:hover .album-cover img {
+            filter: grayscale(0%);
         }
 
-        .live-indicator {
-            width: 10px;
-            height: 10px;
-            background-color: red;
-            border-radius: 50%;
-            animation: blink 1.5s infinite;
+        .album-cover::after {
+            content: '▶ PLAY';
+            position: absolute;
+            bottom: 1rem; right: 1rem;
+            font-family: var(--font-vt);
+            font-size: 1rem;
+            background: var(--black);
+            color: var(--green);
+            padding: 0.5rem 1rem;
+            opacity: 0;
+            transition: opacity 0.3s;
         }
 
-        @keyframes blink {
-            0% { opacity: 1; }
-            50% { opacity: 0.4; }
-            100% { opacity: 1; }
+        .album-card:hover .album-cover::after {
+            opacity: 1;
         }
 
-        /* Simulación del control de audio */
-        .audio-controls {
+        .album-info {
+            padding: 1.5rem;
+        }
+
+        .album-year {
+            font-family: var(--font-vt);
             font-size: 0.9rem;
-            color: #888;
+            color: var(--green);
+            margin-bottom: 0.5rem;
         }
-        
-        /* Ajuste móvil */
+
+        .album-title {
+            font-family: var(--font-vt);
+            font-size: 1.8rem;
+            color: var(--amber);
+            margin-bottom: 1rem;
+        }
+
+        .album-tracks {
+            list-style: none;
+        }
+
+        .album-tracks li {
+            padding: 0.6rem 0;
+            border-bottom: 1px solid var(--static);
+            font-size: 0.85rem;
+            color: var(--amber-dim);
+            display: flex;
+            justify-content: space-between;
+            transition: color 0.2s;
+        }
+
+        .album-tracks li:hover {
+            color: var(--amber);
+        }
+
+        .album-tracks li span {
+            font-family: var(--font-vt);
+            color: var(--amber-dim);
+        }
+
+        .album-links {
+            margin-top: 1.5rem;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .album-links a {
+            font-family: var(--font-vt);
+            font-size: 0.9rem;
+            color: var(--amber-dim);
+            text-decoration: none;
+            padding: 0.4rem 0.8rem;
+            border: 1px solid var(--static);
+            transition: all 0.2s;
+        }
+
+        .album-links a:hover {
+            color: var(--amber);
+            border-color: var(--amber);
+        }
+
+        /* ============ MEMBERS ============ */
+        .members-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+        }
+
+        .member-card {
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .member-photo {
+            position: relative;
+            overflow: hidden;
+            border: 2px solid var(--static);
+            margin-bottom: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .member-card:hover .member-photo {
+            border-color: var(--amber);
+        }
+
+        .member-photo img {
+            width: 100%;
+            aspect-ratio: 3/4;
+            object-fit: cover;
+            filter: grayscale(100%);
+            transition: filter 0.5s;
+        }
+
+        .member-card:hover .member-photo img {
+            filter: grayscale(0%);
+        }
+
+        .member-photo::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0;
+            width: 100%; height: 50%;
+            background: linear-gradient(to top, var(--black), transparent);
+        }
+
+        .member-name {
+            font-family: var(--font-vt);
+            font-size: 1.5rem;
+            color: var(--amber);
+        }
+
+        .member-role {
+            font-family: var(--font-vt);
+            font-size: 0.9rem;
+            color: var(--amber-dim);
+            letter-spacing: 2px;
+        }
+
+        /* ============ GALLERY ============ */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-auto-rows: 200px;
+            gap: 4px;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .gallery-item:nth-child(1) {
+            grid-column: span 2;
+            grid-row: span 2;
+        }
+
+        .gallery-item img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            filter: grayscale(60%) contrast(110%);
+            transition: all 0.5s;
+        }
+
+        .gallery-item:hover img {
+            filter: grayscale(0%) contrast(100%);
+            transform: scale(1.05);
+        }
+
+        .gallery-item::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(255, 176, 0, 0.1);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .gallery-item:hover::after {
+            opacity: 1;
+        }
+
+        .gallery-item .vhs-time {
+            position: absolute;
+            bottom: 0.5rem; right: 0.5rem;
+            font-family: var(--font-vt);
+            font-size: 0.8rem;
+            color: var(--cream);
+            background: rgba(0,0,0,0.7);
+            padding: 0.2rem 0.5rem;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .gallery-item:hover .vhs-time {
+            opacity: 1;
+        }
+
+        /* ============ TOUR ============ */
+        .tour-list {
+            max-width: 900px;
+        }
+
+        .tour-item {
+            display: grid;
+            grid-template-columns: 120px 1fr auto;
+            gap: 2rem;
+            padding: 2rem 0;
+            border-bottom: 1px solid var(--static);
+            align-items: center;
+            transition: all 0.3s;
+        }
+
+        .tour-item:hover {
+            padding-left: 1rem;
+            border-color: var(--amber);
+        }
+
+        .tour-date {
+            font-family: var(--font-vt);
+            font-size: 2rem;
+            color: var(--amber);
+            text-shadow: 0 0 10px var(--amber);
+        }
+
+        .tour-venue {
+            font-family: var(--font-vt);
+            font-size: 1.3rem;
+            color: var(--cream);
+            margin-bottom: 0.3rem;
+        }
+
+        .tour-location {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--amber-dim);
+        }
+
+        .tour-btn {
+            font-family: var(--font-vt);
+            font-size: 1rem;
+            padding: 0.8rem 1.5rem;
+            background: transparent;
+            border: 2px solid var(--amber);
+            color: var(--amber);
+            cursor: pointer;
+            transition: all 0.2s;
+            text-transform: uppercase;
+        }
+
+        .tour-btn:hover {
+            background: var(--amber);
+            color: var(--black);
+        }
+
+        .tour-btn.sold-out {
+            border-color: var(--red);
+            color: var(--red);
+            cursor: default;
+        }
+
+        .tour-btn.sold-out:hover {
+            background: transparent;
+            color: var(--red);
+        }
+
+        /* ============ CONTACT ============ */
+        .contact-section {
+            text-align: center;
+            padding: 8rem 2rem;
+            background: var(--dark);
+            margin: 0;
+            max-width: 100%;
+        }
+
+        .contact-title {
+            font-family: var(--font-vt);
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            color: var(--amber);
+            margin-bottom: 2rem;
+        }
+
+        .contact-email {
+            font-family: var(--font-vt);
+            font-size: 1.5rem;
+            color: var(--cream);
+            text-decoration: none;
+            border-bottom: 2px solid var(--amber-dim);
+            transition: all 0.3s;
+        }
+
+        .contact-email:hover {
+            color: var(--amber);
+            border-color: var(--amber);
+            text-shadow: 0 0 20px var(--amber);
+        }
+
+        .social-links {
+            margin-top: 3rem;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        .social-links a {
+            font-family: var(--font-vt);
+            font-size: 1rem;
+            color: var(--amber-dim);
+            text-decoration: none;
+            padding: 0.8rem 1.5rem;
+            border: 1px solid var(--static);
+            transition: all 0.2s;
+        }
+
+        .social-links a:hover {
+            color: var(--amber);
+            border-color: var(--amber);
+        }
+
+        /* ============ FOOTER ============ */
+        footer {
+            padding: 3rem 2rem;
+            text-align: center;
+            border-top: 1px solid var(--static);
+        }
+
+        footer p {
+            font-family: var(--font-vt);
+            font-size: 0.9rem;
+            color: var(--amber-dim);
+            letter-spacing: 2px;
+        }
+
+        /* ============ STATIC OVERLAY ============ */
+        .static-overlay {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.1'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 9996;
+            opacity: 0;
+            animation: staticBurst 20s infinite;
+        }
+
+        @keyframes staticBurst {
+            0%, 94%, 100% { opacity: 0; }
+            95% { opacity: 0.6; }
+            96% { opacity: 0; }
+            97% { opacity: 0.4; }
+            98% { opacity: 0; }
+        }
+
+        /* ============ MOBILE ============ */
+        @media (max-width: 900px) {
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .members-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .gallery-item:nth-child(1) {
+                grid-column: span 2;
+            }
+
+            .tour-item {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+                text-align: center;
+            }
+
+            nav {
+                flex-wrap: wrap;
+                gap: 0.5rem;
+                padding: 1rem;
+            }
+
+            nav a {
+                font-size: 0.8rem;
+                padding: 0.4rem 0.8rem;
+            }
+        }
+
         @media (max-width: 600px) {
-            .hero h1 { font-size: 2.5rem; }
-            .radio-bar { flex-direction: column; gap: 10px; text-align: center;}
+            .band-name {
+                font-size: 3rem;
+            }
+
+            .members-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 1rem;
+            }
+
+            .albums-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .social-links {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        /* ============ ANIMATIONS ============ */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Channel change */
+        .channel-flash {
+            animation: channelFlash 0.3s ease;
+        }
+
+        @keyframes channelFlash {
+            0% { filter: brightness(1); }
+            25% { filter: brightness(0) saturate(0); }
+            50% { filter: brightness(2) saturate(0); }
+            100% { filter: brightness(1); }
         }
     </style>
 </head>
 <body>
+    <div class="static-overlay"></div>
 
-    <header>
-        <div class="logo">LOS ECOS DISTANTES</div>
-        <nav>
-            <a href="#" style="color: white; text-decoration: none; margin-left: 20px;">MERCH</a>
-            <a href="#" style="color: white; text-decoration: none; margin-left: 20px;">TOUR</a>
-        </nav>
-    </header>
-
-    <section class="hero">
-        <h1>Sonido<br>Analógico</h1>
-        <p>Transmitiendo ruido desde el sótano.</p>
-        
-        <!-- Aquí iría la acción para iniciar el stream -->
-        <button class="btn-play">Escuchar Radio en Vivo</button>
-    </section>
-
-    <section class="dates-section">
-        <h2 style="border-bottom: 2px solid white; display: inline-block;">PRÓXIMAS FECHAS</h2>
-        
-        <div class="gig">
-            <span class="date">DIC 15</span>
-            <span class="city">CDMX, Foro Indie</span>
-            <span class="venue">AGOTADO</span>
-        </div>
-        <div class="gig">
-            <span class="date">ENE 22</span>
-            <span class="city">Guadalajara, Anexo</span>
-            <span class="venue">BOLETOS</span>
-        </div>
-        <div class="gig">
-            <span class="date">FEB 05</span>
-            <span class="city">Monterrey, Café Iguana</span>
-            <span class="venue">BOLETOS</span>
-        </div>
-    </section>
-
-    <!-- ESTO ES LO IMPORTANTE PARA TU PROYECTO -->
-    <!-- Barra fija inferior que simula el streaming -->
-    <div class="radio-bar">
-        <div class="radio-info">
-            <div class="live-indicator"></div>
-            <div>
-                <strong>RADIO ONLINE</strong>
-                <div style="font-size: 0.8rem; opacity: 0.7;">Transmitiendo desde PC Master...</div>
+    <div class="screen">
+        <!-- Top Bar -->
+        <div class="top-bar">
+            <div class="time-display" id="timeDisplay">00:00:00</div>
+            <div class="top-right">
+                <div class="rec-indicator">
+                    <div class="rec-dot"></div>
+                    <span>REC</span>
+                </div>
+                <div class="play-status">▶ PLAY</div>
             </div>
         </div>
-        
-        <div class="audio-controls">
-            <!-- Aquí pegaríamos el reproductor real de Zeno.fm o Icecast -->
-            [ REPRODUCTOR HTML AQUÍ ] 
-            <button style="background:none; border:1px solid #555; color:white; padding:5px 10px; margin-left:10px;">❚❚ PAUSE</button>
-        </div>
+
+        <!-- Hero -->
+        <header class="hero">
+            <div class="vhs-label">EP — 2024</div>
+            <div class="hero-content">
+                <h1 class="band-name">LOS ECOS<br>DISTANTES</h1>
+                <p class="hero-tagline">Indie Rock • Sonido Analógico • Desde el Sótano</p>
+                <p class="hero-year">★ TRANSMITIENDO DESDE 1987 ★</p>
+                <div class="hero-cta">
+                    <a href="#discografia" class="btn-vhs filled">Escuchar</a>
+                    <a href="#tour" class="btn-vhs">Ver Fechas</a>
+                </div>
+                <div class="visualizer-container" id="visualizer"></div>
+            </div>
+        </header>
+
+        <!-- Nav -->
+        <nav id="mainNav">
+            <a href="#sobre" class="active">Sobre</a>
+            <a href="#discografia">Música</a>
+            <a href="#miembros">Banda</a>
+            <a href="#galeria">Fotos</a>
+            <a href="#tour">Tour</a>
+            <a href="#contacto">Contacto</a>
+        </nav>
+
+        <!-- About -->
+        <section id="sobre">
+            <div class="about-grid">
+                <div class="about-image reveal">
+                    <img src="https://images.unsplash.com/photo-1501386761578-eac5c94b800a?w=800&auto=format&fit=crop&q=80" alt="Los Ecos Distantes en vivo">
+                </div>
+                <div class="about-text reveal">
+                    <div class="section-label">001 — LA HISTORIA</div>
+                    <h2 class="section-title">SOBRE NOSOTROS</h2>
+                    <p>
+                        <span class="highlight">Los Ecos Distantes</span> nacieron en un sótano húmedo de la Ciudad de México en 1987. Cuatro amigos con una guitarra rota y un sueño: hacer sonido que se sienta como una记忆 perdida.
+                    </p>
+                    <p>
+                        Nuestra música es un viaje entre el <span class="highlight">ruido analógico</span> y la melancolía urbana. Cada canción es una carta de amor a las noches sin dormir, a las calles vacías y a los ecos que quedan cuando todos se van.
+                    </p>
+                    <p>
+                        37 años después, seguimos transmitiendo desde el mismo sótano. El equipo es viejo, pero la señal sigue fuerte.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Discography -->
+        <section id="discografia">
+            <div class="section-label">002 — NUESTRA MÚSICA</div>
+            <h2 class="section-title">DISCOGRAFÍA</h2>
+            
+            <div class="albums-grid">
+                <!-- Album 1 -->
+                <div class="album-card reveal">
+                    <div class="album-cover">
+                        <img src="https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=600&auto=format&fit=crop&q=80" alt="Frecuencias Olvidadas">
+                    </div>
+                    <div class="album-info">
+                        <div class="album-year">2024 • EP</div>
+                        <h3 class="album-title">Frecuencias Olvidadas</h3>
+                        <ol class="album-tracks">
+                            <li>I. Frecuencias Olvidadas <span>4:32</span></li>
+                            <li>II. Señal Fantasma <span>5:17</span></li>
+                            <li>III. Ruido Blanco <span>3:48</span></li>
+                            <li>IV. Estática Nocturna <span>6:03</span></li>
+                        </ol>
+                        <div class="album-links">
+                            <a href="#">Spotify</a>
+                            <a href="#">Apple</a>
+                            <a href="#">Bandcamp</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Album 2 -->
+                <div class="album-card reveal">
+                    <div class="album-cover">
+                        <img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=600&auto=format&fit=crop&q=80" alt="Transmisión Pirata">
+                    </div>
+                    <div class="album-info">
+                        <div class="album-year">2022 • LP</div>
+                        <h3 class="album-title">Transmisión Pirata</h3>
+                        <ol class="album-tracks">
+                            <li>I. Aire Polar <span>4:15</span></li>
+                            <li>II. Ciudades Fantasma <span>5:42</span></li>
+                            <li>III. Transmisión Pirata <span>4:55</span></li>
+                            <li>IV. Eco del Vacío <span>5:41</span></li>
+                            <li>V. Última Onda <span>7:23</span></li>
+                        </ol>
+                        <div class="album-links">
+                            <a href="#">Spotify</a>
+                            <a href="#">Apple</a>
+                            <a href="#">Bandcamp</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Album 3 -->
+                <div class="album-card reveal">
+                    <div class="album-cover">
+                        <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=600&auto=format&fit=crop&q=80" alt="Antes del Amanecer">
+                    </div>
+                    <div class="album-info">
+                        <div class="album-year">2019 • LP</div>
+                        <h3 class="album-title">Antes del Amanecer</h3>
+                        <ol class="album-tracks">
+                            <li>I. Insomnio <span>4:08</span></li>
+                            <li>II. Luces de Neón <span>5:33</span></li>
+                            <li>III. Antes del Amanecer <span>6:12</span></li>
+                            <li>IV. Calles Vacías <span>4:47</span></li>
+                        </ol>
+                        <div class="album-links">
+                            <a href="#">Spotify</a>
+                            <a href="#">Apple</a>
+                            <a href="#">Bandcamp</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Members -->
+        <section id="miembros">
+            <div class="section-label">003 — LA BANDA</div>
+            <h2 class="section-title">MIEMBROS</h2>
+            
+            <div class="members-grid">
+                <div class="member-card reveal">
+                    <div class="member-photo">
+                        <img src="https://images.unsplash.com/photo-1516280440614-37939bbacd81?w=400&auto=format&fit=crop&q=80" alt="Mateo">
+                    </div>
+                    <h3 class="member-name">MATEO</h3>
+                    <p class="member-role">VOZ • GUITARRA</p>
+                </div>
+
+                <div class="member-card reveal">
+                    <div class="member-photo">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&auto=format&fit=crop&q=80" alt="Luna">
+                    </div>
+                    <h3 class="member-name">LUNA</h3>
+                    <p class="member-role">GUITARRA • COROS</p>
+                </div>
+
+                <div class="member-card reveal">
+                    <div class="member-photo">
+                        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&auto=format&fit=crop&q=80" alt="Raúl">
+                    </div>
+                    <h3 class="member-name">RAÚL</h3>
+                    <p class="member-role">BAJO</p>
+                </div>
+
+                <div class="member-card reveal">
+                    <div class="member-photo">
+                        <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&auto=format&fit=crop&q=80" alt="Sofía">
+                    </div>
+                    <h3 class="member-name">SOFÍA</h3>
+                    <p class="member-role">BATERÍA</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gallery -->
+        <section id="galeria">
+            <div class="section-label">004 — MOMENTOS</div>
+            <h2 class="section-title">GALERÍA VHS</h2>
+            
+            <div class="gallery-grid">
+                <div class="gallery-item reveal">
+                    <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=800&auto=format&fit=crop&q=80" alt="Concierto">
+                    <span class="vhs-time">00:42:15</span>
+                </div>
+                <div class="gallery-item reveal">
+                    <img src="https://images.unsplash.com/photo-1501386761578-eac5c94b800a?w=500&auto=format&fit=crop&q=80" alt="Público">
+                    <span class="vhs-time">01:23:42</span>
+                </div>
+                <div class="gallery-item reveal">
+                    <img src="https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?w=500&auto=format&fit=crop&q=80" alt="Escenario">
+                    <span class="vhs-time">00:15:33</span>
+                </div>
+                <div class="gallery-item reveal">
+                    <img src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=500&auto=format&fit=crop&q=80" alt="Luces">
+                    <span class="vhs-time">02:01:08</span>
+                </div>
+                <div class="gallery-item reveal">
+                    <img src="https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=500&auto=format&fit=crop&q=80" alt="Guitarra">
+                    <span class="vhs-time">00:08:21</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tour -->
+        <section id="tour">
+            <div class="section-label">005 — FECHAS</div>
+            <h2 class="section-title">GIRA 2026</h2>
+            
+            <div class="tour-list">
+                <div class="tour-item reveal">
+                    <div class="tour-date">MAR 15</div>
+                    <div>
+                        <div class="tour-venue">FORO INDIE</div>
+                        <div class="tour-location">Ciudad de México, México</div>
+                    </div>
+                    <button class="tour-btn sold-out">Agotado</button>
+                </div>
+
+                <div class="tour-item reveal">
+                    <div class="tour-date">ABR 02</div>
+                    <div>
+                        <div class="tour-venue">CAFE IGUANA</div>
+                        <div class="tour-location">Monterrey, México</div>
+                    </div>
+                    <button class="tour-btn">Boletos</button>
+                </div>
+
+                <div class="tour-item reveal">
+                    <div class="tour-date">ABR 18</div>
+                    <div>
+                        <div class="tour-venue">ANEXO</div>
+                        <div class="tour-location">Guadalajara, México</div>
+                    </div>
+                    <button class="tour-btn">Boletos</button>
+                </div>
+
+                <div class="tour-item reveal">
+                    <div class="tour-date">MAY 05</div>
+                    <div>
+                        <div class="tour-venue">LA RAMONA</div>
+                        <div class="tour-location">Buenos Aires, Argentina</div>
+                    </div>
+                    <button class="tour-btn">Boletos</button>
+                </div>
+
+                <div class="tour-item reveal">
+                    <div class="tour-date">MAY 20</div>
+                    <div>
+                        <div class="tour-venue">MELTEN VENUE</div>
+                        <div class="tour-location">Bogotá, Colombia</div>
+                    </div>
+                    <button class="tour-btn">Boletos</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact -->
+        <section id="contacto" class="contact-section">
+            <h2 class="contact-title reveal">¿HABLAMOS?</h2>
+            <a href="mailto:hola@losecosdistantes.com" class="contact-email reveal">hola@losecosdistantes.com</a>
+            <div class="social-links reveal">
+                <a href="#">Instagram</a>
+                <a href="#">Spotify</a>
+                <a href="#">YouTube</a>
+                <a href="#">Bandcamp</a>
+                <a href="#">TikTok</a>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <p>© 2026 LOS ECOS DISTANTES — TODOS LOS DERECHOS RESERVADOS</p>
+            <p style="margin-top: 0.5rem; font-size: 0.7rem; color: var(--static);">GRABADO EN UN SÓTANO • CON AMOR Y RUIDO</p>
+        </footer>
     </div>
 
+    <script>
+        // Time
+        function updateTime() {
+            const now = new Date();
+            const h = String(now.getHours()).padStart(2, '0');
+            const m = String(now.getMinutes()).padStart(2, '0');
+            const s = String(now.getSeconds()).padStart(2, '0');
+            document.getElementById('timeDisplay').textContent = `${h}:${m}:${s}`;
+        }
+        setInterval(updateTime, 1000);
+        updateTime();
+
+        // Visualizer
+        const visualizer = document.getElementById('visualizer');
+        for (let i = 0; i < 50; i++) {
+            const bar = document.createElement('div');
+            bar.className = 'viz-bar';
+            bar.style.setProperty('--min-h', `${Math.random() * 8 + 3}px`);
+            bar.style.setProperty('--max-h', `${Math.random() * 40 + 20}px`);
+            bar.style.setProperty('--speed', `${Math.random() * 0.4 + 0.2}s`);
+            bar.style.animationDelay = `${Math.random() * 0.5}s`;
+            visualizer.appendChild(bar);
+        }
+
+        // Nav active state
+        const navLinks = document.querySelectorAll('nav a');
+        const sections = document.querySelectorAll('section');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (scrollY >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Scroll reveal
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealOnScroll = () => {
+            revealElements.forEach(el => {
+                const elTop = el.getBoundingClientRect().top;
+                if (elTop < window.innerHeight - 100) {
+                    el.classList.add('active');
+                }
+            });
+        };
+        window.addEventListener('scroll', revealOnScroll);
+        window.addEventListener('load', revealOnScroll);
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Static on 'S' key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 's' || e.key === 'S') {
+                const overlay = document.querySelector('.static-overlay');
+                overlay.style.opacity = '1';
+                setTimeout(() => overlay.style.opacity = '0', 200);
+            }
+        });
+
+        // Channel flash on album click
+        document.querySelectorAll('.album-card').forEach(card => {
+            card.addEventListener('click', () => {
+                document.querySelector('.screen').classList.add('channel-flash');
+                setTimeout(() => document.querySelector('.screen').classList.remove('channel-flash'), 300);
+            });
+        });
+    </script>
 </body>
 </html>
