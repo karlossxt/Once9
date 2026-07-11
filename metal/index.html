@@ -3,321 +3,1354 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ABISMO DE ACERO - Heavy Metal, Trash, Doom. Sitio oficial de la banda.">
+    <meta property="og:title" content="ABISMO DE ACERO | Official Site">
+    <meta property="og:description" content="Heavy Metal, Trash, Doom. Sitio oficial de la banda.">
+    <meta property="og:type" content="website">
     <title>ABISMO DE ACERO | Official Site</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+    
     <style>
-        /* --- ESTÉTICA METAL / INDUSTRIAL --- */
+        /* ========================================
+           SISTEMA DE DISEÑO - VARIABLES
+           ======================================== */
         :root {
-            --bg-color: #050505;
-            --text-color: #dcdcdc;
-            --accent-color: #8a0303; /* Rojo Sangre Oscuro */
-            --highlight: #ff0000;    /* Rojo Brillante */
-            --metal-grey: #2a2a2a;
-            --font-head: 'Impact', 'Haettenschweiler', 'Arial Narrow Bold', sans-serif;
-            --font-body: 'Verdana', sans-serif;
+            /* Colores */
+            --bg-primary: #0a0a0a;
+            --bg-secondary: #111111;
+            --bg-tertiary: #1a1a1a;
+            --text-primary: #ffffff;
+            --text-secondary: #888888;
+            --text-muted: #555555;
+            --accent-red: #8b0000;
+            --accent-red-bright: #cc0000;
+            --accent-red-glow: rgba(139, 0, 0, 0.5);
+            --border-subtle: #222222;
+            --border-medium: #333333;
+            
+            /* Tipografía */
+            --font-display: 'Bebas Neue', 'Impact', sans-serif;
+            --font-body: 'Inter', 'Helvetica Neue', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+            
+            /* Espaciado */
+            --space-xs: 0.5rem;
+            --space-sm: 1rem;
+            --space-md: 2rem;
+            --space-lg: 4rem;
+            --space-xl: 8rem;
+            
+            /* Transiciones */
+            --transition-fast: 0.2s ease;
+            --transition-base: 0.3s ease;
+            --transition-slow: 0.6s ease;
+            
+            /* Layout */
+            --max-width: 1400px;
+            --nav-height: 80px;
+        }
+
+        /* ========================================
+           RESET & BASE
+           ======================================== */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
         }
 
         body {
-            margin: 0;
-            padding: 0;
-            background-color: var(--bg-color);
-            color: var(--text-color);
             font-family: var(--font-body);
-            /* Fondo con textura sutil de rejilla */
-            background-image: radial-gradient(#1a1a1a 1px, transparent 1px);
-            background-size: 20px 20px;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
         }
 
-        h1, h2, h3 {
-            font-family: var(--font-head);
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            /* Estiramos la letra verticalmente para que se vea más agresiva */
-            transform: scaleY(1.2); 
-            margin: 0;
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
         }
 
-        /* --- NAVEGACIÓN --- */
-        nav {
-            background: black;
-            border-bottom: 3px solid var(--accent-color);
-            padding: 20px;
-            text-align: center;
-            position: sticky;
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        /* ========================================
+           PRELOADER
+           ======================================== */
+        .preloader {
+            position: fixed;
             top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--bg-primary);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+
+        .preloader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .preloader-logo {
+            font-family: var(--font-display);
+            font-size: 3rem;
+            color: var(--accent-red);
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.5; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.05); }
+        }
+
+        /* ========================================
+           NAVEGACIÓN FLOTANTE
+           ======================================== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: var(--nav-height);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 var(--space-md);
             z-index: 1000;
-            box-shadow: 0 5px 20px rgba(138, 3, 3, 0.5);
+            transition: background-color var(--transition-base), box-shadow var(--transition-base);
+        }
+
+        .navbar.scrolled {
+            background-color: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .nav-logo {
+            font-family: var(--font-display);
+            font-size: 1.8rem;
+            color: var(--text-primary);
+            letter-spacing: 2px;
+        }
+
+        .nav-logo span {
+            color: var(--accent-red);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: var(--space-md);
+            list-style: none;
         }
 
         .nav-links a {
-            color: white;
-            text-decoration: none;
-            font-family: var(--font-head);
-            font-size: 1.2rem;
-            margin: 0 15px;
-            transition: 0.3s;
-            display: inline-block;
+            font-family: var(--font-body);
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+            transition: color var(--transition-fast);
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-red);
+            transition: width var(--transition-base);
         }
 
         .nav-links a:hover {
-            color: var(--highlight);
-            text-shadow: 0 0 10px var(--highlight);
-            transform: skew(-10deg); /* Inclina el texto al pasar el mouse */
+            color: var(--text-primary);
         }
 
-        /* --- HERO (PORTADA) --- */
-        .hero {
-            height: 85vh;
-            display: flex;
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Menú hamburguesa */
+        .nav-toggle {
+            display: none;
             flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 10px;
+            background: none;
+            border: none;
+        }
+
+        .nav-toggle span {
+            width: 25px;
+            height: 2px;
+            background: var(--text-primary);
+            transition: var(--transition-base);
+        }
+
+        .nav-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .nav-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .nav-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+
+        /* ========================================
+           HERO INMERSIVO
+           ======================================== */
+        .hero {
+            position: relative;
+            height: 100vh;
+            display: flex;
             justify-content: center;
             align-items: center;
+            overflow: hidden;
+        }
+
+        .hero-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 1;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                to bottom,
+                rgba(10, 10, 10, 0.4) 0%,
+                rgba(10, 10, 10, 0.6) 50%,
+                rgba(10, 10, 10, 0.9) 100%
+            );
+            z-index: 2;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 3;
             text-align: center;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.3), #050505), url('https://placehold.co/1920x1080/111/333');
-            background-size: cover;
-            background-position: center;
-            border-bottom: 5px solid var(--accent-color);
+            padding: var(--space-md);
         }
 
-        .hero h1 {
-            font-size: 5rem;
-            color: white;
-            text-shadow: 4px 4px 0px var(--accent-color);
-            margin-bottom: 20px;
+        .hero-title {
+            font-family: var(--font-display);
+            font-size: clamp(4rem, 15vw, 12rem);
+            line-height: 0.9;
+            letter-spacing: 8px;
+            color: var(--text-primary);
+            text-shadow: 0 0 60px var(--accent-red-glow);
+            margin-bottom: var(--space-sm);
         }
 
-        .btn-metal {
-            background: var(--accent-color);
-            color: white;
-            padding: 15px 40px;
-            font-family: var(--font-head);
-            font-size: 1.5rem;
-            text-decoration: none;
-            border: 2px solid white;
-            /* Corte en las esquinas (estilo futurista/metal) */
-            clip-path: polygon(10% 0, 100% 0, 100% 70%, 90% 100%, 0 100%, 0 30%);
-            transition: 0.3s;
+        .hero-subtitle {
+            font-family: var(--font-mono);
+            font-size: clamp(0.8rem, 2vw, 1.1rem);
+            color: var(--text-secondary);
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            margin-bottom: var(--space-lg);
         }
 
-        .btn-metal:hover {
-            background: var(--highlight);
-            box-shadow: 0 0 20px var(--highlight);
+        .hero-cta {
+            display: inline-flex;
+            gap: var(--space-sm);
+            flex-wrap: wrap;
+            justify-content: center;
         }
 
-        /* --- SECCIONES --- */
-        section {
-            padding: 80px 20px;
-            max-width: 1100px;
+        .btn {
+            font-family: var(--font-body);
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: var(--space-sm) var(--space-md);
+            border: none;
+            cursor: pointer;
+            transition: all var(--transition-base);
+        }
+
+        .btn-primary {
+            background: var(--accent-red);
+            color: var(--text-primary);
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-red-bright);
+            box-shadow: 0 0 30px var(--accent-red-glow);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-primary);
+            border: 1px solid var(--border-medium);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--text-primary);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: var(--space-md);
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 3;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: var(--space-xs);
+            color: var(--text-secondary);
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        .scroll-indicator svg {
+            width: 24px;
+            height: 24px;
+            stroke: currentColor;
+            stroke-width: 2;
+            fill: none;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(10px); }
+        }
+
+        /* ========================================
+           SECCIONES GENERALES
+           ======================================== */
+        .section {
+            padding: var(--space-xl) var(--space-md);
+            max-width: var(--max-width);
             margin: 0 auto;
         }
 
+        .section-header {
+            text-align: center;
+            margin-bottom: var(--space-lg);
+        }
+
         .section-title {
-            font-size: 3rem;
-            border-left: 10px solid var(--accent-color);
-            padding-left: 20px;
-            margin-bottom: 50px;
-            color: white;
+            font-family: var(--font-display);
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            letter-spacing: 4px;
+            color: var(--text-primary);
+            margin-bottom: var(--space-xs);
         }
 
-        /* --- BIOGRAFÍA CON EFECTO --- */
-        .bio-container {
-            background: var(--metal-grey);
-            padding: 40px;
-            /* Borde izquierdo rojo */
-            border-left: 5px solid var(--accent-color); 
+        .section-subtitle {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--accent-red);
+            letter-spacing: 4px;
+            text-transform: uppercase;
         }
 
-        /* --- GRID DE MIEMBROS --- */
+        .section-divider {
+            width: 60px;
+            height: 2px;
+            background: var(--accent-red);
+            margin: var(--space-md) auto;
+        }
+
+        /* Scroll Reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ========================================
+           BIOGRAFÍA
+           ======================================== */
+        .bio-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-lg);
+            align-items: center;
+        }
+
+        .bio-image {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bio-image img {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            filter: grayscale(100%) contrast(1.2);
+            transition: filter var(--transition-slow);
+        }
+
+        .bio-image:hover img {
+            filter: grayscale(0%) contrast(1);
+        }
+
+        .bio-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 1px solid var(--accent-red);
+            transform: translate(20px, 20px);
+            z-index: -1;
+        }
+
+        .bio-content h3 {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            letter-spacing: 2px;
+            margin-bottom: var(--space-sm);
+        }
+
+        .bio-content p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: var(--space-sm);
+        }
+
+        .bio-quote {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            color: var(--accent-red);
+            border-left: 3px solid var(--accent-red);
+            padding-left: var(--space-sm);
+            margin-top: var(--space-md);
+        }
+
+        /* ========================================
+           DISCOGRAFÍA
+           ======================================== */
+        .discography-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--space-md);
+        }
+
+        .album-card {
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .album-cover {
+            width: 100%;
+            aspect-ratio: 1/1;
+            object-fit: cover;
+            transition: transform var(--transition-slow);
+        }
+
+        .album-card:hover .album-cover {
+            transform: scale(1.05);
+        }
+
+        .album-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(10, 10, 10, 0.9) 0%, transparent 50%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: var(--space-md);
+            opacity: 0;
+            transition: opacity var(--transition-base);
+        }
+
+        .album-card:hover .album-overlay {
+            opacity: 1;
+        }
+
+        .album-title {
+            font-family: var(--font-display);
+            font-size: 1.8rem;
+            letter-spacing: 2px;
+            margin-bottom: var(--space-xs);
+        }
+
+        .album-year {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--accent-red);
+            margin-bottom: var(--space-sm);
+        }
+
+        .album-links {
+            display: flex;
+            gap: var(--space-sm);
+        }
+
+        .album-links a {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: color var(--transition-fast);
+        }
+
+        .album-links a:hover {
+            color: var(--text-primary);
+        }
+
+        /* ========================================
+           MIEMBROS
+           ======================================== */
         .members-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--space-md);
         }
 
         .member-card {
-            background: black;
             position: relative;
             overflow: hidden;
-            border: 1px solid #333;
+            cursor: pointer;
         }
 
-        .member-card img {
+        .member-image {
             width: 100%;
-            height: 300px;
+            height: 400px;
             object-fit: cover;
             filter: grayscale(100%);
-            transition: 0.5s;
+            transition: all var(--transition-slow);
         }
 
-        .member-card:hover img {
-            filter: grayscale(0%) contrast(1.2);
+        .member-card:hover .member-image {
+            filter: grayscale(0%);
+            transform: scale(1.05);
         }
 
         .member-info {
-            padding: 15px;
-            background: linear-gradient(to top, var(--accent-color), black);
             position: absolute;
-            bottom: -50px; /* Oculto parcialmente */
+            bottom: 0;
+            left: 0;
             width: 100%;
-            transition: 0.3s;
+            padding: var(--space-md);
+            background: linear-gradient(to top, rgba(10, 10, 10, 0.95) 0%, transparent 100%);
+            transform: translateY(100%);
+            transition: transform var(--transition-base);
         }
 
         .member-card:hover .member-info {
-            bottom: 0; /* Sube al hacer hover */
+            transform: translateY(0);
         }
 
-        /* --- TOUR (TABLA ESTILO INDUSTRIAL) --- */
-        .tour-table {
+        .member-name {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            letter-spacing: 2px;
+            margin-bottom: var(--space-xs);
+        }
+
+        .member-role {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--accent-red);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* ========================================
+           GALERÍA DE FOTOS
+           ======================================== */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-auto-rows: 250px;
+            gap: var(--space-sm);
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .gallery-item:nth-child(1) {
+            grid-column: span 2;
+            grid-row: span 2;
+        }
+
+        .gallery-item img {
             width: 100%;
-            border-collapse: collapse;
-            background: #111;
+            height: 100%;
+            object-fit: cover;
+            transition: transform var(--transition-slow);
         }
 
-        .tour-row {
-            border-bottom: 1px solid #333;
-            transition: 0.2s;
+        .gallery-item:hover img {
+            transform: scale(1.1);
         }
 
-        .tour-row:hover {
-            background: var(--accent-color);
-            color: white;
-            font-weight: bold;
+        .gallery-item::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--accent-red-glow);
+            opacity: 0;
+            transition: opacity var(--transition-base);
         }
 
-        .tour-cell {
-            padding: 20px;
-            text-align: left;
+        .gallery-item:hover::after {
+            opacity: 0.3;
         }
 
-        .date-box {
-            background: white;
-            color: black;
-            padding: 5px 10px;
-            font-family: var(--font-head);
-            font-weight: bold;
-            display: inline-block;
-            transform: skew(-10deg);
+        /* ========================================
+           TOUR
+           ======================================== */
+        .tour-list {
+            max-width: 900px;
+            margin: 0 auto;
         }
 
-        /* --- FOOTER --- */
-        footer {
-            background: black;
-            border-top: 5px solid var(--accent-color);
+        .tour-item {
+            display: grid;
+            grid-template-columns: 120px 1fr auto;
+            gap: var(--space-md);
+            align-items: center;
+            padding: var(--space-md) 0;
+            border-bottom: 1px solid var(--border-subtle);
+            transition: all var(--transition-base);
+        }
+
+        .tour-item:hover {
+            padding-left: var(--space-sm);
+            border-color: var(--accent-red);
+        }
+
+        .tour-date {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            color: var(--text-primary);
+        }
+
+        .tour-venue {
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        .tour-location {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-top: var(--space-xs);
+        }
+
+        .tour-status {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: var(--space-xs) var(--space-sm);
+            border: 1px solid;
+        }
+
+        .tour-status.available {
+            color: var(--text-primary);
+            border-color: var(--text-primary);
+        }
+
+        .tour-status.sold-out {
+            color: var(--accent-red);
+            border-color: var(--accent-red);
+        }
+
+        /* ========================================
+           MULTIMEDIA
+           ======================================== */
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* ========================================
+           NEWSLETTER
+           ======================================== */
+        .newsletter {
+            background: var(--bg-secondary);
+            padding: var(--space-xl) var(--space-md);
             text-align: center;
-            padding: 50px;
-            margin-top: 50px;
         }
 
-        /* --- RESPONSIVE --- */
+        .newsletter-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .newsletter-form {
+            display: flex;
+            gap: var(--space-sm);
+            margin-top: var(--space-md);
+        }
+
+        .newsletter-input {
+            flex: 1;
+            padding: var(--space-sm) var(--space-md);
+            background: var(--bg-primary);
+            border: 1px solid var(--border-medium);
+            color: var(--text-primary);
+            font-family: var(--font-body);
+            font-size: 0.9rem;
+            outline: none;
+            transition: border-color var(--transition-fast);
+        }
+
+        .newsletter-input:focus {
+            border-color: var(--accent-red);
+        }
+
+        .newsletter-input::placeholder {
+            color: var(--text-muted);
+        }
+
+        /* ========================================
+           FOOTER
+           ======================================== */
+        .footer {
+            padding: var(--space-lg) var(--space-md);
+            border-top: 1px solid var(--border-subtle);
+        }
+
+        .footer-content {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: var(--space-lg);
+        }
+
+        .footer-brand h3 {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            letter-spacing: 2px;
+            margin-bottom: var(--space-sm);
+        }
+
+        .footer-brand p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            max-width: 300px;
+        }
+
+        .footer-column h4 {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: var(--space-sm);
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column li {
+            margin-bottom: var(--space-xs);
+        }
+
+        .footer-column a {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            transition: color var(--transition-fast);
+        }
+
+        .footer-column a:hover {
+            color: var(--text-primary);
+        }
+
+        .footer-social {
+            display: flex;
+            gap: var(--space-sm);
+            margin-top: var(--space-sm);
+        }
+
+        .footer-social a {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 1px solid var(--border-medium);
+            transition: all var(--transition-fast);
+        }
+
+        .footer-social a:hover {
+            border-color: var(--accent-red);
+            background: var(--accent-red);
+        }
+
+        .footer-social svg {
+            width: 18px;
+            height: 18px;
+            fill: currentColor;
+        }
+
+        .footer-bottom {
+            max-width: var(--max-width);
+            margin: var(--space-lg) auto 0;
+            padding-top: var(--space-md);
+            border-top: 1px solid var(--border-subtle);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        /* ========================================
+           RESPONSIVE DESIGN
+           ======================================== */
+        @media (max-width: 1024px) {
+            .bio-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .members-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
         @media (max-width: 768px) {
-            .hero h1 { font-size: 3rem; }
-            .nav-links a { display: block; margin: 10px 0; }
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 70%;
+                height: 100vh;
+                background: var(--bg-primary);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                transition: right var(--transition-base);
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .nav-toggle {
+                display: flex;
+                z-index: 1001;
+            }
+
+            .tour-item {
+                grid-template-columns: 1fr;
+                gap: var(--space-sm);
+            }
+
+            .tour-status {
+                justify-self: start;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .footer-brand p {
+                margin: 0 auto;
+            }
+
+            .footer-social {
+                justify-content: center;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: var(--space-sm);
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title {
+                letter-spacing: 4px;
+            }
+
+            .hero-cta {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .btn {
+                width: 100%;
+            }
+
+            .members-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+                grid-auto-rows: 200px;
+            }
+
+            .gallery-item:nth-child(1) {
+                grid-column: span 1;
+                grid-row: span 1;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Preloader -->
+    <div class="preloader" id="preloader">
+        <div class="preloader-logo">ABISMO</div>
+    </div>
 
-    <nav>
-        <div class="nav-links">
-            <a href="#bio">EL ORIGEN</a>
-            <a href="#members">LA LEGIÓN</a>
-            <a href="#media">MEDIA</a>
-            <a href="#tour">GIRA INFERNAL</a>
-        </div>
+    <!-- Navegación -->
+    <nav class="navbar" id="navbar">
+        <a href="#" class="nav-logo">ABISMO <span>DE ACERO</span></a>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#bio">Origen</a></li>
+            <li><a href="#discography">Discografía</a></li>
+            <li><a href="#members">Legión</a></li>
+            <li><a href="#gallery">Galería</a></li>
+            <li><a href="#tour">Tour</a></li>
+            <li><a href="#media">Media</a></li>
+        </ul>
+        <button class="nav-toggle" id="navToggle" aria-label="Abrir menú">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
     </nav>
 
-    <header class="hero">
-        <h1>ABISMO<br>DE ACERO</h1>
-        <p style="font-size: 1.2rem; color: #aaa; margin-bottom: 30px;">HEAVY METAL - TRASH - DOOM</p>
-        <a href="#tour" class="btn-metal">VER FECHAS</a>
-    </header>
+    <main>
+        <!-- Hero -->
+        <header class="hero" id="hero">
+            <video class="hero-video" autoplay muted loop playsinline>
+                <source src="https://videos.pexels.com/video-files/29686188/29686188-uhd_2560_1440_30fps.mp4" type="video/mp4">
+            </video>
+            <div class="hero-overlay"></div>
+            <div class="hero-content">
+                <h1 class="hero-title">ABISMO<br>DE ACERO</h1>
+                <p class="hero-subtitle">Heavy Metal • Trash • Doom</p>
+                <div class="hero-cta">
+                    <a href="#tour" class="btn btn-primary">Ver Fechas</a>
+                    <a href="#discography" class="btn btn-secondary">Escuchar Ahora</a>
+                </div>
+            </div>
+            <div class="scroll-indicator">
+                <span>Scroll</span>
+                <svg viewBox="0 0 24 24">
+                    <path d="M12 5v14M5 12l7 7 7-7"/>
+                </svg>
+            </div>
+        </header>
 
-    <section id="bio">
-        <h2 class="section-title">BIOGRAFÍA</h2>
-        <div class="bio-container">
-            <p>Surgidos de las profundidades industriales en 2023, <strong>Abismo de Acero</strong> combina riffs demoledores con atmósferas opresivas. No tocamos música, forjamos metal.</p>
-            <p style="margin-top:20px;">Nuestras letras exploran la decadencia humana, la guerra eterna y la oscuridad del alma. El volumen no es una opción, es una obligación.</p>
+        <!-- Biografía -->
+        <section class="section" id="bio">
+            <div class="section-header reveal">
+                <p class="section-subtitle">Nuestra Historia</p>
+                <h2 class="section-title">EL ORIGEN</h2>
+                <div class="section-divider"></div>
+            </div>
+            <div class="bio-grid">
+                <div class="bio-image reveal">
+                    <img src="https://images.unsplash.com/photo-1498038432885-c6f3f1b912ee?w=800&auto=format&fit=crop&q=80" alt="ABISMO DE ACERO en concierto">
+                </div>
+                <div class="bio-content reveal">
+                    <h3>FORJADOS EN EL FUEGO</h3>
+                    <p>Surgidos de las profundidades industriales en 2023, ABISMO DE ACERO combina riffs demoledores con atmósferas opresivas. No tocamos música, forjamos metal.</p>
+                    <p>Nuestras letras exploran la decadencia humana, la guerra eterna y la oscuridad del alma. El volumen no es una opción, es una obligación.</p>
+                    <p class="bio-quote">"No musica, fuego puro"</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Discografía -->
+        <section class="section" id="discography">
+            <div class="section-header reveal">
+                <p class="section-subtitle">Nuestros Lanzamientos</p>
+                <h2 class="section-title">DISCOGRAFÍA</h2>
+                <div class="section-divider"></div>
+            </div>
+            <div class="discography-grid">
+                <div class="album-card reveal">
+                    <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=600&auto=format&fit=crop&q=80" alt="Forjados en Fuego" class="album-cover">
+                    <div class="album-overlay">
+                        <h3 class="album-title">FORJADOS EN FUEGO</h3>
+                        <p class="album-year">2024 • Álbum</p>
+                        <div class="album-links">
+                            <a href="#">Spotify</a>
+                            <a href="#">Apple Music</a>
+                            <a href="#">Bandcamp</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="album-card reveal">
+                    <img src="https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=600&auto=format&fit=crop&q=80" alt="Hierro y Sangre" class="album-cover">
+                    <div class="album-overlay">
+                        <h3 class="album-title">HIERRO Y SANGRE</h3>
+                        <p class="album-year">2023 • EP</p>
+                        <div class="album-links">
+                            <a href="#">Spotify</a>
+                            <a href="#">Apple Music</a>
+                            <a href="#">Bandcamp</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="album-card reveal">
+                    <img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=600&auto=format&fit=crop&q=80" alt="Oscuridad Eterna" class="album-cover">
+                    <div class="album-overlay">
+                        <h3 class="album-title">OSCURIDAD ETERNA</h3>
+                        <p class="album-year">2023 • Single</p>
+                        <div class="album-links">
+                            <a href="#">Spotify</a>
+                            <a href="#">Apple Music</a>
+                            <a href="#">YouTube</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Miembros -->
+        <section class="section" id="members">
+            <div class="section-header reveal">
+                <p class="section-subtitle">Los Guerreros</p>
+                <h2 class="section-title">LA LEGIÓN</h2>
+                <div class="section-divider"></div>
+            </div>
+            <div class="members-grid">
+                <div class="member-card reveal">
+                    <img src="https://images.unsplash.com/photo-1516280440614-37939bbacd81?w=500&auto=format&fit=crop&q=80" alt="Drako" class="member-image">
+                    <div class="member-info">
+                        <h3 class="member-name">DRAKO</h3>
+                        <p class="member-role">Voz • Gritos</p>
+                    </div>
+                </div>
+                <div class="member-card reveal">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&auto=format&fit=crop&q=80" alt="Viktor" class="member-image">
+                    <div class="member-info">
+                        <h3 class="member-name">VIKTOR</h3>
+                        <p class="member-role">Guitarra Líder</p>
+                    </div>
+                </div>
+                <div class="member-card reveal">
+                    <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=500&auto=format&fit=crop&q=80" alt="Rex" class="member-image">
+                    <div class="member-info">
+                        <h3 class="member-name">REX</h3>
+                        <p class="member-role">Bajo • Trueno</p>
+                    </div>
+                </div>
+                <div class="member-card reveal">
+                    <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=500&auto=format&fit=crop&q=80" alt="Thor" class="member-image">
+                    <div class="member-info">
+                        <h3 class="member-name">THOR</h3>
+                        <p class="member-role">Percusión</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Galería de Fotos -->
+        <section class="section" id="gallery">
+            <div class="section-header reveal">
+                <p class="section-subtitle">Momentos</p>
+                <h2 class="section-title">GALERÍA</h2>
+                <div class="section-divider"></div>
+            </div>
+            <div class="gallery-grid">
+                <div class="gallery-item reveal">
+                    <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=800&auto=format&fit=crop&q=80" alt="Concierto en vivo">
+                </div>
+                <div class="gallery-item reveal">
+                    <img src="https://images.unsplash.com/photo-1501386761578-eac5c94b800a?w=500&auto=format&fit=crop&q=80" alt="Público en concierto">
+                </div>
+                <div class="gallery-item reveal">
+                    <img src="https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?w=500&auto=format&fit=crop&q=80" alt="Escenario">
+                </div>
+                <div class="gallery-item reveal">
+                    <img src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=500&auto=format&fit=crop&q=80" alt="Luces de concierto">
+                </div>
+                <div class="gallery-item reveal">
+                    <img src="https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=500&auto=format&fit=crop&q=80" alt="Guitarra eléctrica">
+                </div>
+            </div>
+        </section>
+
+        <!-- Tour -->
+        <section class="section" id="tour">
+            <div class="section-header reveal">
+                <p class="section-subtitle">Gira 2026</p>
+                <h2 class="section-title">FECHAS</h2>
+                <div class="section-divider"></div>
+            </div>
+            <div class="tour-list">
+                <div class="tour-item reveal">
+                    <div class="tour-date">OCT 31</div>
+                    <div>
+                        <div class="tour-venue">FESTIVAL METAL HELL</div>
+                        <div class="tour-location">Ciudad de México, México</div>
+                    </div>
+                    <span class="tour-status sold-out">Sold Out</span>
+                </div>
+                <div class="tour-item reveal">
+                    <div class="tour-date">NOV 15</div>
+                    <div>
+                        <div class="tour-venue">ARENA OBSCURA</div>
+                        <div class="tour-location">Bogotá, Colombia</div>
+                    </div>
+                    <a href="#" class="tour-status available">Tickets</a>
+                </div>
+                <div class="tour-item reveal">
+                    <div class="tour-date">DIC 01</div>
+                    <div>
+                        <div class="tour-venue">CLUB SATANÁS</div>
+                        <div class="tour-location">Buenos Aires, Argentina</div>
+                    </div>
+                    <a href="#" class="tour-status available">Tickets</a>
+                </div>
+                <div class="tour-item reveal">
+                    <div class="tour-date">DIC 20</div>
+                    <div>
+                        <div class="tour-venue">FORO INFERNO</div>
+                        <div class="tour-location">Guadalajara, México</div>
+                    </div>
+                    <a href="#" class="tour-status available">Tickets</a>
+                </div>
+                <div class="tour-item reveal">
+                    <div class="tour-date">ENE 15</div>
+                    <div>
+                        <div class="tour-venue">CENTRO DE CONVENCIONES</div>
+                        <div class="tour-location">Monterrey, México</div>
+                    </div>
+                    <a href="#" class="tour-status available">Tickets</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Multimedia -->
+        <section class="section" id="media">
+            <div class="section-header reveal">
+                <p class="section-subtitle">En Vivo</p>
+                <h2 class="section-title">MULTIMEDIA</h2>
+                <div class="section-divider"></div>
+            </div>
+            <div class="video-container reveal">
+                <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="ABISMO DE ACERO - En Vivo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        </section>
+    </main>
+
+    <!-- Newsletter -->
+    <section class="newsletter">
+        <div class="newsletter-content reveal">
+            <h2 class="section-title">ÚNETE A LA LEGIÓN</h2>
+            <p style="color: var(--text-secondary); margin-top: var(--space-sm);">Recibe actualizaciones exclusivas, fechas de tour y contenido premium.</p>
+            <form class="newsletter-form" onsubmit="event.preventDefault(); alert('¡Gracias por suscribirte!');">
+                <input type="email" class="newsletter-input" placeholder="Tu email" required aria-label="Correo electrónico">
+                <button type="submit" class="btn btn-primary">Suscribir</button>
+            </form>
         </div>
     </section>
 
-    <section id="members">
-        <h2 class="section-title">LA LEGIÓN</h2>
-        <div class="members-grid">
-            <div class="member-card">
-                <img src="https://placehold.co/400x600/111/fff?text=VOCAL" alt="Vocal">
-                <div class="member-info">
-                    <h3>DRAKO</h3>
-                    <span>GRITOS & CAOS</span>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h3>ABISMO <span style="color: var(--accent-red);">DE ACERO</span></h3>
+                <p>Forjados en el fuego. Forjados para la eternidad.</p>
+                <div class="footer-social">
+                    <a href="#" aria-label="Facebook">
+                        <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                    </a>
+                    <a href="#" aria-label="Instagram">
+                        <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                    </a>
+                    <a href="#" aria-label="YouTube">
+                        <svg viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/></svg>
+                    </a>
+                    <a href="#" aria-label="Spotify">
+                        <svg viewBox="0 0 24 24"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
+                    </a>
                 </div>
             </div>
-            <div class="member-card">
-                <img src="https://placehold.co/400x600/222/fff?text=GUITARRA" alt="Guitarra">
-                <div class="member-info">
-                    <h3>VIKTOR</h3>
-                    <span>GUITARRA LÍDER</span>
-                </div>
+            <div class="footer-column">
+                <h4>Navegación</h4>
+                <ul>
+                    <li><a href="#bio">Origen</a></li>
+                    <li><a href="#discography">Discografía</a></li>
+                    <li><a href="#members">La Legión</a></li>
+                    <li><a href="#tour">Tour</a></li>
+                </ul>
             </div>
-            <div class="member-card">
-                <img src="https://placehold.co/400x600/333/fff?text=BAJO" alt="Bajo">
-                <div class="member-info">
-                    <h3>REX</h3>
-                    <span>BAJO & TRUENO</span>
-                </div>
+            <div class="footer-column">
+                <h4>Música</h4>
+                <ul>
+                    <li><a href="#">Spotify</a></li>
+                    <li><a href="#">Apple Music</a></li>
+                    <li><a href="#">Bandcamp</a></li>
+                    <li><a href="#">YouTube Music</a></li>
+                </ul>
             </div>
-            <div class="member-card">
-                <img src="https://placehold.co/400x600/444/fff?text=BATERIA" alt="Bateria">
-                <div class="member-info">
-                    <h3>THOR</h3>
-                    <span>PERCUSIÓN</span>
-                </div>
+            <div class="footer-column">
+                <h4>Contacto</h4>
+                <ul>
+                    <li><a href="#">Booking</a></li>
+                    <li><a href="#">Prensa</a></li>
+                    <li><a href="#">Merch</a></li>
+                    <li><a href="#">Legal</a></li>
+                </ul>
             </div>
         </div>
-    </section>
-
-    <section id="media">
-        <h2 class="section-title">MULTIMEDIA</h2>
-        <!-- Video Container Estilo TV Vieja -->
-        <div style="border: 10px solid #333; box-shadow: 0 0 20px black;">
-            <div style="position: relative; padding-bottom: 56.25%; height: 0;">
-                <iframe style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/dQw4w9WgXcQ?si=muted=1" frameborder="0" allowfullscreen></iframe>
-            </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 ABISMO DE ACERO. Todos los derechos reservados.</p>
+            <p>Forjados con metal y fuego.</p>
         </div>
-    </section>
-
-    <section id="tour">
-        <h2 class="section-title">GIRA INFERNAL 2025</h2>
-        <table class="tour-table">
-            <tr class="tour-row">
-                <td class="tour-cell"><span class="date-box">OCT 31</span></td>
-                <td class="tour-cell">FESTIVAL METAL HELL</td>
-                <td class="tour-cell">CDMX</td>
-                <td class="tour-cell" style="text-align:right; color:red;">SOLD OUT</td>
-            </tr>
-            <tr class="tour-row">
-                <td class="tour-cell"><span class="date-box">NOV 15</span></td>
-                <td class="tour-cell">ARENA OBSCURA</td>
-                <td class="tour-cell">BOGOTÁ</td>
-                <td class="tour-cell" style="text-align:right;">TICKETS</td>
-            </tr>
-            <tr class="tour-row">
-                <td class="tour-cell"><span class="date-box">DIC 01</span></td>
-                <td class="tour-cell">CLUB SATANÁS</td>
-                <td class="tour-cell">BUENOS AIRES</td>
-                <td class="tour-cell" style="text-align:right;">TICKETS</td>
-            </tr>
-        </table>
-    </section>
-
-    <footer>
-        <h2 style="font-size: 2rem;">ABISMO DE ACERO</h2>
-        <p>SIGUE LA OSCURIDAD</p>
-        <div style="margin-top: 20px; font-size: 1.5rem;">
-            <!-- Simulación de íconos sociales -->
-            <span style="margin: 0 10px; cursor:pointer;">FB</span>
-            <span style="margin: 0 10px; cursor:pointer;">IG</span>
-            <span style="margin: 0 10px; cursor:pointer;">YT</span>
-        </div>
-        <p style="font-size: 0.8rem; margin-top: 30px; opacity: 0.5;">&copy; 2025 ABISMO DE ACERO. TODOS LOS DERECHOS RESERVADOS.</p>
     </footer>
 
+    <!-- JavaScript -->
+    <script>
+        // Preloader
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('preloader').classList.add('hidden');
+            }, 1000);
+        });
+
+        // Navbar scroll behavior
+        const navbar = document.getElementById('navbar');
+        let lastScroll = 0;
+
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            
+            if (currentScroll > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+            
+            lastScroll = currentScroll;
+        });
+
+        // Mobile menu toggle
+        const navToggle = document.getElementById('navToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        navToggle.addEventListener('click', () => {
+            navToggle.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking a link
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navToggle.classList.remove('active');
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Scroll reveal animation
+        const revealElements = document.querySelectorAll('.reveal');
+
+        const revealOnScroll = () => {
+            revealElements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (elementTop < windowHeight - 100) {
+                    element.classList.add('active');
+                }
+            });
+        };
+
+        window.addEventListener('scroll', revealOnScroll);
+        window.addEventListener('load', revealOnScroll);
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
 </body>
 </html>
