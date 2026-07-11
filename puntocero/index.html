@@ -3,231 +3,1408 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PUNTO CERO | Cinema & Streaming</title>
+    <meta name="description" content="PUNTO CERO - Tu experiencia cinematográfica definitiva. Cartelera, streaming y crítica de cine.">
+    <title>PUNTO CERO — Cinema Experience</title>
     
-    <!-- Fuentes -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;500;700&display=swap" rel="stylesheet">
-    <!-- Iconos -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:wght@400;600;700&family=Space+Mono:wght@400;700&family=Playfair+Display:wght@400;700;900&display=swap" rel="stylesheet">
+    
     <style>
         :root {
             --bg: #050505;
+            --bg-light: #0a0a0a;
             --text: #ffffff;
-            --accent: #e50914;
-            --gold: #f5c518;
+            --text-muted: #666666;
+            --accent: #c41e3a;
+            --gold: #d4af37;
+            --gold-dim: #8b7355;
+            --film-grey: #1a1a1a;
+            --letterbox: #000000;
+            --font-display: 'Bebas Neue', sans-serif;
+            --font-serif: 'Cormorant Garamond', serif;
+            --font-mono: 'Space Mono', monospace;
+            --font-elegant: 'Playfair Display', serif;
         }
 
-        body { margin: 0; padding: 0; background-color: var(--bg); color: var(--text); font-family: 'Montserrat', sans-serif; overflow-x: hidden; }
-        a { text-decoration: none; color: white; transition: 0.3s; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
 
-        /* --- NAV --- */
-        nav {
-            position: fixed; top: 0; width: 100%; padding: 20px 5%;
-            display: flex; justify-content: space-between; align-items: center;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.9), transparent);
-            z-index: 1000;
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: var(--font-serif);
+            overflow-x: hidden;
+            line-height: 1.6;
         }
-        .logo { font-family: 'Bebas Neue', sans-serif; font-size: 2.5rem; letter-spacing: 2px; }
-        .logo span { color: var(--accent); }
-        .menu-links a { margin-left: 30px; font-size: 0.9rem; text-transform: uppercase; font-weight: 700; opacity: 0.8; }
-        .menu-links a:hover { opacity: 1; color: var(--accent); }
 
-        /* --- HERO CON VIDEO YOUTUBE --- */
-        .hero {
-            height: 100vh;
-            width: 100%;
-            position: relative;
+        /* ============ FILM GRAIN OVERLAY ============ */
+        body::before {
+            content: "";
+            position: fixed;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='grain'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23grain)' opacity='0.08'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 9999;
+            animation: grainShift 0.5s steps(1) infinite;
+        }
+
+        @keyframes grainShift {
+            0%, 100% { transform: translate(0, 0); }
+            25% { transform: translate(-2%, 2%); }
+            50% { transform: translate(2%, -2%); }
+            75% { transform: translate(-1%, -1%); }
+        }
+
+        /* ============ LETTERBOX BARS ============ */
+        .letterbox-top, .letterbox-bottom {
+            position: fixed;
+            left: 0; width: 100%;
+            height: 8vh;
+            background: var(--letterbox);
+            z-index: 9998;
+        }
+
+        .letterbox-top { top: 0; }
+        .letterbox-bottom { bottom: 0; }
+
+        /* ============ FILM COUNTDOWN ============ */
+        .countdown {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: var(--bg);
             display: flex;
+            justify-content: center;
             align-items: center;
-            overflow: hidden; /* Importante para cortar el video sobrante */
+            z-index: 10000;
+            transition: opacity 0.5s, visibility 0.5s;
         }
 
-        /* Contenedor del Video */
-        .video-background {
+        .countdown.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .countdown-inner {
+            position: relative;
+            width: 300px;
+            height: 300px;
+        }
+
+        .countdown-circle {
+            width: 100%;
+            height: 100%;
+            border: 3px solid var(--film-grey);
+            border-radius: 50%;
+            position: relative;
+        }
+
+        .countdown-circle::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            border: 3px solid var(--accent);
+            border-radius: 50%;
+            clip-path: polygon(50% 50%, 50% 0%, 100% 0%, 100% 100%, 0% 100%, 0% 0%, 50% 0%);
+            animation: countdownWipe 3s linear forwards;
+        }
+
+        @keyframes countdownWipe {
+            from { clip-path: polygon(50% 50%, 50% 0%, 50% 0%, 50% 0%, 50% 0%, 50% 0%, 50% 0%); }
+            to { clip-path: polygon(50% 50%, 50% 0%, 100% 0%, 100% 100%, 0% 100%, 0% 0%, 50% 0%); }
+        }
+
+        .countdown-number {
             position: absolute;
             top: 50%; left: 50%;
             transform: translate(-50%, -50%);
-            min-width: 100%; min-height: 100%;
-            width: 177.77777778vh; /* 16:9 aspect ratio */
-            height: 56.25vw;
-            z-index: 0;
-            pointer-events: none; /* Evita que le den clic al video */
+            font-family: var(--font-display);
+            font-size: 8rem;
+            color: var(--text);
+            animation: countPulse 1s infinite;
         }
 
-        .video-background iframe {
-            width: 100%; height: 100%;
-            opacity: 0.6; /* Un poco transparente para que no brille tanto */
+        @keyframes countPulse {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); }
+            50% { transform: translate(-50%, -50%) scale(1.1); }
         }
 
-        /* Capa oscura para que el texto se lea */
-        .hero-overlay {
+        .countdown-lines {
             position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle, transparent 20%, #050505 90%);
-            z-index: 1;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+        }
+
+        .countdown-lines::before, .countdown-lines::after {
+            content: '';
+            position: absolute;
+            background: var(--film-grey);
+        }
+
+        .countdown-lines::before {
+            top: 50%; left: 0;
+            width: 100%; height: 1px;
+        }
+
+        .countdown-lines::after {
+            top: 0; left: 50%;
+            width: 1px; height: 100%;
+        }
+
+        .countdown-text {
+            position: absolute;
+            bottom: -60px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            letter-spacing: 4px;
+            white-space: nowrap;
+        }
+
+        /* ============ PROJECTOR FLICKER ============ */
+        .projector-flicker {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: white;
+            pointer-events: none;
+            z-index: 9997;
+            opacity: 0;
+            animation: projectorFlicker 8s infinite;
+        }
+
+        @keyframes projectorFlicker {
+            0%, 92%, 94%, 96%, 98%, 100% { opacity: 0; }
+            93% { opacity: 0.02; }
+            95% { opacity: 0.01; }
+            97% { opacity: 0.03; }
+        }
+
+        /* ============ NAV ============ */
+        nav {
+            position: fixed;
+            top: 8vh; left: 0;
+            width: 100%;
+            padding: 1.5rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background: linear-gradient(to bottom, rgba(5, 5, 5, 0.95), transparent);
+            transition: background 0.3s;
+        }
+
+        nav.scrolled {
+            background: rgba(5, 5, 5, 0.98);
+            backdrop-filter: blur(10px);
+        }
+
+        .logo {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            letter-spacing: 4px;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px; left: 0;
+            width: 0; height: 1px;
+            background: var(--accent);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--text);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a.active {
+            color: var(--accent);
+        }
+
+        .nav-search {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+        }
+
+        .nav-search span {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            letter-spacing: 2px;
+        }
+
+        .search-icon {
+            width: 20px;
+            height: 20px;
+            border: 1px solid var(--text-muted);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: border-color 0.3s;
+        }
+
+        .search-icon:hover {
+            border-color: var(--text);
+        }
+
+        .search-icon::after {
+            content: '';
+            width: 6px; height: 6px;
+            border: 1px solid var(--text-muted);
+            border-radius: 50%;
+        }
+
+        /* ============ HERO ============ */
+        .hero {
+            height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: flex-end;
+            padding: 0 5% 12vh;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: 
+                linear-gradient(to bottom, transparent 40%, var(--bg) 100%),
+                linear-gradient(to right, rgba(5, 5, 5, 0.8), transparent 50%),
+                url('https://images.unsplash.com/photo-1544253303-34e8f664a7c1?w=1920&auto=format&fit=crop&q=80');
+            background-size: cover;
+            background-position: center;
+            filter: saturate(0.7) contrast(1.1);
         }
 
         .hero-content {
             position: relative;
-            z-index: 2; /* Encima del video */
-            padding-left: 5%;
+            z-index: 10;
             max-width: 700px;
-            margin-top: 50px;
         }
 
-        .tag-hero { background: rgba(255,255,255,0.2); padding: 5px 10px; font-size: 0.8rem; font-weight: bold; border-radius: 4px; backdrop-filter: blur(5px); }
-        
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            color: var(--gold);
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--gold-dim);
+        }
+
+        .hero-badge::before {
+            content: '▶';
+            font-size: 0.6rem;
+        }
+
         .hero-title {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 6rem; /* Título gigante */
+            font-family: var(--font-elegant);
+            font-size: clamp(4rem, 10vw, 8rem);
+            font-weight: 900;
             line-height: 0.9;
-            margin: 20px 0;
-            text-shadow: 0 0 20px rgba(0,0,0,0.8);
+            margin-bottom: 1.5rem;
+            text-shadow: 0 0 60px rgba(0, 0, 0, 0.8);
         }
 
-        .hero-meta { display: flex; gap: 20px; margin-bottom: 20px; font-size: 1rem; color: #ddd; font-weight: bold; text-shadow: 0 2px 4px black; }
-        .rating { color: var(--gold); }
-
-        .desc {
-            font-size: 1.1rem; line-height: 1.6; margin-bottom: 30px;
-            text-shadow: 0 2px 4px black; max-width: 600px;
+        .hero-title span {
+            display: block;
+            font-weight: 400;
+            font-size: 0.4em;
+            color: var(--gold);
+            letter-spacing: 8px;
         }
 
-        .btn-play {
-            background: var(--accent); color: white; padding: 15px 40px;
-            font-weight: bold; border-radius: 4px; display: inline-flex; align-items: center; gap: 10px; font-size: 1.1rem;
+        .hero-meta {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--text-muted);
         }
-        .btn-play:hover { transform: scale(1.05); background: #f40612; }
 
-        /* --- RESTO DEL SITIO --- */
-        .section-title { padding: 0 5%; margin-top: 50px; font-family: 'Bebas Neue', sans-serif; font-size: 2rem; letter-spacing: 1px; border-left: 4px solid var(--accent); padding-left: 15px; margin-left: 5%; }
-        
-        .movie-slider { display: flex; overflow-x: auto; gap: 20px; padding: 20px 5%; padding-bottom: 40px; }
-        .movie-slider::-webkit-scrollbar { height: 8px; }
-        .movie-slider::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
-        
-        .movie-card { min-width: 200px; position: relative; transition: 0.3s; cursor: pointer; }
-        .movie-card:hover { transform: scale(1.05); z-index: 10; }
-        .poster { width: 100%; height: 300px; object-fit: cover; border-radius: 8px; }
-        .card-title { font-weight: bold; font-size: 1rem; display: block; margin-top: 10px;}
-        .card-year { font-size: 0.8rem; color: #888; }
+        .hero-meta .rating {
+            color: var(--gold);
+        }
 
-        /* Reviews */
-        .reviews-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; padding: 20px 5%; margin-bottom: 80px; }
-        .review-item { background: #111; border: 1px solid #222; padding: 25px; border-radius: 8px; transition: 0.3s; }
-        .review-item:hover { border-color: var(--accent); }
-        .review-movie { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; letter-spacing: 1px; }
-        .user-rating i { color: var(--gold); font-size: 0.8rem; }
-        .review-text { font-size: 0.95rem; color: #bbb; line-height: 1.6; margin: 15px 0; }
-        
-        footer { text-align: center; padding: 50px; border-top: 1px solid #222; color: #555; font-size: 0.8rem; }
+        .hero-meta .divider {
+            color: var(--film-grey);
+        }
+
+        .hero-desc {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 2rem;
+            max-width: 550px;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-cinema {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            padding: 1rem 2rem;
+            border: none;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .btn-cinema.primary {
+            background: var(--accent);
+            color: white;
+        }
+
+        .btn-cinema.primary:hover {
+            background: #d42040;
+            transform: scale(1.02);
+        }
+
+        .btn-cinema.secondary {
+            background: transparent;
+            color: var(--text);
+            border: 1px solid var(--text-muted);
+        }
+
+        .btn-cinema.secondary:hover {
+            border-color: var(--text);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .hero-progress {
+            position: absolute;
+            bottom: 12vh; right: 5%;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            z-index: 10;
+        }
+
+        .progress-dot {
+            width: 8px; height: 8px;
+            border: 1px solid var(--text-muted);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .progress-dot.active {
+            background: var(--accent);
+            border-color: var(--accent);
+        }
+
+        /* ============ SECTIONS ============ */
+        section {
+            padding: 6rem 5%;
+            position: relative;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 3rem;
+        }
+
+        .section-label {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-title {
+            font-family: var(--font-elegant);
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
+        }
+
+        .section-link {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--accent);
+            text-decoration: none;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: color 0.3s;
+        }
+
+        .section-link:hover {
+            color: var(--text);
+        }
+
+        /* ============ MOVIE SLIDER ============ */
+        .slider-container {
+            position: relative;
+        }
+
+        .movie-slider {
+            display: flex;
+            gap: 1.5rem;
+            overflow-x: auto;
+            padding-bottom: 2rem;
+            scroll-snap-type: x mandatory;
+            scrollbar-width: thin;
+            scrollbar-color: var(--film-grey) transparent;
+        }
+
+        .movie-slider::-webkit-scrollbar {
+            height: 4px;
+        }
+
+        .movie-slider::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .movie-slider::-webkit-scrollbar-thumb {
+            background: var(--film-grey);
+            border-radius: 2px;
+        }
+
+        .movie-card {
+            min-width: 280px;
+            position: relative;
+            cursor: pointer;
+            scroll-snap-align: start;
+            transition: transform 0.4s;
+        }
+
+        .movie-card:hover {
+            transform: scale(1.05);
+        }
+
+        .movie-poster {
+            position: relative;
+            overflow: hidden;
+            border-radius: 4px;
+        }
+
+        .movie-poster img {
+            width: 100%;
+            height: 420px;
+            object-fit: cover;
+            transition: filter 0.4s;
+        }
+
+        .movie-card:hover .movie-poster img {
+            filter: brightness(1.2);
+        }
+
+        .movie-poster::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0;
+            width: 100%; height: 50%;
+            background: linear-gradient(to top, rgba(5, 5, 5, 0.9), transparent);
+        }
+
+        .movie-rating {
+            position: absolute;
+            top: 1rem; right: 1rem;
+            background: var(--bg);
+            padding: 0.4rem 0.8rem;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--gold);
+            border: 1px solid var(--gold-dim);
+            z-index: 5;
+        }
+
+        .movie-info {
+            padding: 1rem 0;
+        }
+
+        .movie-title {
+            font-family: var(--font-elegant);
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+        }
+
+        .movie-year {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            color: var(--text-muted);
+        }
+
+        /* ============ FEATURED (HORIZONTAL) ============ */
+        .featured-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .featured-card {
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            aspect-ratio: 16/9;
+        }
+
+        .featured-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s;
+        }
+
+        .featured-card:hover img {
+            transform: scale(1.1);
+        }
+
+        .featured-overlay {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: linear-gradient(to top, rgba(5, 5, 5, 0.95), transparent 60%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 2rem;
+        }
+
+        .featured-badge {
+            font-family: var(--font-mono);
+            font-size: 0.65rem;
+            color: var(--accent);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        .featured-title {
+            font-family: var(--font-elegant);
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .featured-desc {
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.6;
+        }
+
+        /* ============ REVIEWS ============ */
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .review-card {
+            background: var(--bg-light);
+            border: 1px solid var(--film-grey);
+            padding: 2rem;
+            position: relative;
+            transition: all 0.3s;
+        }
+
+        .review-card::before {
+            content: '"';
+            position: absolute;
+            top: 1rem; left: 1.5rem;
+            font-family: var(--font-elegant);
+            font-size: 5rem;
+            color: var(--accent);
+            opacity: 0.2;
+            line-height: 1;
+        }
+
+        .review-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-5px);
+        }
+
+        .review-movie {
+            font-family: var(--font-display);
+            font-size: 1.8rem;
+            letter-spacing: 2px;
+            margin-bottom: 0.5rem;
+        }
+
+        .review-rating {
+            display: flex;
+            gap: 0.3rem;
+            margin-bottom: 1rem;
+        }
+
+        .star {
+            width: 14px; height: 14px;
+            background: var(--gold);
+            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+        }
+
+        .star.empty {
+            background: var(--film-grey);
+        }
+
+        .review-text {
+            font-size: 1.05rem;
+            font-style: italic;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .review-author {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        /* ============ SCHEDULE ============ */
+        .schedule-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+        }
+
+        .schedule-card {
+            background: var(--bg-light);
+            border: 1px solid var(--film-grey);
+            padding: 1.5rem;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .schedule-card:hover {
+            border-color: var(--gold);
+            background: rgba(212, 175, 55, 0.05);
+        }
+
+        .schedule-time {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            color: var(--gold);
+            margin-bottom: 0.5rem;
+        }
+
+        .schedule-title {
+            font-family: var(--font-elegant);
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+        }
+
+        .schedule-hall {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            letter-spacing: 2px;
+        }
+
+        /* ============ NEWSLETTER ============ */
+        .newsletter {
+            background: linear-gradient(135deg, var(--film-grey), var(--bg));
+            padding: 6rem 5%;
+            text-align: center;
+            border-top: 1px solid var(--film-grey);
+            border-bottom: 1px solid var(--film-grey);
+        }
+
+        .newsletter-title {
+            font-family: var(--font-elegant);
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .newsletter-desc {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+
+        .newsletter-form {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .newsletter-input {
+            flex: 1;
+            padding: 1rem 1.5rem;
+            background: var(--bg);
+            border: 1px solid var(--film-grey);
+            color: var(--text);
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .newsletter-input:focus {
+            border-color: var(--accent);
+        }
+
+        .newsletter-input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .newsletter-btn {
+            padding: 1rem 2rem;
+            background: var(--accent);
+            border: none;
+            color: white;
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .newsletter-btn:hover {
+            background: #d42040;
+        }
+
+        /* ============ FOOTER ============ */
+        footer {
+            padding: 4rem 5% 12vh;
+            border-top: 1px solid var(--film-grey);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-brand .logo {
+            margin-bottom: 1rem;
+        }
+
+        .footer-brand p {
+            font-size: 1rem;
+            color: var(--text-muted);
+            line-height: 1.8;
+        }
+
+        .footer-col h4 {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-col a {
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-col a:hover {
+            color: var(--text);
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 2rem;
+            border-top: 1px solid var(--film-grey);
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            color: var(--text-muted);
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .footer-social a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-social a:hover {
+            color: var(--text);
+        }
+
+        /* ============ MOBILE ============ */
+        @media (max-width: 1024px) {
+            .featured-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .reviews-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .schedule-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
 
         @media (max-width: 768px) {
-            .hero-title { font-size: 3.5rem; }
-            .menu-links { display: none; }
-            /* En móvil ocultamos el video para ahorrar datos y mostramos imagen */
-            .video-background { display: none; }
-            .hero { background: url('https://images.unsplash.com/photo-1544253303-34e8f664a7c1?q=80&w=1080') center/cover; }
+            .letterbox-top, .letterbox-bottom {
+                height: 5vh;
+            }
+
+            nav {
+                top: 5vh;
+                padding: 1rem 5%;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero {
+                padding-bottom: 8vh;
+            }
+
+            .hero-title {
+                font-size: 3.5rem;
+            }
+
+            .hero-meta {
+                flex-wrap: wrap;
+            }
+
+            .reviews-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .schedule-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+
+            .hero-progress {
+                display: none;
+            }
+        }
+
+        /* ============ ANIMATIONS ============ */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .slide-in {
+            opacity: 0;
+            transform: translateX(-30px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+
+        .slide-in.active {
+            opacity: 1;
+            transform: translateX(0);
         }
     </style>
 </head>
 <body>
+    <!-- Letterbox Bars -->
+    <div class="letterbox-top"></div>
+    <div class="letterbox-bottom"></div>
 
-    <nav>
+    <!-- Projector Flicker -->
+    <div class="projector-flicker"></div>
+
+    <!-- Film Countdown -->
+    <div class="countdown" id="countdown">
+        <div class="countdown-inner">
+            <div class="countdown-circle"></div>
+            <div class="countdown-number" id="countdownNumber">5</div>
+            <div class="countdown-lines"></div>
+            <div class="countdown-text">PUNTO CERO — PRESENTA</div>
+        </div>
+    </div>
+
+    <!-- Nav -->
+    <nav id="mainNav">
         <div class="logo">PUNTO<span>CERO</span></div>
-        <div class="menu-links">
-            <a href="#">Cartelera</a>
-            <a href="#">Streaming</a>
-            <a href="#">Reseñas</a>
-            <a href="#">Podcast</a>
+        <ul class="nav-links">
+            <li><a href="#cartelera" class="active">Cartelera</a></li>
+            <li><a href="#destacadas">Destacadas</a></li>
+            <li><a href="#critica">Crítica</a></li>
+            <li><a href="#horarios">Horarios</a></li>
+            <li><a href="#newsletter">Newsletter</a></li>
+        </ul>
+        <div class="nav-search">
+            <div class="search-icon"></div>
+            <span>Buscar</span>
         </div>
     </nav>
 
-    <!-- HERO CON VIDEO DE FONDO -->
-    <header class="hero">
-        
-        <!-- VIDEO YOUTUBE EMBED -->
-        <div class="video-background">
-            <!-- ID del video: Way9Dexny3w (Dune 2)
-                 Parámetros: autoplay, mute, loop, playlist (para que el loop funcione), controls=0 -->
-            <iframe 
-                src="https://www.youtube.com/embed/Way9Dexny3w?autoplay=1&mute=1&controls=0&loop=1&playlist=Way9Dexny3w&showinfo=0&rel=0&iv_load_policy=3&disablekb=1" 
-                frameborder="0" 
-                allow="autoplay; encrypted-media" 
-                allowfullscreen>
-            </iframe>
-        </div>
-
-        <div class="hero-overlay"></div>
-
-        <div class="hero-content">
-            <span class="tag-hero">ESTRENO DE LA SEMANA</span>
-            <h1 class="hero-title">DUNE: PART TWO</h1>
-            <div class="hero-meta">
-                <span>2024</span>
-                <span>2h 46m</span>
-                <span class="rating"><i class="fa-solid fa-star"></i> 9.0</span>
-                <span>IMAX</span>
+    <main>
+        <!-- Hero -->
+        <header class="hero" id="hero">
+            <div class="hero-bg"></div>
+            <div class="hero-content">
+                <div class="hero-badge">Estreno de la Semana</div>
+                <h1 class="hero-title">
+                    DUNE
+                    <span>Part Two</span>
+                </h1>
+                <div class="hero-meta">
+                    <span>2024</span>
+                    <span class="divider">•</span>
+                    <span>2h 46m</span>
+                    <span class="divider">•</span>
+                    <span class="rating">★ 9.0</span>
+                    <span class="divider">•</span>
+                    <span>IMAX</span>
+                </div>
+                <p class="hero-desc">
+                    Paul Atreides se une a Chani y a los Fremen mientras busca venganza contra los conspiradores que destruyeron a su familia. Una experiencia visual que redefine la ciencia ficción.
+                </p>
+                <div class="hero-cta">
+                    <a href="#" class="btn-cinema primary">▶ Ver Tráiler</a>
+                    <a href="#" class="btn-cinema secondary">+ Información</a>
+                </div>
             </div>
-            <p class="desc">
-                Paul Atreides se une a Chani y a los Fremen mientras busca venganza contra los conspiradores que destruyeron a su familia. Una experiencia visual que redefine la ciencia ficción.
-            </p>
-            <a href="https://www.youtube.com/watch?v=Way9Dexny3w" target="_blank" class="btn-play">
-                <i class="fa-solid fa-play"></i> VER TRÁILER CON SONIDO
-            </a>
-        </div>
-    </header>
-
-    <!-- SLIDER -->
-    <h2 class="section-title">En Tendencia</h2>
-    <div class="movie-slider">
-        <div class="movie-card">
-            <img src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?q=80&w=600&auto=format&fit=crop" class="poster">
-            <span class="card-title">Joker: Folie à Deux</span>
-        </div>
-        <div class="movie-card">
-            <img src="https://images.unsplash.com/photo-1626814026160-2237a95fc5a0?q=80&w=600&auto=format&fit=crop" class="poster">
-            <span class="card-title">Oppenheimer</span>
-        </div>
-        <div class="movie-card">
-            <img src="https://images.unsplash.com/photo-1485846234645-a62644f84728?q=80&w=600&auto=format&fit=crop" class="poster">
-            <span class="card-title">Interstellar</span>
-        </div>
-        <div class="movie-card">
-            <img src="https://images.unsplash.com/photo-1594909122845-11baa439b7bf?q=80&w=600&auto=format&fit=crop" class="poster">
-            <span class="card-title">Cyberpunk Legacy</span>
-        </div>
-    </div>
-
-    <!-- REVIEWS -->
-    <h2 class="section-title">Crítica</h2>
-    <div class="reviews-grid">
-        <article class="review-item">
-            <div class="review-header">
-                <span class="review-movie">POOR THINGS</span>
-                <span class="user-rating"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></span>
+            <div class="hero-progress">
+                <div class="progress-dot active"></div>
+                <div class="progress-dot"></div>
+                <div class="progress-dot"></div>
+                <div class="progress-dot"></div>
             </div>
-            <p class="review-text">"Emma Stone entrega la actuación de su vida en esta fábula gótica..."</p>
-        </article>
-        <article class="review-item">
-            <div class="review-header">
-                <span class="review-movie">CIVIL WAR</span>
-                <span class="user-rating"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></span>
-            </div>
-            <p class="review-text">"Un thriller bélico que se siente aterradoramente cercano."</p>
-        </article>
-        <article class="review-item">
-            <div class="review-header">
-                <span class="review-movie">THE SUBSTANCE</span>
-                <span class="user-rating"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></span>
-            </div>
-            <p class="review-text">"El horror corporal llevado al extremo."</p>
-        </article>
-    </div>
+        </header>
 
-    <footer><p>&copy; 2025 PUNTO CERO.</p></footer>
+        <!-- Cartelera -->
+        <section id="cartelera">
+            <div class="section-header reveal">
+                <div>
+                    <div class="section-label">001 — Cartelera</div>
+                    <h2 class="section-title">En Tendencia</h2>
+                </div>
+                <a href="#" class="section-link">Ver Todo →</a>
+            </div>
+            
+            <div class="slider-container reveal">
+                <div class="movie-slider">
+                    <div class="movie-card">
+                        <div class="movie-poster">
+                            <img src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=600&auto=format&fit=crop&q=80" alt="Joker">
+                            <div class="movie-rating">★ 8.5</div>
+                        </div>
+                        <div class="movie-info">
+                            <h3 class="movie-title">Joker: Folie à Deux</h3>
+                            <p class="movie-year">2024 • Thriller</p>
+                        </div>
+                    </div>
 
+                    <div class="movie-card">
+                        <div class="movie-poster">
+                            <img src="https://images.unsplash.com/photo-1626814026160-2237a95fc5a0?w=600&auto=format&fit=crop&q=80" alt="Oppenheimer">
+                            <div class="movie-rating">★ 9.2</div>
+                        </div>
+                        <div class="movie-info">
+                            <h3 class="movie-title">Oppenheimer</h3>
+                            <p class="movie-year">2023 • Drama</p>
+                        </div>
+                    </div>
+
+                    <div class="movie-card">
+                        <div class="movie-poster">
+                            <img src="https://images.unsplash.com/photo-1485846234645-a62644f84728?w=600&auto=format&fit=crop&q=80" alt="Interstellar">
+                            <div class="movie-rating">★ 9.5</div>
+                        </div>
+                        <div class="movie-info">
+                            <h3 class="movie-title">Interstellar</h3>
+                            <p class="movie-year">2014 • Sci-Fi</p>
+                        </div>
+                    </div>
+
+                    <div class="movie-card">
+                        <div class="movie-poster">
+                            <img src="https://images.unsplash.com/photo-1594909122845-11baa439b7bf?w=600&auto=format&fit=crop&q=80" alt="Cyberpunk">
+                            <div class="movie-rating">★ 7.8</div>
+                        </div>
+                        <div class="movie-info">
+                            <h3 class="movie-title">Cyberpunk Legacy</h3>
+                            <p class="movie-year">2024 • Sci-Fi</p>
+                        </div>
+                    </div>
+
+                    <div class="movie-card">
+                        <div class="movie-poster">
+                            <img src="https://images.unsplash.com/photo-1518676590747-1e3dcf5a0e3f?w=600&auto=format&fit=crop&q=80" alt="Poor Things">
+                            <div class="movie-rating">★ 8.9</div>
+                        </div>
+                        <div class="movie-info">
+                            <h3 class="movie-title">Poor Things</h3>
+                            <p class="movie-year">2023 • Drama</p>
+                        </div>
+                    </div>
+
+                    <div class="movie-card">
+                        <div class="movie-poster">
+                            <img src="https://images.unsplash.com/photo-1535016120720-40c646be5580?w=600&auto=format&fit=crop&q=80" alt="Civil War">
+                            <div class="movie-rating">★ 7.5</div>
+                        </div>
+                        <div class="movie-info">
+                            <h3 class="movie-title">Civil War</h3>
+                            <p class="movie-year">2024 • Thriller</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Destacadas -->
+        <section id="destacadas">
+            <div class="section-header reveal">
+                <div>
+                    <div class="section-label">002 — Destacadas</div>
+                    <h2 class="section-title">Selección del Editor</h2>
+                </div>
+            </div>
+
+            <div class="featured-grid">
+                <div class="featured-card reveal">
+                    <img src="https://images.unsplash.com/photo-1440404653325-ab127d49abc1?w=800&auto=format&fit=crop&q=80" alt="Clásicos">
+                    <div class="featured-overlay">
+                        <span class="featured-badge">Clásicos</span>
+                        <h3 class="featured-title">El Cine de los 70s</h3>
+                        <p class="featured-desc">Una revisión a la década dorada del cine americano. De Coppola a Kubrick.</p>
+                    </div>
+                </div>
+
+                <div class="featured-card reveal">
+                    <img src="https://images.unsplash.com/photo-1478720568477-152d9b164e26?w=800&auto=format&fit=crop&q=80" alt="Indie">
+                    <div class="featured-overlay">
+                        <span class="featured-badge">Indie</span>
+                        <h3 class="featured-title">Festival Sundance 2024</h3>
+                        <p class="featured-desc">Las joyas ocultas que no te puedes perder este año.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Crítica -->
+        <section id="critica">
+            <div class="section-header reveal">
+                <div>
+                    <div class="section-label">003 — Crítica</div>
+                    <h2 class="section-title">Reseñas</h2>
+                </div>
+                <a href="#" class="section-link">Ver Todas →</a>
+            </div>
+
+            <div class="reviews-grid">
+                <article class="review-card reveal">
+                    <h3 class="review-movie">POOR THINGS</h3>
+                    <div class="review-rating">
+                        <div class="star"></div>
+                        <div class="star"></div>
+                        <div class="star"></div>
+                        <div class="star"></div>
+                        <div class="star"></div>
+                    </div>
+                    <p class="review-text">"Emma Stone entrega la actuación de su vida en esta fábula gótica que desafía toda convención narrativa. Yorgos Lanthimos crea un mundo absolutamente único."</p>
+                    <span class="review-author">— Carlos Mendoza</span>
+                </article>
+
+                <article class="review-card reveal">
+                    <h3 class="review-movie">CIVIL WAR</h3>
+                    <div class="review-rating">
+                        <div class="star"></div>
+                        <div class="star"></div>
+                        <div class="star"></div>
+                        <div class="star"></div>
+                        <div class="star empty"></div>
+                    </div>
+                    <p class="review-text">"Un thriller bélico que se siente aterradoramente cercano. Garland nos obliga a mirar la guerra desde el lente del periodismo."</p>
+                    <span class="review-author">— María López</span>
+                </article>
+
+                <article class="review-card reveal">
+                    <h3 class="review-movie">THE SUBSTANCE</h3>
+                    <div class="review-rating">
+                        <div class="star"></div>
+                        <div class="star"></div>
+                        <div class="star"></div>
+                        <div class="star empty"></div>
+                        <div class="star empty"></div>
+                    </div>
+                    <p class="review-text">"El horror corporal llevado al extremo. Demi Moore regresa con fuerza en esta sátira incómoda sobre la belleza y la juventud."</p>
+                    <span class="review-author">— Ana García</span>
+                </article>
+            </div>
+        </section>
+
+        <!-- Horarios -->
+        <section id="horarios">
+            <div class="section-header reveal">
+                <div>
+                    <div class="section-label">004 — Cartelera</div>
+                    <h2 class="section-title">Próximas Funciones</h2>
+                </div>
+            </div>
+
+            <div class="schedule-grid">
+                <div class="schedule-card reveal">
+                    <div class="schedule-time">14:30</div>
+                    <h3 class="schedule-title">Dune: Part Two</h3>
+                    <p class="schedule-hall">SALA IMAX • SALA 1</p>
+                </div>
+
+                <div class="schedule-card reveal">
+                    <div class="schedule-time">17:00</div>
+                    <h3 class="schedule-title">Oppenheimer</h3>
+                    <p class="schedule-hall">SALA 70MM • SALA 2</p>
+                </div>
+
+                <div class="schedule-card reveal">
+                    <div class="schedule-time">19:30</div>
+                    <h3 class="schedule-title">Poor Things</h3>
+                    <p class="schedule-hall">SALA PREMIUM • SALA 3</p>
+                </div>
+
+                <div class="schedule-card reveal">
+                    <div class="schedule-time">22:00</div>
+                    <h3 class="schedule-title">Civil War</h3>
+                    <p class="schedule-hall">SALA ESTÁNDAR • SALA 4</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Newsletter -->
+        <section id="newsletter" class="newsletter">
+            <h2 class="newsletter-title reveal">No Te Pierdas Nada</h2>
+            <p class="newsletter-desc reveal">Recibe las mejores reseñas y estrenos directo en tu correo.</p>
+            <form class="newsletter-form reveal" onsubmit="event.preventDefault(); alert('¡Gracias por suscribirte!');">
+                <input type="email" class="newsletter-input" placeholder="tu@email.com" required>
+                <button type="submit" class="newsletter-btn">Suscribir</button>
+            </form>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <div class="logo">PUNTO<span>CERO</span></div>
+                <p>Tu experiencia cinematográfica definitiva. Críticas, estrenos y todo sobre el mundo del cine.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Explorar</h4>
+                <ul>
+                    <li><a href="#">Cartelera</a></li>
+                    <li><a href="#">Estrenos</a></li>
+                    <li><a href="#">Clásicos</a></li>
+                    <li><a href="#">Festivales</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Comunidad</h4>
+                <ul>
+                    <li><a href="#">Reseñas</a></li>
+                    <li><a href="#">Podcast</a></li>
+                    <li><a href="#">Newsletter</a></li>
+                    <li><a href="#">Foro</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Contacto</h4>
+                <ul>
+                    <li><a href="#">Prensa</a></li>
+                    <li><a href="#">Publicidad</a></li>
+                    <li><a href="#">Legal</a></li>
+                    <li><a href="#">Privacidad</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 PUNTO CERO. Todos los derechos reservados.</p>
+            <div class="footer-social">
+                <a href="#">Twitter</a>
+                <a href="#">Instagram</a>
+                <a href="#">YouTube</a>
+                <a href="#">Letterboxd</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // ============ FILM COUNTDOWN ============
+        const countdown = document.getElementById('countdown');
+        const countdownNumber = document.getElementById('countdownNumber');
+        let count = 5;
+
+        const countInterval = setInterval(() => {
+            count--;
+            countdownNumber.textContent = count;
+            
+            if (count === 0) {
+                clearInterval(countInterval);
+                countdown.classList.add('hidden');
+            }
+        }, 600);
+
+        // ============ NAV SCROLL ============
+        const nav = document.getElementById('mainNav');
+        window.addEventListener('scroll', () => {
+            if (scrollY > 100) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+
+        // ============ NAV ACTIVE ============
+        const navLinks = document.querySelectorAll('.nav-links a');
+        const sections = document.querySelectorAll('section');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (scrollY >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // ============ SCROLL REVEAL ============
+        const revealElements = document.querySelectorAll('.reveal, .slide-in');
+
+        const revealOnScroll = () => {
+            revealElements.forEach(el => {
+                const elTop = el.getBoundingClientRect().top;
+                if (elTop < window.innerHeight - 100) {
+                    el.classList.add('active');
+                }
+            });
+        };
+
+        window.addEventListener('scroll', revealOnScroll);
+        window.addEventListener('load', revealOnScroll);
+
+        // ============ SMOOTH SCROLL ============
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // ============ PROGRESS DOTS ============
+        const progressDots = document.querySelectorAll('.progress-dot');
+        progressDots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                progressDots.forEach(d => d.classList.remove('active'));
+                dot.classList.add('active');
+            });
+        });
+
+        // ============ MOVIE CARD CLICK ============
+        document.querySelectorAll('.movie-card').forEach(card => {
+            card.addEventListener('click', () => {
+                card.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    card.style.transform = '';
+                }, 200);
+            });
+        });
+    </script>
 </body>
 </html>
