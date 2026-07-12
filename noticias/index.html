@@ -3,321 +3,1621 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NOISE MAG | Cultura Sonora</title>
+    <meta name="description" content="SONORA — Revista de cultura sonora experimental. Noticias, reseñas y arte marginal.">
+    <title>SONORA — Cultura Sonora</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Mono:wght@400;700&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
     <style>
-        /* --- ESTILO BRUTALISTA / EDITORIAL --- */
         :root {
-            --bg-color: #ffffff;
-            --text-color: #000000;
-            --accent: #ccff00; /* Verde Ácido */
-            --border: 3px solid black;
-            --font-head: 'Arial Black', 'Helvetica Inserat', sans-serif;
-            --font-body: 'Helvetica', 'Arial', sans-serif;
+            --bg: #e8e4dc;
+            --cream: #f5f2eb;
+            --black: #0a0a0a;
+            --white: #ffffff;
+            --coral: #ff6b4a;
+            --mustard: #d4a843;
+            --teal: #2a9d8f;
+            --grey: #6b6b6b;
+            --border: 1px solid var(--black);
+            --font-display: 'Syne', sans-serif;
+            --font-serif: 'Instrument Serif', serif;
+            --font-mono: 'Space Mono', monospace;
         }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
 
         body {
-            margin: 0;
-            padding: 0;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            font-family: var(--font-body);
+            background: var(--bg);
+            color: var(--black);
+            font-family: var(--font-display);
+            overflow-x: hidden;
         }
 
-        a { color: black; text-decoration: none; }
-        a:hover { text-decoration: underline; color: #444; }
+        ::selection {
+            background: var(--coral);
+            color: var(--white);
+        }
 
-        /* --- HEADER --- */
-        header {
-            border-bottom: var(--border);
-            padding: 20px;
+        a { color: inherit; text-decoration: none; }
+
+        /* ============ PRELOADER ============ */
+        .preloader {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: var(--black);
+            z-index: 10000;
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 2rem;
+            transition: opacity 0.8s, visibility 0.8s;
+        }
+
+        .preloader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .preloader-text {
+            font-family: var(--font-display);
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 800;
+            color: var(--white);
+            letter-spacing: -3px;
+            animation: preloaderPulse 1.5s ease-in-out infinite;
+        }
+
+        .preloader-sub {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            color: var(--grey);
+            letter-spacing: 4px;
+            text-transform: uppercase;
+        }
+
+        @keyframes preloaderPulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(0.98); }
+        }
+
+        /* ============ HEADER ============ */
+        header {
             position: sticky;
             top: 0;
-            background: white;
+            background: var(--cream);
+            border-bottom: 2px solid var(--black);
             z-index: 1000;
         }
 
-        .logo {
-            font-family: var(--font-head);
-            font-size: 2.5rem;
-            letter-spacing: -2px;
-            background: black;
-            color: var(--accent);
-            padding: 0 10px;
-            transform: rotate(-2deg); /* Un toque rebelde */
-        }
-
-        nav a {
-            margin-left: 20px;
-            font-weight: bold;
-            text-transform: uppercase;
-            font-size: 0.9rem;
-        }
-
-        /* --- CINTILLA DE NOTICIAS (MARQUEE) --- */
-        .breaking-news {
-            background: var(--accent);
+        .header-top {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            align-items: center;
+            padding: 1.5rem 2rem;
             border-bottom: var(--border);
-            padding: 10px 0;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .logo {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            font-weight: 800;
+            letter-spacing: -4px;
+            line-height: 1;
+        }
+
+        .logo-accent {
+            color: var(--coral);
+        }
+
+        .header-issue {
+            font-family: var(--font-mono);
+            font-size: 0.6rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 0.5rem 1rem;
+            border: var(--border);
+            background: var(--white);
+        }
+
+        .header-center {
+            text-align: center;
+        }
+
+        .header-tagline {
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-size: 1rem;
+            color: var(--grey);
+        }
+
+        .header-right {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .btn-subscribe {
+            font-family: var(--font-mono);
+            font-size: 0.65rem;
+            padding: 0.8rem 1.5rem;
+            background: var(--coral);
+            color: var(--white);
+            border: none;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.3s;
+        }
+
+        .btn-subscribe:hover {
+            background: var(--black);
+        }
+
+        .search-btn {
+            width: 44px;
+            height: 44px;
+            border: var(--border);
+            background: transparent;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+
+        .search-btn:hover {
+            background: var(--black);
+        }
+
+        .search-btn svg {
+            width: 18px;
+            height: 18px;
+            stroke: var(--black);
+            transition: stroke 0.3s;
+        }
+
+        .search-btn:hover svg {
+            stroke: var(--white);
+        }
+
+        /* Nav */
+        .nav-bar {
+            display: flex;
+            justify-content: center;
+            gap: 0;
+            padding: 0;
+        }
+
+        .nav-bar a {
+            font-family: var(--font-mono);
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            padding: 1rem 2rem;
+            position: relative;
+            transition: all 0.3s;
+            border-right: var(--border);
+        }
+
+        .nav-bar a:last-child {
+            border-right: none;
+        }
+
+        .nav-bar a::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0;
+            width: 100%; height: 0;
+            background: var(--black);
+            transition: height 0.3s;
+            z-index: -1;
+        }
+
+        .nav-bar a:hover {
+            color: var(--white);
+        }
+
+        .nav-bar a:hover::after {
+            height: 100%;
+        }
+
+        .nav-bar a.active {
+            background: var(--black);
+            color: var(--white);
+        }
+
+        /* ============ BREAKING NEWS ============ */
+        .breaking-news {
+            background: var(--coral);
+            border-bottom: 2px solid var(--black);
+            padding: 0.6rem 0;
             overflow: hidden;
             white-space: nowrap;
         }
 
-        .marquee-content {
+        .marquee {
             display: inline-block;
-            animation: scroll 20s linear infinite;
-            font-weight: bold;
-            font-family: var(--font-head);
+            animation: marquee 25s linear infinite;
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            font-weight: 700;
             text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--white);
         }
 
-        @keyframes scroll {
-            0% { transform: translateX(100%); }
-            100% { transform: translateX(-100%); }
+        .marquee-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 2rem;
+            padding-right: 2rem;
         }
 
-        /* --- GRID PRINCIPAL --- */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            border-left: var(--border);
-            border-right: var(--border);
-            min-height: 100vh;
+        .marquee-item::before {
+            content: '●';
         }
 
-        /* --- ARTÍCULO DESTACADO (HERO) --- */
-        .hero-post {
-            border-bottom: var(--border);
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* ============ HERO ============ */
+        .hero {
+            border-bottom: 2px solid var(--black);
+            position: relative;
+            min-height: 90vh;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .hero-image {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 1s;
+        }
+
+        .hero:hover .hero-image img {
+            transform: scale(1.05);
+        }
+
+        .hero-image-overlay {
+            position: absolute;
+            top: 2rem; left: 2rem;
+            background: var(--coral);
+            color: var(--white);
+            padding: 0.8rem 1.5rem;
+            font-family: var(--font-mono);
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .hero-content {
+            padding: 4rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background: var(--cream);
             position: relative;
         }
 
-        .hero-img {
-            width: 100%;
-            height: 500px;
-            object-fit: cover;
-            display: block;
-            filter: grayscale(100%);
-            transition: 0.3s;
+        .hero-content::before {
+            content: '';
+            position: absolute;
+            top: 0; right: 0;
+            width: 200px; height: 200px;
+            background: var(--mustard);
+            clip-path: polygon(100% 0, 0 0, 100% 100%);
         }
 
-        .hero-post:hover .hero-img { filter: grayscale(0%); }
+        .hero-tag {
+            font-family: var(--font-mono);
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--coral);
+            margin-bottom: 2rem;
+        }
 
         .hero-title {
-            position: absolute;
-            bottom: 20px;
-            left: 20px;
-            background: white;
-            border: var(--border);
-            padding: 20px;
-            max-width: 70%;
-            box-shadow: 10px 10px 0px var(--accent);
+            font-family: var(--font-serif);
+            font-size: clamp(3rem, 6vw, 5rem);
+            font-weight: 400;
+            line-height: 1;
+            margin-bottom: 2rem;
+            max-width: 600px;
         }
 
-        .hero-title h1 {
-            margin: 0;
-            font-family: var(--font-head);
-            font-size: 3rem;
-            line-height: 0.9;
+        .hero-excerpt {
+            font-size: 1.1rem;
+            color: var(--grey);
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            max-width: 500px;
         }
 
-        /* --- SECCIÓN DIVIDIDA (NOTICIAS + SIDEBAR) --- */
-        .grid-layout {
-            display: grid;
-            grid-template-columns: 2fr 1fr; /* 2 partes noticia, 1 parte barra lateral */
-        }
-
-        .main-feed {
-            border-right: var(--border);
-        }
-
-        .sidebar {
-            background: #f4f4f4;
-        }
-
-        /* --- TARJETAS DE NOTICIAS --- */
-        .news-card {
-            display: flex;
-            border-bottom: 1px solid black;
-            padding: 20px;
-            gap: 20px;
-            transition: 0.2s;
-        }
-
-        .news-card:hover { background: #fffde7; }
-
-        .news-thumb {
-            width: 150px;
-            height: 150px;
-            object-fit: cover;
-            border: 2px solid black;
-        }
-
-        .news-info h3 {
-            margin-top: 0;
-            font-family: var(--font-head);
-            font-size: 1.5rem;
-            text-transform: uppercase;
-        }
-
-        .tag {
-            background: black;
-            color: white;
-            padding: 2px 8px;
+        .hero-meta {
+            font-family: var(--font-mono);
             font-size: 0.7rem;
-            font-weight: bold;
+            color: var(--grey);
+            display: flex;
+            gap: 2rem;
+        }
+
+        .hero-read-more {
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            margin-top: 2rem;
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
             text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--black);
+            transition: gap 0.3s;
         }
 
-        /* --- SIDEBAR LIST --- */
-        .sidebar-box {
-            padding: 20px;
-            border-bottom: var(--border);
+        .hero-read-more:hover {
+            gap: 1.5rem;
+            color: var(--coral);
         }
 
-        .top-track {
+        .hero-read-more svg {
+            width: 24px;
+            height: 24px;
+            transition: transform 0.3s;
+        }
+
+        .hero-read-more:hover svg {
+            transform: translateX(5px);
+        }
+
+        /* ============ SECTION HEADER ============ */
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 2rem;
+            border-bottom: 2px solid var(--black);
+            background: var(--white);
+        }
+
+        .section-title {
+            font-family: var(--font-display);
+            font-size: 1.2rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: -1px;
+        }
+
+        .section-count {
+            font-family: var(--font-mono);
+            font-size: 0.65rem;
+            color: var(--grey);
+            letter-spacing: 2px;
+        }
+
+        /* ============ NEWS GRID ============ */
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            border-bottom: 2px solid var(--black);
+        }
+
+        .news-card {
+            border-right: var(--border);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .news-card:hover {
+            transform: translateY(-8px);
+            z-index: 10;
+        }
+
+        .news-card:last-child {
+            border-right: none;
+        }
+
+        .news-card-image {
+            position: relative;
+            height: 380px;
+            overflow: hidden;
+        }
+
+        .news-card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(60%);
+            transition: all 0.5s;
+        }
+
+        .news-card:hover .news-card-image img {
+            filter: grayscale(0%);
+            transform: scale(1.08);
+        }
+
+        .news-card-number {
+            position: absolute;
+            top: 1rem; left: 1rem;
+            font-family: var(--font-display);
+            font-size: 4rem;
+            font-weight: 800;
+            color: var(--white);
+            text-shadow: 3px 3px 0 var(--black);
+            line-height: 1;
+            opacity: 0.8;
+        }
+
+        .news-card-tag {
+            position: absolute;
+            bottom: 1rem; left: 1rem;
+            background: var(--mustard);
+            color: var(--black);
+            padding: 0.5rem 1rem;
+            font-family: var(--font-mono);
+            font-size: 0.55rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .news-card-content {
+            padding: 1.5rem;
+            background: var(--white);
+        }
+
+        .news-card-title {
+            font-family: var(--font-serif);
+            font-size: 1.3rem;
+            line-height: 1.3;
+            margin-bottom: 0.5rem;
+        }
+
+        .news-card-meta {
+            font-family: var(--font-mono);
+            font-size: 0.6rem;
+            color: var(--grey);
+        }
+
+        /* ============ FEATURED ARTICLE ============ */
+        .featured {
+            border-bottom: 2px solid var(--black);
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            min-height: 70vh;
+        }
+
+        .featured-main {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .featured-main img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(100%);
+            transition: filter 0.8s;
+        }
+
+        .featured:hover .featured-main img {
+            filter: grayscale(0%);
+        }
+
+        .featured-sidebar {
+            background: var(--black);
+            color: var(--white);
+            padding: 3rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .featured-tag {
+            font-family: var(--font-mono);
+            font-size: 0.6rem;
+            color: var(--coral);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 1.5rem;
+        }
+
+        .featured-title {
+            font-family: var(--font-serif);
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 400;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+        }
+
+        .featured-desc {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+
+        .featured-author {
             display: flex;
             align-items: center;
-            margin-bottom: 15px;
-            border-bottom: 1px dashed #999;
-            padding-bottom: 10px;
-        }
-        
-        .track-number {
-            font-family: var(--font-head);
-            font-size: 2rem;
-            color: #ccc;
-            margin-right: 10px;
+            gap: 1rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
         }
 
-        /* --- RESPONSIVE --- */
-        @media (max-width: 768px) {
-            .grid-layout { grid-template-columns: 1fr; }
-            .hero-title { position: relative; bottom: auto; left: auto; max-width: 100%; border: none; border-top: var(--border); box-shadow: none; }
-            .hero-title h1 { font-size: 2rem; }
-            .news-card { flex-direction: column; }
-            .news-thumb { width: 100%; height: 200px; }
-            .main-feed { border-right: none; }
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--coral);
+        }
+
+        .author-name {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+
+        .author-role {
+            font-family: var(--font-mono);
+            font-size: 0.6rem;
+            color: var(--grey);
+        }
+
+        /* ============ REVIEWS ============ */
+        .reviews-section {
+            border-bottom: 2px solid var(--black);
+        }
+
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        .review-card {
+            border-right: var(--border);
+            padding: 2.5rem;
+            position: relative;
+            transition: all 0.3s;
+        }
+
+        .review-card:last-child {
+            border-right: none;
+        }
+
+        .review-card:hover {
+            background: var(--black);
+            color: var(--white);
+        }
+
+        .review-rating {
+            font-family: var(--font-display);
+            font-size: 5rem;
+            font-weight: 800;
+            line-height: 1;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--coral), var(--mustard));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .review-card:hover .review-rating {
+            background: linear-gradient(135deg, var(--white), var(--coral));
+            -webkit-background-clip: text;
+            background-clip: text;
+        }
+
+        .review-album {
+            font-family: var(--font-mono);
+            font-size: 0.55rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--grey);
+            margin-bottom: 1rem;
+        }
+
+        .review-card:hover .review-album {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .review-title {
+            font-family: var(--font-serif);
+            font-size: 2rem;
+            font-weight: 400;
+            line-height: 1.1;
+            margin-bottom: 0.5rem;
+        }
+
+        .review-artist {
+            font-family: var(--font-display);
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--coral);
+        }
+
+        .review-card:hover .review-artist {
+            color: var(--mustard);
+        }
+
+        .review-excerpt {
+            font-size: 0.9rem;
+            color: var(--grey);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+            font-style: italic;
+        }
+
+        .review-card:hover .review-excerpt {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .review-link {
+            font-family: var(--font-mono);
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border-bottom: 1px solid var(--black);
+            padding-bottom: 3px;
+            transition: all 0.3s;
+        }
+
+        .review-card:hover .review-link {
+            border-color: var(--coral);
+            color: var(--coral);
+        }
+
+        /* ============ INTERVIEW ============ */
+        .interview {
+            border-bottom: 2px solid var(--black);
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+        }
+
+        .interview-image {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .interview-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .interview-image::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: linear-gradient(45deg, var(--teal) 0%, transparent 50%);
+            mix-blend-mode: multiply;
+        }
+
+        .interview-content {
+            padding: 4rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background: var(--cream);
+            position: relative;
+        }
+
+        .interview-content::before {
+            content: '"';
+            position: absolute;
+            top: 2rem; left: 2rem;
+            font-family: var(--font-serif);
+            font-size: 15rem;
+            line-height: 1;
+            color: var(--coral);
+            opacity: 0.15;
+        }
+
+        .interview-tag {
+            font-family: var(--font-mono);
+            font-size: 0.6rem;
+            color: var(--teal);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 1rem;
+        }
+
+        .interview-title {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .interview-quote {
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-size: 1.4rem;
+            color: var(--grey);
+            line-height: 1.8;
+            padding-left: 2rem;
+            border-left: 3px solid var(--teal);
+            margin-bottom: 2rem;
+        }
+
+        .interview-meta {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            color: var(--grey);
+        }
+
+        .interview-meta strong {
+            color: var(--black);
+        }
+
+        /* ============ TOP CHARTS ============ */
+        .charts-section {
+            border-bottom: 2px solid var(--black);
+            background: var(--black);
+            color: var(--white);
+        }
+
+        .charts-section .section-header {
+            background: var(--black);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .charts-section .section-title {
+            color: var(--white);
+        }
+
+        .charts-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+        }
+
+        .chart-item {
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            position: relative;
+            transition: all 0.3s;
+        }
+
+        .chart-item:last-child {
+            border-right: none;
+        }
+
+        .chart-item:hover {
+            background: var(--coral);
+        }
+
+        .chart-number {
+            font-family: var(--font-display);
+            font-size: 4rem;
+            font-weight: 800;
+            line-height: 1;
+            margin-bottom: 1rem;
+            opacity: 0.3;
+        }
+
+        .chart-item:hover .chart-number {
+            opacity: 1;
+        }
+
+        .chart-cover {
+            width: 100%;
+            aspect-ratio: 1/1;
+            margin-bottom: 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .chart-cover img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(50%);
+            transition: filter 0.3s;
+        }
+
+        .chart-item:hover .chart-cover img {
+            filter: grayscale(0%);
+        }
+
+        .chart-title {
+            font-family: var(--font-serif);
+            font-size: 1.1rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .chart-artist {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--grey);
+        }
+
+        .chart-item:hover .chart-artist {
+            color: var(--white);
+        }
+
+        /* ============ NEWSLETTER ============ */
+        .newsletter {
+            border-bottom: 2px solid var(--black);
+            padding: 6rem 2rem;
+            text-align: center;
+            background: var(--teal);
+            color: var(--white);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .newsletter::before {
+            content: 'SONORA';
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%) rotate(-5deg);
+            font-family: var(--font-display);
+            font-size: 20vw;
+            font-weight: 800;
+            opacity: 0.1;
+            white-space: nowrap;
+        }
+
+        .newsletter-title {
+            font-family: var(--font-display);
+            font-size: clamp(3rem, 7vw, 5rem);
+            font-weight: 800;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .newsletter-desc {
+            font-family: var(--font-serif);
+            font-size: 1.3rem;
+            margin-bottom: 2.5rem;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+            font-style: italic;
+            position: relative;
+            z-index: 1;
+        }
+
+        .newsletter-form {
+            display: flex;
+            justify-content: center;
+            gap: 0;
+            max-width: 500px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .newsletter-input {
+            flex: 1;
+            padding: 1.2rem 1.5rem;
+            background: var(--white);
+            border: 2px solid var(--black);
+            border-right: none;
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            outline: none;
+        }
+
+        .newsletter-input::placeholder {
+            color: var(--grey);
+        }
+
+        .newsletter-btn {
+            padding: 1.2rem 2.5rem;
+            background: var(--black);
+            border: 2px solid var(--black);
+            color: var(--white);
+            font-family: var(--font-mono);
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .newsletter-btn:hover {
+            background: var(--coral);
+            border-color: var(--coral);
+        }
+
+        /* ============ FOOTER ============ */
+        footer {
+            background: var(--black);
+            color: var(--white);
+            padding: 5rem 2rem 2rem;
+        }
+
+        .footer-top {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 4rem;
+        }
+
+        .footer-brand .logo {
+            color: var(--white);
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-brand .logo-accent {
+            color: var(--coral);
+        }
+
+        .footer-brand p {
+            font-size: 0.95rem;
+            color: var(--grey);
+            line-height: 1.8;
+            max-width: 350px;
+        }
+
+        .footer-col h4 {
+            font-family: var(--font-mono);
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 1.5rem;
+            color: var(--mustard);
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-col a {
+            font-size: 0.85rem;
+            color: var(--grey);
+            transition: color 0.3s;
+        }
+
+        .footer-col a:hover {
+            color: var(--coral);
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-copy {
+            font-family: var(--font-mono);
+            font-size: 0.65rem;
+            color: var(--grey);
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .footer-social a {
+            font-family: var(--font-mono);
+            font-size: 0.65rem;
+            color: var(--grey);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: color 0.3s;
+        }
+
+        .footer-social a:hover {
+            color: var(--coral);
+        }
+
+        /* ============ RESPONSIVE ============ */
+        @media (max-width: 1200px) {
+            .news-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .charts-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 900px) {
+            .header-top {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+                text-align: center;
+            }
+            .header-left, .header-right {
+                justify-content: center;
+            }
+            .header-center {
+                display: none;
+            }
+            .hero {
+                grid-template-columns: 1fr;
+            }
+            .hero-image {
+                height: 50vh;
+            }
+            .featured {
+                grid-template-columns: 1fr;
+            }
+            .featured-main {
+                height: 50vh;
+            }
+            .interview {
+                grid-template-columns: 1fr;
+            }
+            .interview-image {
+                height: 400px;
+            }
+            .reviews-grid {
+                grid-template-columns: 1fr;
+            }
+            .review-card {
+                border-right: none;
+                border-bottom: var(--border);
+            }
+            .review-card:last-child {
+                border-bottom: none;
+            }
+            .charts-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .footer-top {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .header-top {
+                padding: 1rem;
+            }
+            .header-issue {
+                display: none;
+            }
+            .nav-bar {
+                overflow-x: auto;
+                justify-content: flex-start;
+                -webkit-overflow-scrolling: touch;
+            }
+            .nav-bar::-webkit-scrollbar {
+                display: none;
+            }
+            .nav-bar a {
+                padding: 1rem 1.5rem;
+                white-space: nowrap;
+            }
+            .hero-content {
+                padding: 2rem;
+            }
+            .hero-content::before {
+                display: none;
+            }
+            .news-grid {
+                grid-template-columns: 1fr;
+            }
+            .news-card {
+                border-right: none;
+                border-bottom: var(--border);
+            }
+            .news-card:last-child {
+                border-bottom: none;
+            }
+            .charts-grid {
+                grid-template-columns: 1fr;
+            }
+            .chart-item {
+                border-right: none;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            }
+            .chart-item:last-child {
+                border-bottom: none;
+            }
+            .newsletter-form {
+                flex-direction: column;
+            }
+            .newsletter-input {
+                border-right: 2px solid var(--black);
+                border-bottom: none;
+            }
+            .footer-top {
+                grid-template-columns: 1fr;
+            }
+            .footer-bottom {
+                flex-direction: column;
+                gap: 1.5rem;
+                text-align: center;
+            }
+        }
+
+        /* ============ ANIMATIONS ============ */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.9s cubic-bezier(0.5, 0, 0, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Halftone overlay */
+        .halftone {
+            position: relative;
+        }
+
+        .halftone::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-image: radial-gradient(circle, var(--black) 1px, transparent 1px);
+            background-size: 4px 4px;
+            opacity: 0.03;
+            pointer-events: none;
+        }
+
+        /* Custom cursor */
+        .cursor {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--coral);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.15s, opacity 0.15s;
+            mix-blend-mode: difference;
+        }
+
+        .cursor.active {
+            transform: scale(2);
+            opacity: 0.5;
         }
     </style>
 </head>
 <body>
+    <!-- Preloader -->
+    <div class="preloader">
+        <div class="preloader-text">SONORA</div>
+        <div class="preloader-sub">Cargando cultura sonora...</div>
+    </div>
 
-    <!-- CABECERA -->
-    <header>
-        <div class="logo">NOISE MAG</div>
-        <nav>
-            <a href="#">Noticias</a>
-            <a href="#">Reseñas</a>
-            <a href="#">Entrevistas</a>
-            <a href="#" style="background:black; color:white; padding: 5px 10px;">Suscríbete</a>
+    <!-- Custom Cursor -->
+    <div class="cursor"></div>
+
+    <!-- Header -->
+    <header class="halftone">
+        <div class="header-top">
+            <div class="header-left">
+                <div class="logo">SON<span class="logo-accent">O</span>RA</div>
+                <span class="header-issue">Edición #23 • Junio 2026</span>
+            </div>
+            <div class="header-center">
+                <div class="header-tagline">Cultura sonora experimental desde 2018</div>
+            </div>
+            <div class="header-right">
+                <button class="search-btn" aria-label="Buscar">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"/>
+                        <path d="M21 21l-4.35-4.35"/>
+                    </svg>
+                </button>
+                <button class="btn-subscribe">Suscribir</button>
+            </div>
+        </div>
+        <nav class="nav-bar">
+            <a href="#noticias" class="active">Noticias</a>
+            <a href="#resenas">Reseñas</a>
+            <a href="#entrevistas">Entrevistas</a>
+            <a href="#listas">Listas</a>
+            <a href="#cultura">Cultura</a>
+            <a href="#radio">Radio</a>
         </nav>
     </header>
 
-    <!-- BARRA DE ÚLTIMA HORA (SCROLLING) -->
+    <!-- Breaking News -->
     <div class="breaking-news">
-        <div class="marquee-content">
-            +++ ÚLTIMA HORA: DAFT PUNK ANUNCIA SU REGRESO (ES BROMA) +++ NUEVO DISCO DE THE CURE +++ ENTREVISTA EXCLUSIVA CON TAME IMPALA ESTA NOCHE +++
+        <div class="marquee">
+            <span class="marquee-item">FESTIVAL PRIMAVERA SOUND CONFIRMA FECHAS 2026</span>
+            <span class="marquee-item">NUEVO ÁLBUM DE BURIAL SORPRENDE A CRÍTICOS</span>
+            <span class="marquee-item">ARCA COLABORA CON ORQUESTA SINFÓNICA</span>
+            <span class="marquee-item">BEACH HOUSE ANUNCIA GIRA MUNDIAL</span>
+            <span class="marquee-item">SXSW 2026 ROMPE RÉCORDS DE ASISTENCIA</span>
+            <span class="marquee-item">FESTIVAL PRIMAVERA SOUND CONFIRMA FECHAS 2026</span>
+            <span class="marquee-item">NUEVO ÁLBUM DE BURIAL SORPRENDE A CRÍTICOS</span>
+            <span class="marquee-item">ARCA COLABORA CON ORQUESTA SINFÓNICA</span>
+            <span class="marquee-item">BEACH HOUSE ANUNCIA GIRA MUNDIAL</span>
+            <span class="marquee-item">SXSW 2026 ROMPE RÉCORDS DE ASISTENCIA</span>
         </div>
     </div>
 
-    <div class="container">
-        
-        <!-- ARTÍCULO PRINCIPAL (HERO) -->
-        <article class="hero-post">
-            <a href="#">
-                <img src="https://images.unsplash.com/photo-1501612780327-45045538702b?q=80&w=1600&auto=format&fit=crop" class="hero-img" alt="Concierto principal">
-                <div class="hero-title">
-                    <span class="tag">REPORTAJE</span>
-                    <h1>EL RENACIMIENTO DEL VINILO EN MÉXICO</h1>
-                    <p>Visitamos las tiendas más icónicas de la Roma y el Centro.</p>
+    <main>
+        <!-- Hero -->
+        <section class="hero">
+            <div class="hero-image">
+                <span class="hero-image-overlay">Portada</span>
+                <img src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=1600&auto=format&fit=crop&q=80" alt="Concierto">
+            </div>
+            <div class="hero-content">
+                <div class="hero-tag">Reportaje Especial</div>
+                <h1 class="hero-title">El Futuro del Sonido Underground en América Latina</h1>
+                <p class="hero-excerpt">Exploramos las escenas emergentes que están redefiniendo los límites entre lo experimental y lo accesible en todo el continente.</p>
+                <div class="hero-meta">
+                    <span>Por: Lucía Fernández</span>
+                    <span>12 Minutos de Lectura</span>
                 </div>
-            </a>
+                <a href="#" class="hero-read-more">
+                    Leer Artículo
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </a>
+            </div>
+        </section>
+
+        <!-- News Grid -->
+        <div class="section-header">
+            <h2 class="section-title">Lo Más Reciente</h2>
+            <span class="section-count">012 Artículos</span>
+        </div>
+
+        <div class="news-grid" id="noticias">
+            <article class="news-card reveal">
+                <div class="news-card-image">
+                    <img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=600&auto=format&fit=crop&q=80" alt="DJ">
+                    <span class="news-card-number">01</span>
+                    <span class="news-card-tag">Festivales</span>
+                </div>
+                <div class="news-card-content">
+                    <h3 class="news-card-title">Mutek México: Donde el Arte Sonoro se Encontra con la Tecnología</h3>
+                    <div class="news-card-meta">Por: Redacción • Hace 2 horas</div>
+                </div>
+            </article>
+
+            <article class="news-card reveal">
+                <div class="news-card-image">
+                    <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=600&auto=format&fit=crop&q=80" alt="Estudio">
+                    <span class="news-card-number">02</span>
+                    <span class="news-card-tag">Crítica</span>
+                </div>
+                <div class="news-card-content">
+                    <h3 class="news-card-title">La Nueva Ola del Noise Mexicano</h3>
+                    <div class="news-card-meta">Por: Marco Vega • Hace 5 horas</div>
+                </div>
+            </article>
+
+            <article class="news-card reveal">
+                <div class="news-card-image">
+                    <img src="https://images.unsplash.com/photo-1501386761578-eac5c94b800a?w=600&auto=format&fit=crop&q=80" alt="Artista">
+                    <span class="news-card-number">03</span>
+                    <span class="news-card-tag">Entrevista</span>
+                </div>
+                <div class="news-card-content">
+                    <h3 class="news-card-title">Natalia Spoliar: "El Silencio También es Música"</h3>
+                    <div class="news-card-meta">Por: Ana García • Hace 8 horas</div>
+                </div>
+            </article>
+
+            <article class="news-card reveal">
+                <div class="news-card-image">
+                    <img src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=600&auto=format&fit=crop&q=80" alt="Vinilo">
+                    <span class="news-card-number">04</span>
+                    <span class="news-card-tag">Tecnología</span>
+                </div>
+                <div class="news-card-content">
+                    <h3 class="news-card-title">Modular Synths: El Regreso del Sonido Analógico</h3>
+                    <div class="news-card-meta">Por: Carlos Ruiz • Hace 12 horas</div>
+                </div>
+            </article>
+        </div>
+
+        <!-- Featured Article -->
+        <article class="featured">
+            <div class="featured-main">
+                <img src="https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=1200&auto=format&fit=crop&q=80" alt="Ensayo">
+            </div>
+            <div class="featured-sidebar">
+                <div class="featured-tag">Ensayo</div>
+                <h2 class="featured-title">La Música como Resistencia Política en Tiempos de Crisis</h2>
+                <p class="featured-desc">Un análisis profundo de cómo los artistas independientes están usando sus plataformas para commentary social sin comprometer su integridad artística.</p>
+                <div class="featured-author">
+                    <div class="author-avatar"></div>
+                    <div>
+                        <div class="author-name">Roberto Sánchez</div>
+                        <div class="author-role">Editor de Cultura</div>
+                    </div>
+                </div>
+            </div>
         </article>
 
-        <!-- CONTENIDO DIVIDIDO -->
-        <div class="grid-layout">
-            
-            <!-- COLUMNA IZQUIERDA: NOTICIAS -->
-            <section class="main-feed">
-                
-                <article class="news-card">
-                    <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=300&auto=format&fit=crop" class="news-thumb" alt="Noticia 1">
-                    <div class="news-info">
-                        <span class="tag">RESEÑA</span>
-                        <a href="#"><h3>Radiohead: ¿Ok Computer sigue vigente?</h3></a>
-                        <p>Analizamos el clásico de 1997 en el contexto de la Inteligencia Artificial moderna.</p>
-                        <small>Por: Juan Pérez • Hace 2 horas</small>
-                    </div>
+        <!-- Reviews -->
+        <section class="reviews-section" id="resenas">
+            <div class="section-header">
+                <h2 class="section-title">Reseñas de la Semana</h2>
+                <span class="section-count">Ver Todas →</span>
+            </div>
+            <div class="reviews-grid">
+                <article class="review-card reveal">
+                    <div class="review-rating">9.4</div>
+                    <div class="review-album">Álbum • 2026</div>
+                    <h3 class="review-title">Revolver</h3>
+                    <div class="review-artist">Fontaines D.C.</div>
+                    <p class="review-excerpt">"Un viaje sonoro que desafía las convenciones del post-punk contemporáneo con una maestría impresionante."</p>
+                    <a href="#" class="review-link">Leer Reseña Completa →</a>
                 </article>
 
-                <article class="news-card">
-                    <img src="https://images.unsplash.com/photo-1498038432885-c6f3f1b912ee?q=80&w=300&auto=format&fit=crop" class="news-thumb" alt="Noticia 2">
-                    <div class="news-info">
-                        <span class="tag">INDUSTRIA</span>
-                        <a href="#"><h3>Spotify sube precios en Latinoamérica</h3></a>
-                        <p>La plataforma de streaming ajusta sus tarifas a partir del próximo mes.</p>
-                        <small>Por: Ana López • Hace 5 horas</small>
-                    </div>
+                <article class="review-card reveal">
+                    <div class="review-rating">8.8</div>
+                    <div class="review-album">Álbum • 2026</div>
+                    <h3 class="review-title">Brat</h3>
+                    <div class="review-artist">Charli XCX</div>
+                    <p class="review-excerpt">"Pop caótico y honesto que captura la esencia de una generación en constante transformación."</p>
+                    <a href="#" class="review-link">Leer Reseña Completa →</a>
                 </article>
 
-                <article class="news-card">
-                    <img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?q=80&w=300&auto=format&fit=crop" class="news-thumb" alt="Noticia 3">
-                    <div class="news-info">
-                        <span class="tag">FESTIVALES</span>
-                        <a href="#"><h3>Cartel Oficial: Corona Capital 2025</h3></a>
-                        <p>Filtraciones, rumores y confirmaciones de última hora.</p>
-                        <small>Por: Redacción • Hace 1 día</small>
-                    </div>
+                <article class="review-card reveal">
+                    <div class="review-rating">7.9</div>
+                    <div class="review-album">Álbum • 2026</div>
+                    <h3 class="review-title">The Tortured Poets Department</h3>
+                    <div class="review-artist">Taylor Swift</div>
+                    <p class="review-excerpt">"Introspección lírica con momentos de brillantez, aunque a veces se pierde en su propia ambición."</p>
+                    <a href="#" class="review-link">Leer Reseña Completa →</a>
                 </article>
+            </div>
+        </section>
 
-            </section>
+        <!-- Interview -->
+        <article class="interview" id="entrevistas">
+            <div class="interview-image">
+                <img src="https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=800&auto=format&fit=crop&q=80" alt="Entrevista">
+            </div>
+            <div class="interview-content">
+                <div class="interview-tag">Entrevista Exclusiva</div>
+                <h2 class="interview-title">"Cada nota es un acto de resistencia contra el silencio impuesto"</h2>
+                <p class="interview-quote">"No hago música para encajar en categorías. La música me elige a mí, y yo simplemente le permito fluir a través de mi cuerpo y mi voz."</p>
+                <div class="interview-meta">
+                    <strong>Con: Arca</strong> • Por: Lucía Fernández • Junio 2026
+                </div>
+            </div>
+        </article>
 
-            <!-- COLUMNA DERECHA: SIDEBAR -->
-            <aside class="sidebar">
-                <div class="sidebar-box">
-                    <h4 style="font-family: var(--font-head); font-size: 1.5rem; margin-top:0;">TOP 5 SEMANAL</h4>
-                    
-                    <div class="top-track">
-                        <span class="track-number">1</span>
-                        <div>
-                            <strong>Kendrick Lamar</strong><br>
-                            <small>Not Like Us</small>
-                        </div>
+        <!-- Top Charts -->
+        <section class="charts-section" id="listas">
+            <div class="section-header">
+                <h2 class="section-title">Top 5 Experimental</h2>
+                <span class="section-count" style="color: var(--grey);">Actualizado Lunes</span>
+            </div>
+            <div class="charts-grid">
+                <div class="chart-item">
+                    <div class="chart-number">01</div>
+                    <div class="chart-cover">
+                        <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=300&auto=format&fit=crop&q=80" alt="Cover">
                     </div>
-                    
-                    <div class="top-track">
-                        <span class="track-number">2</span>
-                        <div>
-                            <strong>Fontaines D.C.</strong><br>
-                            <small>Starburster</small>
-                        </div>
-                    </div>
-
-                    <div class="top-track">
-                        <span class="track-number">3</span>
-                        <div>
-                            <strong>Charli XCX</strong><br>
-                            <small>360</small>
-                        </div>
-                    </div>
+                    <div class="chart-title">Starburster</div>
+                    <div class="chart-artist">Fontaines D.C.</div>
                 </div>
 
-                <div class="sidebar-box" style="background: black; color: white; text-align: center;">
-                    <h4>¿TIENES UNA BANDA?</h4>
-                    <p>Envía tu demo a nuestra redacción.</p>
-                    <button style="background: var(--accent); border:none; padding: 10px 20px; font-weight:bold; cursor:pointer;">ENVIAR AHORA</button>
+                <div class="chart-item">
+                    <div class="chart-number">02</div>
+                    <div class="chart-cover">
+                        <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=300&auto=format&fit=crop&q=80" alt="Cover">
+                    </div>
+                    <div class="chart-title">360</div>
+                    <div class="chart-artist">Charli XCX</div>
                 </div>
-            </aside>
 
+                <div class="chart-item">
+                    <div class="chart-number">03</div>
+                    <div class="chart-cover">
+                        <img src="https://images.unsplash.com/photo-1498038432885-c6f3f1b912ee?w=300&auto=format&fit=crop&q=80" alt="Cover">
+                    </div>
+                    <div class="chart-title">Wandering Star</div>
+                    <div class="chart-artist">Portishead</div>
+                </div>
+
+                <div class="chart-item">
+                    <div class="chart-number">04</div>
+                    <div class="chart-cover">
+                        <img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=300&auto=format&fit=crop&q=80" alt="Cover">
+                    </div>
+                    <div class="chart-title">Hyperballad</div>
+                    <div class="chart-artist">Björk</div>
+                </div>
+
+                <div class="chart-item">
+                    <div class="chart-number">05</div>
+                    <div class="chart-cover">
+                        <img src="https://images.unsplash.com/photo-1501386761578-eac5c94b800a?w=300&auto=format&fit=crop&q=80" alt="Cover">
+                    </div>
+                    <div class="chart-title">Born to Die</div>
+                    <div class="chart-artist">Lana Del Rey</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Newsletter -->
+        <section class="newsletter">
+            <h2 class="newsletter-title reveal">Únete al Movimiento</h2>
+            <p class="newsletter-desc reveal">Recibe las historias más importantes directo a tu correo. Sin ruido, solo señal.</p>
+            <form class="newsletter-form reveal" onsubmit="event.preventDefault(); alert('¡Gracias por unirte a SONORA!');">
+                <input type="email" class="newsletter-input" placeholder="tu@email.com" required>
+                <button type="submit" class="newsletter-btn">Enviar</button>
+            </form>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-top">
+            <div class="footer-brand">
+                <div class="logo">SON<span class="logo-accent">O</span>RA</div>
+                <p>Cultura sonora experimental desde 2018. Noticias, reseñas, entrevistas y el sonido del margen.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Secciones</h4>
+                <ul>
+                    <li><a href="#">Noticias</a></li>
+                    <li><a href="#">Reseñas</a></li>
+                    <li><a href="#">Entrevistas</a></li>
+                    <li><a href="#">Listas</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Multimedia</h4>
+                <ul>
+                    <li><a href="#">Radio</a></li>
+                    <li><a href="#">Podcast</a></li>
+                    <li><a href="#">Videos</a></li>
+                    <li><a href="#">Fotografía</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Contacto</h4>
+                <ul>
+                    <li><a href="#">Prensa</a></li>
+                    <li><a href="#">Publicidad</a></li>
+                    <li><a href="#">Colaboradores</a></li>
+                    <li><a href="#">Legal</a></li>
+                </ul>
+            </div>
         </div>
-    </div>
-    
-    <footer style="background: black; color: white; padding: 40px; text-align: center; margin-top: 50px;">
-        <h2>NOISE MAG</h2>
-        <p>Periodismo musical independiente.</p>
+        <div class="footer-bottom">
+            <p class="footer-copy">© 2026 SONORA. Todos los derechos reservados.</p>
+            <div class="footer-social">
+                <a href="#">Twitter</a>
+                <a href="#">Instagram</a>
+                <a href="#">TikTok</a>
+                <a href="#">YouTube</a>
+            </div>
+        </div>
     </footer>
 
+    <script>
+        // Preloader
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.querySelector('.preloader').classList.add('hidden');
+            }, 2000);
+        });
+
+        // Custom cursor
+        const cursor = document.querySelector('.cursor');
+        let cursorX = 0, cursorY = 0;
+        let mouseX = 0, mouseY = 0;
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+
+        function animateCursor() {
+            cursorX += (mouseX - cursorX) * 0.15;
+            cursorY += (mouseY - cursorY) * 0.15;
+            cursor.style.left = cursorX - 10 + 'px';
+            cursor.style.top = cursorY - 10 + 'px';
+            requestAnimationFrame(animateCursor);
+        }
+        animateCursor();
+
+        document.querySelectorAll('a, button, .news-card, .chart-item').forEach(el => {
+            el.addEventListener('mouseenter', () => cursor.classList.add('active'));
+            el.addEventListener('mouseleave', () => cursor.classList.remove('active'));
+        });
+
+        // Nav active
+        const navLinks = document.querySelectorAll('.nav-bar a');
+        const sections = document.querySelectorAll('section[id]');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (scrollY >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Scroll reveal
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealOnScroll = () => {
+            revealElements.forEach(el => {
+                const elTop = el.getBoundingClientRect().top;
+                if (elTop < window.innerHeight - 100) {
+                    el.classList.add('active');
+                }
+            });
+        };
+        window.addEventListener('scroll', revealOnScroll);
+        window.addEventListener('load', revealOnScroll);
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // News card hover
+        document.querySelectorAll('.news-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.boxShadow = '10px 10px 0 var(--black)';
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.boxShadow = '';
+            });
+        });
+
+        // Chart item hover
+        document.querySelectorAll('.chart-item').forEach(item => {
+            item.addEventListener('mouseenter', () => {
+                item.style.transform = 'translateY(-5px)';
+            });
+            item.addEventListener('mouseleave', () => {
+                item.style.transform = '';
+            });
+        });
+    </script>
 </body>
 </html>
