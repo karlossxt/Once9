@@ -1,0 +1,1484 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CASAS & CÍA — Propiedades Exclusivas</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg: #faf9f7;
+            --cream: #f5f3ef;
+            --black: #1a1a1a;
+            --dark: #2d2d2d;
+            --white: #ffffff;
+            --gold: #b8956a;
+            --gold-light: #d4b896;
+            --sage: #7a8b7a;
+            --taupe: #8b8178;
+            --border: 1px solid rgba(26, 26, 26, 0.1);
+            --font-display: 'Cormorant Garamond', serif;
+            --font-body: 'Montserrat', sans-serif;
+            --font-accent: 'Playfair Display', serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            background: var(--bg);
+            color: var(--black);
+            font-family: var(--font-body);
+            overflow-x: hidden;
+        }
+
+        ::selection {
+            background: var(--gold);
+            color: var(--white);
+        }
+
+        a { color: inherit; text-decoration: none; }
+
+        /* ============ PRELOADER ============ */
+        .preloader {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: var(--black);
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 2rem;
+            transition: opacity 1s ease, visibility 1s ease;
+        }
+
+        .preloader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .preloader-logo {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 300;
+            color: var(--white);
+            letter-spacing: 8px;
+            text-transform: uppercase;
+        }
+
+        .preloader-line {
+            width: 60px;
+            height: 1px;
+            background: var(--gold);
+            animation: preloaderPulse 1.5s ease-in-out infinite;
+        }
+
+        .preloader-text {
+            font-family: var(--font-body);
+            font-size: 0.65rem;
+            color: var(--taupe);
+            letter-spacing: 4px;
+            text-transform: uppercase;
+        }
+
+        @keyframes preloaderPulse {
+            0%, 100% { opacity: 0.3; transform: scaleX(1); }
+            50% { opacity: 1; transform: scaleX(1.5); }
+        }
+
+        /* ============ CUSTOM CURSOR ============ */
+        .cursor {
+            width: 40px;
+            height: 40px;
+            border: 1px solid var(--gold);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.2s ease, opacity 0.2s ease, border-color 0.3s ease;
+        }
+
+        .cursor-dot {
+            width: 6px;
+            height: 6px;
+            background: var(--gold);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.1s ease;
+        }
+
+        .cursor.active {
+            transform: scale(1.8);
+            border-color: var(--black);
+            opacity: 0.5;
+        }
+
+        /* ============ HEADER ============ */
+        header {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%;
+            z-index: 1000;
+            transition: all 0.4s ease;
+        }
+
+        header.scrolled {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 30px rgba(0, 0, 0, 0.05);
+        }
+
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 4rem;
+            transition: padding 0.4s ease;
+        }
+
+        header.scrolled .header-top {
+            padding: 1rem 4rem;
+        }
+
+        .logo {
+            font-family: var(--font-display);
+            font-size: 1.8rem;
+            font-weight: 300;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+        }
+
+        .logo-accent {
+            font-style: italic;
+            color: var(--gold);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            font-family: var(--font-body);
+            font-size: 0.7rem;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--dark);
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px; left: 0;
+            width: 0; height: 1px;
+            background: var(--gold);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--gold);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            font-family: var(--font-body);
+            font-size: 0.65rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 1rem 2rem;
+            border: 1px solid var(--black);
+            background: transparent;
+            cursor: pointer;
+            transition: all 0.4s ease;
+        }
+
+        .nav-cta:hover {
+            background: var(--black);
+            color: var(--white);
+        }
+
+        /* ============ HERO ============ */
+        .hero {
+            position: relative;
+            height: 100vh;
+            min-height: 700px;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+        }
+
+        .hero-bg img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.85);
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: linear-gradient(135deg, rgba(26, 26, 26, 0.7) 0%, rgba(26, 26, 26, 0.3) 100%);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            padding: 0 4rem;
+            max-width: 800px;
+        }
+
+        .hero-tag {
+            font-family: var(--font-body);
+            font-size: 0.65rem;
+            font-weight: 500;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .hero-tag::before {
+            content: '';
+            width: 40px;
+            height: 1px;
+            background: var(--gold);
+        }
+
+        .hero-title {
+            font-family: var(--font-display);
+            font-size: clamp(3rem, 7vw, 5.5rem);
+            font-weight: 300;
+            line-height: 1.1;
+            color: var(--white);
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-title em {
+            font-style: italic;
+            color: var(--gold-light);
+        }
+
+        .hero-desc {
+            font-family: var(--font-body);
+            font-size: 1rem;
+            font-weight: 300;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.8;
+            margin-bottom: 3rem;
+            max-width: 500px;
+        }
+
+        .hero-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 1.5rem;
+            font-family: var(--font-body);
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--white);
+            padding: 1.2rem 2.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.4s ease;
+        }
+
+        .hero-cta:hover {
+            background: var(--white);
+            color: var(--black);
+            border-color: var(--white);
+        }
+
+        .hero-cta svg {
+            width: 20px;
+            height: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .hero-cta:hover svg {
+            transform: translateX(5px);
+        }
+
+        /* Search Bar */
+        .hero-search {
+            position: absolute;
+            bottom: 4rem;
+            right: 4rem;
+            z-index: 10;
+        }
+
+        .search-box {
+            background: var(--white);
+            padding: 2rem;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+            max-width: 500px;
+        }
+
+        .search-title {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin-bottom: 1.5rem;
+            color: var(--black);
+        }
+
+        .search-fields {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .search-input {
+            font-family: var(--font-body);
+            font-size: 0.85rem;
+            padding: 1rem 1.5rem;
+            border: 1px solid rgba(26, 26, 26, 0.15);
+            background: var(--bg);
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .search-input:focus {
+            border-color: var(--gold);
+        }
+
+        .search-input::placeholder {
+            color: var(--taupe);
+        }
+
+        .search-btn {
+            width: 100%;
+            padding: 1rem;
+            background: var(--black);
+            color: var(--white);
+            border: none;
+            font-family: var(--font-body);
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.4s ease;
+        }
+
+        .search-btn:hover {
+            background: var(--gold);
+        }
+
+        /* ============ STATS ============ */
+        .stats {
+            background: var(--white);
+            border-top: var(--border);
+            border-bottom: var(--border);
+            padding: 4rem 0;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .stat-item:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            right: 0; top: 50%;
+            transform: translateY(-50%);
+            width: 1px;
+            height: 60%;
+            background: rgba(26, 26, 26, 0.1);
+        }
+
+        .stat-number {
+            font-family: var(--font-display);
+            font-size: 3.5rem;
+            font-weight: 300;
+            color: var(--gold);
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-family: var(--font-body);
+            font-size: 0.7rem;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--taupe);
+        }
+
+        /* ============ SECTION HEADER ============ */
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            padding: 0 4rem;
+            margin-bottom: 3rem;
+        }
+
+        .section-title {
+            font-family: var(--font-display);
+            font-size: clamp(2.5rem, 4vw, 3.5rem);
+            font-weight: 300;
+            line-height: 1.1;
+        }
+
+        .section-title em {
+            font-style: italic;
+            color: var(--gold);
+        }
+
+        .section-desc {
+            font-family: var(--font-body);
+            font-size: 0.85rem;
+            color: var(--taupe);
+            max-width: 400px;
+            line-height: 1.7;
+        }
+
+        /* ============ FILTER BUTTONS ============ */
+        .filter-btns {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .filter-btn {
+            font-family: var(--font-body);
+            font-size: 0.65rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding: 0.8rem 1.5rem;
+            border: 1px solid rgba(26, 26, 26, 0.2);
+            background: transparent;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: var(--black);
+            color: var(--white);
+            border-color: var(--black);
+        }
+
+        /* ============ PROPERTIES GRID ============ */
+        .properties-section {
+            padding: 6rem 0;
+        }
+
+        .properties-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            padding: 0 4rem;
+        }
+
+        .property-card {
+            background: var(--white);
+            overflow: hidden;
+            transition: all 0.5s ease;
+            cursor: pointer;
+        }
+
+        .property-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.1);
+        }
+
+        .property-image {
+            position: relative;
+            height: 300px;
+            overflow: hidden;
+        }
+
+        .property-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s ease;
+        }
+
+        .property-card:hover .property-image img {
+            transform: scale(1.08);
+        }
+
+        .property-tag {
+            position: absolute;
+            top: 1.5rem; left: 1.5rem;
+            font-family: var(--font-body);
+            font-size: 0.6rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 0.6rem 1.2rem;
+            background: var(--white);
+            color: var(--black);
+        }
+
+        .property-tag.rent {
+            background: var(--sage);
+            color: var(--white);
+        }
+
+        .property-favorite {
+            position: absolute;
+            top: 1.5rem; right: 1.5rem;
+            width: 44px;
+            height: 44px;
+            background: var(--white);
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .property-favorite:hover {
+            background: var(--gold);
+        }
+
+        .property-favorite svg {
+            width: 18px;
+            height: 18px;
+            stroke: var(--black);
+            fill: none;
+            transition: all 0.3s ease;
+        }
+
+        .property-favorite:hover svg {
+            stroke: var(--white);
+        }
+
+        .property-content {
+            padding: 2rem;
+        }
+
+        .property-price {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            font-weight: 400;
+            color: var(--black);
+            margin-bottom: 0.5rem;
+        }
+
+        .property-price span {
+            font-size: 1rem;
+            color: var(--taupe);
+            font-weight: 300;
+        }
+
+        .property-title {
+            font-family: var(--font-display);
+            font-size: 1.4rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .property-location {
+            font-family: var(--font-body);
+            font-size: 0.8rem;
+            color: var(--taupe);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .property-location svg {
+            width: 14px;
+            height: 14px;
+            stroke: var(--gold);
+        }
+
+        .property-features {
+            display: flex;
+            gap: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: var(--border);
+        }
+
+        .feature {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: var(--font-body);
+            font-size: 0.75rem;
+            color: var(--dark);
+        }
+
+        .feature svg {
+            width: 16px;
+            height: 16px;
+            stroke: var(--gold);
+        }
+
+        .property-footer {
+            padding: 1.5rem 2rem;
+            background: var(--cream);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .property-id {
+            font-family: var(--font-body);
+            font-size: 0.65rem;
+            letter-spacing: 1px;
+            color: var(--taupe);
+        }
+
+        .property-link {
+            font-family: var(--font-body);
+            font-size: 0.65rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--gold);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: gap 0.3s ease;
+        }
+
+        .property-link:hover {
+            gap: 1rem;
+        }
+
+        .property-link svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        /* ============ CTA SECTION ============ */
+        .cta-section {
+            position: relative;
+            padding: 10rem 4rem;
+            background: var(--black);
+            overflow: hidden;
+        }
+
+        .cta-bg {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            opacity: 0.3;
+        }
+
+        .cta-bg img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 10;
+            max-width: 700px;
+        }
+
+        .cta-tag {
+            font-family: var(--font-body);
+            font-size: 0.65rem;
+            font-weight: 500;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 2rem;
+        }
+
+        .cta-title {
+            font-family: var(--font-display);
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 300;
+            line-height: 1.2;
+            color: var(--white);
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-title em {
+            font-style: italic;
+            color: var(--gold-light);
+        }
+
+        .cta-desc {
+            font-family: var(--font-body);
+            font-size: 1rem;
+            font-weight: 300;
+            color: rgba(255, 255, 255, 0.6);
+            line-height: 1.8;
+            margin-bottom: 3rem;
+        }
+
+        .cta-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 1.5rem;
+            font-family: var(--font-body);
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--black);
+            padding: 1.2rem 2.5rem;
+            background: var(--gold);
+            border: none;
+            cursor: pointer;
+            transition: all 0.4s ease;
+        }
+
+        .cta-btn:hover {
+            background: var(--white);
+        }
+
+        .cta-btn svg {
+            width: 20px;
+            height: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .cta-btn:hover svg {
+            transform: translateX(5px);
+        }
+
+        /* ============ TESTIMONIALS ============ */
+        .testimonials {
+            padding: 8rem 0;
+            background: var(--cream);
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 3rem;
+            padding: 0 4rem;
+        }
+
+        .testimonial-card {
+            background: var(--white);
+            padding: 3rem;
+            position: relative;
+        }
+
+        .testimonial-quote {
+            position: absolute;
+            top: 2rem; left: 2rem;
+            font-family: var(--font-accent);
+            font-size: 6rem;
+            line-height: 1;
+            color: var(--gold);
+            opacity: 0.2;
+        }
+
+        .testimonial-text {
+            font-family: var(--font-accent);
+            font-style: italic;
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: var(--dark);
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-display);
+            font-size: 1.2rem;
+            color: var(--white);
+        }
+
+        .author-name {
+            font-family: var(--font-body);
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .author-role {
+            font-family: var(--font-body);
+            font-size: 0.7rem;
+            color: var(--taupe);
+        }
+
+        /* ============ FOOTER ============ */
+        footer {
+            background: var(--black);
+            color: var(--white);
+            padding: 5rem 4rem 2rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 4rem;
+            margin-bottom: 4rem;
+        }
+
+        .footer-brand .logo {
+            color: var(--white);
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-brand p {
+            font-family: var(--font-body);
+            font-size: 0.85rem;
+            color: var(--taupe);
+            line-height: 1.8;
+            max-width: 300px;
+        }
+
+        .footer-col h4 {
+            font-family: var(--font-body);
+            font-size: 0.65rem;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-col a {
+            font-family: var(--font-body);
+            font-size: 0.85rem;
+            color: var(--taupe);
+            transition: color 0.3s;
+        }
+
+        .footer-col a:hover {
+            color: var(--white);
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-copy {
+            font-family: var(--font-body);
+            font-size: 0.7rem;
+            color: var(--taupe);
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .footer-social a {
+            width: 40px;
+            height: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+
+        .footer-social a:hover {
+            background: var(--gold);
+            border-color: var(--gold);
+        }
+
+        .footer-social svg {
+            width: 16px;
+            height: 16px;
+            fill: var(--white);
+        }
+
+        /* ============ RESPONSIVE ============ */
+        @media (max-width: 1200px) {
+            .properties-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 900px) {
+            .header-top {
+                padding: 1.5rem 2rem;
+            }
+            .nav-links {
+                display: none;
+            }
+            .hero-content {
+                padding: 0 2rem;
+            }
+            .hero-search {
+                position: relative;
+                bottom: auto;
+                right: auto;
+                padding: 0 2rem;
+                margin-top: 2rem;
+            }
+            .search-box {
+                max-width: 100%;
+            }
+            .section-header {
+                flex-direction: column;
+                gap: 1.5rem;
+                padding: 0 2rem;
+                align-items: flex-start;
+            }
+            .properties-grid {
+                grid-template-columns: 1fr;
+                padding: 0 2rem;
+            }
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+                padding: 0 2rem;
+            }
+            .cta-section {
+                padding: 6rem 2rem;
+            }
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .hero {
+                min-height: 600px;
+            }
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .stat-item:not(:last-child)::after {
+                display: none;
+            }
+            .filter-btns {
+                flex-wrap: wrap;
+            }
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+            .footer-bottom {
+                flex-direction: column;
+                gap: 1.5rem;
+                text-align: center;
+            }
+        }
+
+        /* ============ ANIMATIONS ============ */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 1s cubic-bezier(0.5, 0, 0, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.2s; }
+        .reveal-delay-3 { transition-delay: 0.3s; }
+    </style>
+</head>
+<body>
+    <!-- Preloader -->
+    <div class="preloader">
+        <div class="preloader-logo">CASAS <span class="logo-accent">&</span> CÍA</div>
+        <div class="preloader-line"></div>
+        <div class="preloader-text">Propiedades exclusivas</div>
+    </div>
+
+    <!-- Custom Cursor -->
+    <div class="cursor"></div>
+    <div class="cursor-dot"></div>
+
+    <!-- Header -->
+    <header>
+        <div class="header-top">
+            <div class="logo">CASAS <span class="logo-accent">&</span> CÍA</div>
+            <nav class="nav-links">
+                <a href="#propiedades">Comprar</a>
+                <a href="#propiedades">Rentar</a>
+                <a href="#vender">Vender</a>
+                <a href="#nosotros">Nosotros</a>
+                <button class="nav-cta">Contactar</button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-bg">
+            <img src="https://images.unsplash.com/photo-1600596542815-2a4d9fddace7?auto=format&fit=crop&w=1920&q=80" alt="Casa de lujo">
+        </div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <div class="hero-tag">Exclusividad</div>
+            <h1 class="hero-title">Encuentra tu <em>lugar</em> en el mundo</h1>
+            <p class="hero-desc">Descubre propiedades exclusivas seleccionadas para quienes buscan más que una casa, un estilo de vida.</p>
+            <a href="#propiedades" class="hero-cta">
+                Explorar Propiedades
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+            </a>
+        </div>
+        <div class="hero-search">
+            <div class="search-box">
+                <h3 class="search-title">Buscar Propiedad</h3>
+                <div class="search-fields">
+                    <input type="text" placeholder="Ubicación (ej. Polanco, CDMX)" class="search-input">
+                    <select class="search-input">
+                        <option value="">Tipo de Propiedad</option>
+                        <option value="casa">Casa</option>
+                        <option value="departamento">Departamento</option>
+                        <option value="terreno">Terreno</option>
+                        <option value="oficina">Oficina</option>
+                    </select>
+                    <select class="search-input">
+                        <option value="">Rango de Precio</option>
+                        <option value="1">Menos de $1,000,000</option>
+                        <option value="2">$1,000,000 - $3,000,000</option>
+                        <option value="3">$3,000,000 - $5,000,000</option>
+                        <option value="4">Más de $5,000,000</option>
+                    </select>
+                    <button class="search-btn">Buscar Propiedades</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats -->
+    <section class="stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item reveal">
+                    <div class="stat-number">850+</div>
+                    <div class="stat-label">Propiedades Activas</div>
+                </div>
+                <div class="stat-item reveal reveal-delay-1">
+                    <div class="stat-number">1,200+</div>
+                    <div class="stat-label">Clientes Satisfechos</div>
+                </div>
+                <div class="stat-item reveal reveal-delay-2">
+                    <div class="stat-number">15</div>
+                    <div class="stat-label">Años de Experiencia</div>
+                </div>
+                <div class="stat-item reveal reveal-delay-3">
+                    <div class="stat-number">98%</div>
+                    <div class="stat-label">Tasa de Satisfacción</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Properties -->
+    <section class="properties-section" id="propiedades">
+        <div class="section-header">
+            <div>
+                <h2 class="section-title">Propiedades <em>Destacadas</em></h2>
+                <p class="section-desc">Selección curada de las mejores oportunidades inmobiliarias del momento.</p>
+            </div>
+            <div class="filter-btns">
+                <button onclick="filtrar('todo')" class="filter-btn active">Todos</button>
+                <button onclick="filtrar('Venta')" class="filter-btn">Venta</button>
+                <button onclick="filtrar('Renta')" class="filter-btn">Renta</button>
+            </div>
+        </div>
+        <div id="propiedades-grid" class="properties-grid">
+            <!-- Se genera con JavaScript -->
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="cta-bg">
+            <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1920&q=80" alt="Interior">
+        </div>
+        <div class="cta-content">
+            <div class="cta-tag">Servicio Premium</div>
+            <h2 class="cta-title">¿Buscas vender tu <em>propiedad</em>?</h2>
+            <p class="cta-desc">Nuestro equipo de expertos te acompaña en todo el proceso. Desde la tasación hasta la firma, nos encargamos de cada detalle para que obtengas el mejor resultado.</p>
+            <button class="cta-btn">
+                Solicitar Tasación
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+            </button>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials">
+        <div class="section-header">
+            <div>
+                <h2 class="section-title">Lo que dicen <em>nuestros</em> clientes</h2>
+            </div>
+        </div>
+        <div class="testimonials-grid">
+            <div class="testimonial-card reveal">
+                <div class="testimonial-quote">"</div>
+                <p class="testimonial-text">El equipo de Casas & Cía hizo que el proceso de compra fuera increíblemente sencillo. Encontramos la casa perfecta en menos de un mes.</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">MG</div>
+                    <div>
+                        <div class="author-name">María González</div>
+                        <div class="author-role">Compradora en Polanco</div>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card reveal reveal-delay-1">
+                <div class="testimonial-quote">"</div>
+                <p class="testimonial-text">Profesionales de pies a cabeza. Mi departamento se vendió en tiempo récord y a un precio excelente. Totalmente recomendados.</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">RL</div>
+                    <div>
+                        <div class="author-name">Roberto López</div>
+                        <div class="author-role">Vendedor en Santa Fe</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <div class="logo">CASAS <span class="logo-accent">&</span> CÍA</div>
+                <p>Más de 15 años conectando personas con el hogar de sus sueños. Excelencia, confianza y servicio personalizado.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Servicios</h4>
+                <ul>
+                    <li><a href="#">Comprar</a></li>
+                    <li><a href="#">Vender</a></li>
+                    <li><a href="#">Rentar</a></li>
+                    <li><a href="#">Tasaciones</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Empresa</h4>
+                <ul>
+                    <li><a href="#">Sobre Nosotros</a></li>
+                    <li><a href="#">Equipo</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Prensa</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Contacto</h4>
+                <ul>
+                    <li><a href="#">+52 55 1234 5678</a></li>
+                    <li><a href="#">hola@casasycompañia.com</a></li>
+                    <li><a href="#">Av. Reforma 505, CDMX</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p class="footer-copy">© 2026 Casas & Cía. Todos los derechos reservados.</p>
+            <div class="footer-social">
+                <a href="#">
+                    <svg viewBox="0 0 24 24"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/></svg>
+                </a>
+                <a href="#">
+                    <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                </a>
+                <a href="#">
+                    <svg viewBox="0 0 24 24"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/></svg>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Preloader
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.querySelector('.preloader').classList.add('hidden');
+            }, 2500);
+        });
+
+        // Custom Cursor
+        const cursor = document.querySelector('.cursor');
+        const cursorDot = document.querySelector('.cursor-dot');
+        let cursorX = 0, cursorY = 0;
+        let mouseX = 0, mouseY = 0;
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+
+        function animateCursor() {
+            cursorX += (mouseX - cursorX) * 0.1;
+            cursorY += (mouseY - cursorY) * 0.1;
+            cursor.style.left = cursorX - 20 + 'px';
+            cursor.style.top = cursorY - 20 + 'px';
+            cursorDot.style.left = mouseX - 3 + 'px';
+            cursorDot.style.top = mouseY - 3 + 'px';
+            requestAnimationFrame(animateCursor);
+        }
+        animateCursor();
+
+        document.querySelectorAll('a, button, .property-card').forEach(el => {
+            el.addEventListener('mouseenter', () => cursor.classList.add('active'));
+            el.addEventListener('mouseleave', () => cursor.classList.remove('active'));
+        });
+
+        // Header Scroll Effect
+        const header = document.querySelector('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Scroll Reveal
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealOnScroll = () => {
+            revealElements.forEach(el => {
+                const elTop = el.getBoundingClientRect().top;
+                if (elTop < window.innerHeight - 100) {
+                    el.classList.add('active');
+                }
+            });
+        };
+        window.addEventListener('scroll', revealOnScroll);
+        window.addEventListener('load', revealOnScroll);
+
+        // Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Property Data
+        const propiedades = [
+            {
+                id: 1,
+                titulo: "Penthouse de Lujo",
+                tipo: "Venta",
+                precio: 5200000,
+                ubicacion: "Monterrey, San Pedro",
+                habs: 3,
+                banios: 3,
+                m2: 180,
+                img: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80"
+            },
+            {
+                id: 2,
+                titulo: "Casa Familiar con Jardín",
+                tipo: "Renta",
+                precio: 18500,
+                ubicacion: "Mérida, Yucatán",
+                habs: 4,
+                banios: 2,
+                m2: 250,
+                img: "https://images.unsplash.com/photo-1568605114967-8130f3a36994?auto=format&fit=crop&w=800&q=80"
+            },
+            {
+                id: 3,
+                titulo: "Loft Industrial",
+                tipo: "Renta",
+                precio: 22000,
+                ubicacion: "CDMX, Condesa",
+                habs: 1,
+                banios: 1,
+                m2: 85,
+                img: "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=800&q=80"
+            },
+            {
+                id: 4,
+                titulo: "Residencia Colonial",
+                tipo: "Venta",
+                precio: 4100000,
+                ubicacion: "Querétaro, Centro",
+                habs: 5,
+                banios: 4,
+                m2: 320,
+                img: "https://images.unsplash.com/photo-1600596542815-2a4d9fddace7?auto=format&fit=crop&w=800&q=80"
+            },
+            {
+                id: 5,
+                titulo: "Departamento Minimalista",
+                tipo: "Venta",
+                precio: 1950000,
+                ubicacion: "Puebla, Angelópolis",
+                habs: 2,
+                banios: 2,
+                m2: 110,
+                img: "https://images.unsplash.com/photo-1493809842364-78817add7ffb?auto=format&fit=crop&w=800&q=80"
+            },
+            {
+                id: 6,
+                titulo: "Cabaña en el Bosque",
+                tipo: "Renta",
+                precio: 12000,
+                ubicacion: "Valle de Bravo",
+                habs: 2,
+                banios: 1,
+                m2: 95,
+                img: "https://images.unsplash.com/photo-1449844908441-8829872d2607?auto=format&fit=crop&w=800&q=80"
+            }
+        ];
+
+        // Render Properties
+        const contenedor = document.getElementById('propiedades-grid');
+
+        function mostrarPropiedades(lista) {
+            contenedor.innerHTML = '';
+            
+            lista.forEach((prop, index) => {
+                const precioFormato = prop.tipo === 'Venta' 
+                    ? new Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN', maximumFractionDigits: 0 }).format(prop.precio)
+                    : new Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN', maximumFractionDigits: 0 }).format(prop.precio) + ' /mes';
+                
+                const tagClass = prop.tipo === 'Renta' ? 'rent' : '';
+
+                const card = `
+                    <div class="property-card reveal reveal-delay-${(index % 3) + 1}">
+                        <div class="property-image">
+                            <img src="${prop.img}" alt="${prop.titulo}">
+                            <span class="property-tag ${tagClass}">${prop.tipo}</span>
+                            <button class="property-favorite">
+                                <svg viewBox="0 0 24 24" stroke-width="1.5">
+                                    <path d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="property-content">
+                            <div class="property-price">${precioFormato}</div>
+                            <h3 class="property-title">${prop.titulo}</h3>
+                            <p class="property-location">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <path d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                    <path d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/>
+                                </svg>
+                                ${prop.ubicacion}
+                            </p>
+                            <div class="property-features">
+                                <span class="feature">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                        <path d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"/>
+                                    </svg>
+                                    ${prop.habs} Hab.
+                                </span>
+                                <span class="feature">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                        <path d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                    </svg>
+                                    ${prop.banios} Baños
+                                </span>
+                                <span class="feature">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                        <path d="M3.75 3.75v4.5m0-4.5h4.5m-4.5 0L9 9M3.75 20.25v-4.5m0 4.5h4.5m-4.5 0L9 15M20.25 3.75h-4.5m4.5 0v4.5m0-4.5L15 9m5.25 11.25h-4.5m4.5 0v-4.5m0 4.5L15 15"/>
+                                    </svg>
+                                    ${prop.m2}m²
+                                </span>
+                            </div>
+                        </div>
+                        <div class="property-footer">
+                            <span class="property-id">ID: ${prop.id.toString().padStart(4, '0')}</span>
+                            <a href="#" class="property-link">
+                                Ver Detalles
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <path d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                `;
+                contenedor.innerHTML += card;
+            });
+
+            // Re-init reveal for new elements
+            setTimeout(() => {
+                document.querySelectorAll('.property-card.reveal').forEach(el => {
+                    const elTop = el.getBoundingClientRect().top;
+                    if (elTop < window.innerHeight - 100) {
+                        el.classList.add('active');
+                    }
+                });
+            }, 100);
+        }
+
+        // Filter Function
+        function filtrar(criterio) {
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            if (criterio === 'todo') {
+                mostrarPropiedades(propiedades);
+            } else {
+                const filtradas = propiedades.filter(p => p.tipo === criterio);
+                mostrarPropiedades(filtradas);
+            }
+        }
+
+        // Initial Load
+        mostrarPropiedades(propiedades);
+    </script>
+</body>
+</html>
