@@ -149,6 +149,15 @@
             border: none; cursor: pointer; transition: all 0.3s;
         }
         .cta-btn:hover { transform: translateY(-3px); box-shadow: 0 15px 40px rgba(37,211,102,0.3); }
+        .cta-secondary {
+            display: inline-flex; align-items: center; gap: 1rem;
+            padding: 1.2rem 3rem; background: transparent; color: var(--text);
+            font-family: var(--font-body); font-size: 0.75rem; font-weight: 600;
+            letter-spacing: 2px; text-transform: uppercase;
+            border: 1px solid var(--border); cursor: pointer; transition: all 0.3s;
+            margin-left: 1rem;
+        }
+        .cta-secondary:hover { background: var(--text); color: var(--bg); }
 
         footer {
             border-top: 1px solid var(--border); padding: 3rem 4rem;
@@ -262,9 +271,14 @@
 
         <div class="cta-case">
             <h3>¿Quieres un sistema automatizado como este para tu negocio?</h3>
-            <a href="https://wa.me/525588374947?text=Hola%20ONCE9,%20vi%20el%20caso%20de%20Rifas%20Lucha%20M%C3%A9xico%20y%20me%20interesa%20un%20sistema%20similar." target="_blank" class="cta-btn">
-                <i class="fab fa-whatsapp"></i> Hablemos por WhatsApp
-            </a>
+            <div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 1rem;">
+                <a href="https://wa.me/525588374947?text=Hola%20ONCE9,%20vi%20el%20caso%20de%20Rifas%20Lucha%20M%C3%A9xico%20y%20me%20interesa%20un%20sistema%20similar." target="_blank" class="cta-btn">
+                    <i class="fab fa-whatsapp"></i> Hablemos por WhatsApp
+                </a>
+                <a href="https://rifaluchamexico.com.mx/" target="_blank" class="cta-secondary">
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i> Ver Proyecto en Vivo
+                </a>
+            </div>
         </div>
     </div>
 
