@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caso de Estudio — WhiteBox Music | ONCE9</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/x-icon" href="logoonce.jpg">
+    <style>
+        :root {
+            --bg: #030303;
+            --card: #0a0a0a;
+            --surface: #111111;
+            --text: #f0f0f0;
+            --text-dim: #666;
+            --accent: #00f3ff;
+            --accent-glow: rgba(0, 243, 255, 0.15);
+            --coral: #ff6b4a;
+            --border: rgba(255, 255, 255, 0.06);
+            --font-display: 'Space Grotesk', sans-serif;
+            --font-body: 'Inter', sans-serif;
+            --font-serif: 'Playfair Display', serif;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: var(--font-body);
+            overflow-x: hidden;
+        }
+        ::selection { background: var(--accent); color: var(--bg); }
+        a { color: inherit; text-decoration: none; }
+
+        nav {
+            position: fixed; top: 0; left: 0; width: 100%;
+            padding: 1.5rem 4rem;
+            display: flex; justify-content: space-between; align-items: center;
+            z-index: 1000;
+            background: rgba(3,3,3,0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+        }
+        .brand { font-family: var(--font-display); font-size: 1.8rem; font-weight: 700; letter-spacing: -2px; }
+        .brand span { color: var(--accent); }
+        .nav-back {
+            font-size: 0.7rem; font-weight: 500; letter-spacing: 2px; text-transform: uppercase;
+            color: var(--text-dim); display: flex; align-items: center; gap: 0.8rem; transition: color 0.3s;
+        }
+        .nav-back:hover { color: var(--accent); }
+
+        .hero-case {
+            min-height: 70vh; display: flex; flex-direction: column; justify-content: flex-end;
+            padding: 8rem 4rem 4rem; position: relative;
+        }
+        .hero-case::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(135deg, rgba(99,102,241,0.08) 0%, transparent 50%);
+        }
+        .hero-tag {
+            font-size: 0.6rem; font-weight: 600; letter-spacing: 4px; text-transform: uppercase;
+            color: #6366f1; margin-bottom: 1.5rem;
+            display: flex; align-items: center; gap: 1rem;
+        }
+        .hero-tag::before { content: ''; width: 40px; height: 1px; background: #6366f1; }
+        .hero-case h1 {
+            font-family: var(--font-display); font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700; letter-spacing: -3px; margin-bottom: 1rem;
+        }
+        .hero-case h1 .accent { color: #6366f1; }
+        .hero-meta {
+            font-size: 0.85rem; color: var(--text-dim); display: flex; gap: 2rem; margin-top: 1rem;
+        }
+        .hero-meta span { display: flex; align-items: center; gap: 0.5rem; }
+
+        .content { max-width: 900px; margin: 0 auto; padding: 4rem; }
+
+        .case-section { margin-bottom: 5rem; }
+        .case-label {
+            font-size: 0.6rem; font-weight: 600; letter-spacing: 4px; text-transform: uppercase;
+            color: #6366f1; margin-bottom: 1.5rem;
+        }
+        .case-section h2 {
+            font-family: var(--font-display); font-size: 2rem; font-weight: 700;
+            letter-spacing: -1px; margin-bottom: 1.5rem;
+        }
+        .case-section p {
+            font-size: 1.05rem; color: var(--text-dim); line-height: 1.9; margin-bottom: 1rem;
+        }
+
+        .highlight-box {
+            background: var(--surface); border-left: 3px solid #6366f1;
+            padding: 2rem; margin: 2rem 0;
+        }
+        .highlight-box h3 {
+            font-family: var(--font-display); font-size: 1.1rem; font-weight: 600;
+            margin-bottom: 0.8rem;
+        }
+        .highlight-box p { font-size: 0.95rem; margin-bottom: 0; }
+
+        .tech-stack {
+            display: flex; flex-wrap: wrap; gap: 0.8rem; margin: 2rem 0;
+        }
+        .tech-tag {
+            font-size: 0.65rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase;
+            padding: 0.6rem 1.2rem; border: 1px solid var(--border); color: var(--text-dim);
+        }
+
+        .screenshots {
+            display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; margin: 2rem 0;
+        }
+        .screenshot {
+            background: var(--surface); border: 1px solid var(--border);
+            aspect-ratio: 9/16; display: flex; flex-direction: column;
+            align-items: center; justify-content: center; gap: 1rem;
+            color: var(--text-dim); font-size: 0.75rem; text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        .screenshot i { font-size: 2rem; color: #6366f1; }
+
+        .result-stat {
+            display: flex; gap: 3rem; margin: 2rem 0;
+        }
+        .result-item { text-align: center; }
+        .result-number {
+            font-family: var(--font-display); font-size: 2.5rem; font-weight: 700;
+            color: #6366f1; line-height: 1; margin-bottom: 0.5rem;
+        }
+        .result-label {
+            font-size: 0.65rem; letter-spacing: 2px; text-transform: uppercase; color: var(--text-dim);
+        }
+
+        .cta-case {
+            text-align: center; padding: 5rem 0; border-top: 1px solid var(--border);
+            margin-top: 4rem;
+        }
+        .cta-case h3 {
+            font-family: var(--font-display); font-size: 1.8rem; font-weight: 700;
+            letter-spacing: -1px; margin-bottom: 2rem;
+        }
+        .cta-btn {
+            display: inline-flex; align-items: center; gap: 1rem;
+            padding: 1.2rem 3rem; background: #25d366; color: #fff;
+            font-family: var(--font-body); font-size: 0.75rem; font-weight: 600;
+            letter-spacing: 2px; text-transform: uppercase;
+            border: none; cursor: pointer; transition: all 0.3s;
+        }
+        .cta-btn:hover { transform: translateY(-3px); box-shadow: 0 15px 40px rgba(37,211,102,0.3); }
+
+        footer {
+            border-top: 1px solid var(--border); padding: 3rem 4rem;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .footer-copy { font-size: 0.75rem; color: var(--text-dim); }
+
+        @media (max-width: 768px) {
+            nav { padding: 1.5rem 2rem; }
+            .hero-case { padding: 6rem 2rem 3rem; }
+            .content { padding: 3rem 2rem; }
+            .screenshots { grid-template-columns: 1fr; }
+            .result-stat { flex-direction: column; gap: 2rem; }
+            .hero-meta { flex-direction: column; gap: 0.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="index.html" class="brand">ONCE<span>9</span></a>
+        <a href="index.html" class="nav-back">
+            <i class="fa-solid fa-arrow-left"></i> Volver al Portafolio
+        </a>
+    </nav>
+
+    <section class="hero-case">
+        <div class="hero-tag">Caso de Estudio</div>
+        <h1>WhiteBox <span class="accent">Music</span></h1>
+        <p style="font-size: 1.1rem; color: var(--text-dim); max-width: 600px; line-height: 1.8;">
+            Revista musical con CMS independiente integrado para publicación instantánea de notas, reproductores de audio y galería interactiva.
+        </p>
+        <div class="hero-meta">
+            <span><i class="fa-solid fa-tag"></i> Studio</span>
+            <span><i class="fa-solid fa-calendar"></i> 2025</span>
+            <span><i class="fa-solid fa-layer-group"></i> Audio • Interactive</span>
+        </div>
+    </section>
+
+    <div class="content">
+        <div class="case-section">
+            <div class="case-label">El Reto</div>
+            <h2>El problema del cliente</h2>
+            <p>
+                WhiteBox Music necesitaba una presencia digital que reflejara la identidad de su estudio musical: moderna, profesional y con capacidad de publicar contenido nuevo sin depender de un programador. El sitio debía incluir reproductores de audio, galería de fotos y un sistema de noticias que el equipo pudiera gestionar desde su celular.
+            </p>
+            <div class="highlight-box">
+                <h3>El desafío técnico</h3>
+                <p>Crear una revista musical con CMS propio que permita publicación instantánea de notas, integración de audio streaming y una galería interactiva, todo sin plugins de terceros ni dependencias externas.</p>
+            </div>
+        </div>
+
+        <div class="case-section">
+            <div class="case-label">La Solución</div>
+            <h2>CMS independiente a medida</h2>
+            <p>
+                Desarrollé un CMS (Content Management System) a medida que permite al equipo de WhiteBox publicar notas, subir fotos y gestionar contenido desde cualquier dispositivo. El sistema funciona con Firebase como backend, garantizando sincronización en tiempo real y costos de hosting mínimos.
+            </p>
+            <div class="tech-stack">
+                <span class="tech-tag">Firebase Firestore</span>
+                <span class="tech-tag">Firebase Storage</span>
+                <span class="tech-tag">JavaScript Vanilla</span>
+                <span class="tech-tag">CSS3 Custom</span>
+                <span class="tech-tag">Audio API</span>
+            </div>
+            <p>
+                El diseño neón moderno refleja la identidad del estudio, mientras que la arquitectura técnica garantiza carga rápida y experiencia fluida en móviles y escritorio.
+            </p>
+        </div>
+
+        <div class="case-section">
+            <div class="case-label">La Joya de la Corona</div>
+            <h2>El Panel /backstage</h2>
+            <p>
+                El panel de administración permite al equipo de WhiteBox publicar contenido nuevo en segundos. Desde aquí pueden subir fotos, escribir notas de prensa, gestionar la galería y actualizar reproductores de audio. Todo funciona desde el navegador sin instalar nada.
+            </p>
+            <div class="screenshots">
+                <div class="screenshot">
+                    <i class="fa-solid fa-newspaper"></i>
+                    <span>Editor de Notas</span>
+                    <span style="font-size: 0.6rem; opacity: 0.5;">Captura pendiente</span>
+                </div>
+                <div class="screenshot">
+                    <i class="fa-solid fa-images"></i>
+                    <span>Gestión de Galería</span>
+                    <span style="font-size: 0.6rem; opacity: 0.5;">Captura pendiente</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="case-section">
+            <div class="case-label">El Resultado</div>
+            <h2>Impacto medible</h2>
+            <p>
+                Una revista musical 100% autogestionable que permite al equipo publicar contenido nuevo sin depender de programadores. El CMS propio elimina la dependencia de WordPress y sus plugins lentos.
+            </p>
+            <div class="result-stat">
+                <div class="result-item">
+                    <div class="result-number">0</div>
+                    <div class="result-label">Dependencias externas</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-number">CMS</div>
+                    <div class="result-label">Propio / A medida</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-number">Real Time</div>
+                    <div class="result-label">Publicación</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="cta-case">
+            <h3>¿Quieres un sistema automatizado como este para tu negocio?</h3>
+            <a href="https://wa.me/525588374947?text=Hola%20ONCE9,%20vi%20el%20caso%20de%20WhiteBox%20Music%20y%20me%20interesa%20un%20CMS%20similar." target="_blank" class="cta-btn">
+                <i class="fab fa-whatsapp"></i> Hablemos por WhatsApp
+            </a>
+        </div>
+    </div>
+
+    <footer>
+        <p class="footer-copy">© 2026 <strong>ONCE9</strong> — Karlos SXT</p>
+        <a href="index.html" class="nav-back" style="font-size: 0.65rem;">
+            <i class="fa-solid fa-arrow-left"></i> Portafolio
+        </a>
+    </footer>
+</body>
+</html>

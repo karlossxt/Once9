@@ -611,6 +611,130 @@
             font-size: 0.8rem;
         }
 
+        /* ============ FEATURED CASES ============ */
+        .featured-cases {
+            padding: 6rem 0;
+            background: var(--bg);
+        }
+        .featured-cases-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;
+            padding: 0 4rem; max-width: 1400px; margin: 0 auto;
+        }
+        .featured-case {
+            position: relative; overflow: hidden;
+            border: 1px solid var(--border); background: var(--card);
+            display: flex; flex-direction: column;
+            transition: all 0.5s ease;
+        }
+        .featured-case:hover {
+            border-color: var(--accent); transform: translateY(-8px);
+            box-shadow: 0 30px 60px -15px var(--accent-glow);
+        }
+        .featured-case:nth-child(2):hover {
+            border-color: #6366f1;
+            box-shadow: 0 30px 60px -15px rgba(99,102,241,0.15);
+        }
+        .featured-image {
+            height: 350px; overflow: hidden; position: relative;
+        }
+        .featured-image img {
+            width: 100%; height: 100%; object-fit: cover;
+            filter: grayscale(60%); transition: all 0.6s ease;
+        }
+        .featured-case:hover .featured-image img {
+            filter: grayscale(0%); transform: scale(1.05);
+        }
+        .featured-image::after {
+            content: ''; position: absolute; bottom: 0; left: 0;
+            width: 100%; height: 60%;
+            background: linear-gradient(to top, var(--card), transparent);
+        }
+        .featured-badge {
+            position: absolute; top: 1.5rem; left: 1.5rem;
+            font-size: 0.55rem; font-weight: 700; letter-spacing: 2px;
+            text-transform: uppercase; padding: 0.6rem 1.2rem; z-index: 10;
+            background: var(--accent); color: var(--bg);
+        }
+        .featured-badge.purple { background: #6366f1; color: var(--text); }
+        .featured-content { padding: 2.5rem; flex: 1; display: flex; flex-direction: column; }
+        .featured-category {
+            font-size: 0.6rem; font-weight: 500; letter-spacing: 2px;
+            text-transform: uppercase; color: var(--accent); margin-bottom: 0.8rem;
+        }
+        .featured-category.purple { color: #6366f1; }
+        .featured-title {
+            font-family: var(--font-display); font-size: 1.8rem; font-weight: 700;
+            letter-spacing: -1px; margin-bottom: 1rem; line-height: 1.2;
+        }
+        .featured-desc {
+            font-size: 0.95rem; color: var(--text-dim); line-height: 1.8;
+            margin-bottom: 2rem; flex: 1;
+        }
+        .featured-stats {
+            display: flex; gap: 2rem; margin-bottom: 2rem;
+            padding-top: 1.5rem; border-top: 1px solid var(--border);
+        }
+        .featured-stat-number {
+            font-family: var(--font-display); font-size: 1.5rem; font-weight: 700;
+            color: var(--accent); line-height: 1;
+        }
+        .featured-stat-number.purple { color: #6366f1; }
+        .featured-stat-label {
+            font-size: 0.6rem; letter-spacing: 1px; text-transform: uppercase;
+            color: var(--text-dim); margin-top: 0.3rem;
+        }
+        .featured-link {
+            display: inline-flex; align-items: center; gap: 1rem;
+            font-size: 0.7rem; font-weight: 600; letter-spacing: 2px;
+            text-transform: uppercase; color: var(--text);
+            padding: 1rem 2rem; border: 1px solid var(--border);
+            transition: all 0.3s; align-self: flex-start;
+        }
+        .featured-link:hover {
+            background: var(--text); color: var(--bg); border-color: var(--text);
+        }
+
+        @media (max-width: 900px) {
+            .featured-cases-grid { grid-template-columns: 1fr; padding: 0 2rem; }
+            .featured-image { height: 250px; }
+        }
+
+        /* ============ WHY US ============ */
+        .why-section {
+            background: var(--card);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            padding: 6rem 4rem;
+        }
+        .why-grid {
+            max-width: 1200px; margin: 0 auto;
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 3rem;
+        }
+        .why-card {
+            padding: 2.5rem; border: 1px solid var(--border);
+            transition: all 0.4s ease; position: relative;
+        }
+        .why-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px -10px var(--accent-glow);
+        }
+        .why-icon {
+            font-size: 2rem; color: var(--accent); margin-bottom: 1.5rem;
+        }
+        .why-card h3 {
+            font-family: var(--font-display); font-size: 1.2rem; font-weight: 600;
+            margin-bottom: 1rem; letter-spacing: -0.5px;
+        }
+        .why-card p {
+            font-size: 0.9rem; color: var(--text-dim); line-height: 1.8;
+        }
+
+        @media (max-width: 900px) {
+            .why-grid { grid-template-columns: 1fr; }
+            .why-section { padding: 4rem 2rem; }
+        }
+
         /* ============ SERVICES ============ */
         .services-section {
             background: var(--card);
@@ -1206,6 +1330,76 @@
         </div>
     </div>
 
+    <!-- Featured Cases -->
+    <section class="featured-cases" id="casos-destacados">
+        <div class="section-header" style="padding: 0 4rem; max-width: 1400px; margin: 0 auto 4rem;">
+            <div>
+                <h2 class="section-title">Casos de <span class="accent">Estudio</span></h2>
+                <p class="section-desc">Proyectos reales con resultados medibles.</p>
+            </div>
+            <span class="badge">Destacados</span>
+        </div>
+        <div class="featured-cases-grid">
+            <article class="featured-case reveal">
+                <div class="featured-image">
+                    <img src="pexels-myatezhny39-2938205.jpg" alt="WhiteBox Music">
+                    <span class="featured-badge purple">Caso de Estudio</span>
+                </div>
+                <div class="featured-content">
+                    <div class="featured-category purple">CMS • Audio • Interactive</div>
+                    <h3 class="featured-title">WhiteBox Music</h3>
+                    <p class="featured-desc">Revista musical con CMS independiente integrado para publicación instantánea de notas, reproductores de audio y galería interactiva.</p>
+                    <div class="featured-stats">
+                        <div>
+                            <div class="featured-stat-number purple">CMS</div>
+                            <div class="featured-stat-label">Propio / A medida</div>
+                        </div>
+                        <div>
+                            <div class="featured-stat-number purple">0</div>
+                            <div class="featured-stat-label">Dependencias externas</div>
+                        </div>
+                        <div>
+                            <div class="featured-stat-number purple">Real Time</div>
+                            <div class="featured-stat-label">Publicación</div>
+                        </div>
+                    </div>
+                    <a href="./whitebox-music.html" class="featured-link">
+                        <i class="fa-solid fa-arrow-right"></i> Ver Caso Completo
+                    </a>
+                </div>
+            </article>
+
+            <article class="featured-case reveal reveal-delay-1">
+                <div class="featured-image">
+                    <img src="og-image.png" alt="Rifas Lucha México">
+                    <span class="featured-badge">Caso de Estudio</span>
+                </div>
+                <div class="featured-content">
+                    <div class="featured-category">Gamificación • Live • E-commerce</div>
+                    <h3 class="featured-title">Rifas Lucha México</h3>
+                    <p class="featured-desc">Sistema de boletaje en tiempo real con panel de validación móvil y cero costos fijos de servidor.</p>
+                    <div class="featured-stats">
+                        <div>
+                            <div class="featured-stat-number">$0</div>
+                            <div class="featured-stat-label">Costo mensual servidor</div>
+                        </div>
+                        <div>
+                            <div class="featured-stat-number">100%</div>
+                            <div class="featured-stat-label">Autogestionable</div>
+                        </div>
+                        <div>
+                            <div class="featured-stat-number">Tiempo Real</div>
+                            <div class="featured-stat-label">Sincronización</div>
+                        </div>
+                    </div>
+                    <a href="./rifas-mx.html" class="featured-link">
+                        <i class="fa-solid fa-arrow-right"></i> Ver Caso Completo
+                    </a>
+                </div>
+            </article>
+        </div>
+    </section>
+
     <!-- Projects -->
     <section id="proyectos">
         <div class="section-header">
@@ -1227,21 +1421,6 @@
                     <p class="project-desc">Plataforma de cine con video background inmersivo, tráilers integrados y estética oscura tipo Netflix/HBO.</p>
                     <a href="https://karlossxt.github.io/espika-cine/" target="_blank" class="project-link">
                         <i class="fa-solid fa-film"></i> Ver Proyecto
-                    </a>
-                </div>
-            </article>
-
-            <article class="project-card reveal reveal-delay-1">
-                <div class="project-image">
-                    <img src="pexels-myatezhny39-2938205.jpg" alt="WhiteBox Music">
-                    <span class="project-badge">Studio</span>
-                </div>
-                <div class="project-content">
-                    <div class="project-category">Audio • Interactive</div>
-                    <h3 class="project-title">WhiteBox Music</h3>
-                    <p class="project-desc">Sitio web para estudio musical. Reproductores de audio, galería interactiva y diseño neón moderno.</p>
-                    <a href="https://whiteboxmusic.com.mx/" target="_blank" class="project-link">
-                        <i class="fa-solid fa-music"></i> Ver Proyecto
                     </a>
                 </div>
             </article>
@@ -1305,21 +1484,33 @@
                     </a>
                 </div>
             </article>
+        </div>
+    </section>
 
-            <article class="project-card reveal">
-                <div class="project-image">
-                    <img src="og-image.png" alt="Rifas Lucha México">
-                    <span class="project-badge">E-commerce</span>
-                </div>
-                <div class="project-content">
-                    <div class="project-category">Gamificación • Live</div>
-                    <h3 class="project-title">Rifas Lucha México</h3>
-                    <p class="project-desc">Plataforma interactiva de rifas con boletera digital en tiempo real, pagos integrados y selección de números en vivo.</p>
-                    <a href="https://rifaluchamexico.com.mx/" target="_blank" class="project-link">
-                        <i class="fa-solid fa-ticket"></i> Visitar Sitio
-                    </a>
-                </div>
-            </article>
+    <!-- Why ONCE9 -->
+    <section class="why-section">
+        <div class="section-header">
+            <div>
+                <h2 class="section-title">Por qué trabajar con <span class="accent">ONCE9</span></h2>
+                <p class="section-desc">Lo que nos diferencia de otros desarrolladores.</p>
+            </div>
+        </div>
+        <div class="why-grid">
+            <div class="why-card reveal">
+                <div class="why-icon"><i class="fas fa-code"></i></div>
+                <h3>Código a medida vs Plantillas</h3>
+                <p>No uso WordPress saturado de plugins ni plantillas lentas. Tu web cargará instantáneamente, mejorando tu posicionamiento en Google.</p>
+            </div>
+            <div class="why-card reveal reveal-delay-1">
+                <div class="why-icon"><i class="fas fa-cloud"></i></div>
+                <h3>Cero rentas mensuales</h3>
+                <p>Desarrollo con arquitectura en la nube optimizada (Firebase/Supabase). Tus datos e imágenes se guardan sin generar cobros extras ocultos.</p>
+            </div>
+            <div class="why-card reveal reveal-delay-2">
+                <div class="why-icon"><i class="fas fa-mobile-screen-button"></i></div>
+                <h3>Independencia total</h3>
+                <p>Te entrego un panel administrativo propio (/backstage) para que subas contenido, cambies precios o gestiones tu negocio desde tu celular sin depender de un programador.</p>
+            </div>
         </div>
     </section>
 
@@ -1374,6 +1565,7 @@
                 <ul class="service-features">
                     <li><i class="fas fa-check"></i> Hasta 8 Secciones</li>
                     <li><i class="fas fa-check"></i> Tienda online</li>
+                    <li><i class="fas fa-check"></i> Panel de Administración Autogestionable</li>
                     <li><i class="fas fa-check"></i> Formulario Avanzado + CRM</li>
                     <li><i class="fas fa-check"></i> Máxima Velocidad (SEO Score)</li>
                     <li><i class="fas fa-check"></i> 12 Meses de Mantenimiento</li>
@@ -1387,12 +1579,13 @@
                 <h3 class="service-name">Custom Dev</h3>
                 <div class="service-price">A MEDIDA</div>
                 <ul class="service-features">
-                    <li><i class="fas fa-check"></i> Web Apps & Dashboards</li>
-                    <li><i class="fas fa-check"></i> E-commerce Completo</li>
-                    <li><i class="fas fa-check"></i> Integración de APIs</li>
+                    <li><i class="fas fa-check"></i> Sistemas de Rifas & Boleteras</li>
+                    <li><i class="fas fa-check"></i> Aplicaciones Web en Tiempo Real</li>
+                    <li><i class="fas fa-check"></i> Paneles Administrativos con DB</li>
+                    <li><i class="fas fa-check"></i> Integración de APIs & Pagos</li>
                     <li><i class="fas fa-check"></i> Soporte y Seguridad 365</li>
                 </ul>
-                <a href="https://wa.me/525588374947?text=Tengo%20un%20proyecto%20a%20medida" target="_blank" class="service-btn">Cotizar Proyecto</a>
+                <a href="https://wa.me/525588374947?text=Tengo%20un%20proyecto%20a%20medida%20que%20requiere%20panel%20administrativo" target="_blank" class="service-btn">Cotizar Proyecto</a>
             </div>
         </div>
     </section>
