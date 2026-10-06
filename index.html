@@ -22,7 +22,7 @@
     <link rel="icon" type="image/x-icon" href="logoonce.jpg">
 
     <!-- SEO -->
-    <meta name="description" content="ONCE9 — Desarrollo web, diseño y soluciones digitales. Creamos experiencias digitales que impulsan tu marca.">
+    <meta name="description" content="ONCE9 — Desarrollo web, diseño e invitaciones digitales para bodas y XV años. Creamos experiencias para tu marca y tu evento.">
     <link rel="canonical" href="https://oncenueve.com.mx/">
     <link rel="sitemap" type="application/xml" href="sitemap.xml">
     <meta name="google-site-verification" content="rqNvGfbhvu6MVC1BirOPVVGI7LXzYDPANM3iBjMj8tA" />
@@ -1237,6 +1237,26 @@
             0% { transform: translateX(0); }
             100% { transform: translateX(-50%); }
         }
+    
+        /* Invitaciones digitales */
+        #invitaciones { scroll-margin-top: 100px; }
+        .invitation-intro { display:grid; grid-template-columns: 1.1fr 1fr; gap:3rem; align-items:center; padding:0 4rem 3rem; }
+        .invitation-intro p { color:#aaa; line-height:1.9; margin-bottom:1.5rem; max-width:580px; }
+        .invitation-features { display:flex; flex-wrap:wrap; gap:.65rem; margin-bottom:2rem; }
+        .invitation-features span { border:1px solid var(--border); padding:.6rem .9rem; color:#ccc; font-size:.75rem; }
+        .invitation-flyer { display:block; max-width:320px; justify-self:center; }
+        .invitation-flyer img { width:100%; height:auto; display:block; border:1px solid var(--border); }
+        .invitation-demos { grid-template-columns:repeat(2,minmax(0,1fr)); }
+        .invitation-preview { display:flex; flex-direction:column; align-items:center; justify-content:center; height:280px; gap:10px; text-align:center; position:relative; }
+        .invitation-preview::before { content:''; position:absolute; width:210px; height:240px; border:1px solid currentColor; opacity:.25; border-radius:110px 110px 0 0; top:30px; }
+        .invitation-preview small { font-size:9px; letter-spacing:3px; position:relative; }
+        .invitation-preview strong { font:italic 38px var(--font-serif); position:relative; font-weight:400; }
+        .invitation-preview em { font:30px var(--font-serif); color:#ad8d58; }
+        .invitation-preview.boda { background:linear-gradient(135deg,#e7ebde,#fcf8ec); color:#59644e; }
+        .invitation-preview.xv { background:linear-gradient(135deg,#efd4d1,#fff2e3); color:#925e65; }
+        .invitation-demo-note { color:#999; font-size:.8rem; line-height:1.8; padding:1.5rem 4rem 0; }
+        @media(max-width:900px) { .invitation-intro { grid-template-columns:1fr; padding:0 2rem 2rem; gap:2rem; } .invitation-demos { grid-template-columns:1fr; } .invitation-demo-note { padding:1.5rem 2rem 0; } }
+
     </style>
 </head>
 <body>
@@ -1263,6 +1283,7 @@
         <a href="/" class="brand">ONCE<span>9</span></a>
         <div class="nav-links">
             <a href="#proyectos">Proyectos</a>
+            <a href="#invitaciones">Invitaciones</a>
             <a href="#laboratorio">Laboratorio</a>
             <a href="#servicios">Servicios</a>
             <a href="https://www.instagram.com/once9.dev/" target="_blank">Instagram</a>
@@ -1489,6 +1510,38 @@
         </div>
     </section>
 
+
+    <!-- Invitaciones digitales -->
+    <section id="invitaciones">
+        <div class="section-header">
+            <div>
+                <h2 class="section-title">Tu evento <span class="accent">empieza aquí</span></h2>
+                <p class="section-desc">Invitaciones digitales para bodas, XV años y celebraciones especiales.</p>
+            </div>
+            <span class="badge">Nuevo servicio</span>
+        </div>
+        <div class="invitation-intro">
+            <div>
+                <p>Haz que la emoción comience desde el primer clic. Diseñamos una invitación a tu estilo, lista para compartir por WhatsApp y disfrutar desde el celular.</p>
+                <div class="invitation-features"><span>Diseño personalizado</span><span>Música opcional</span><span>Cuenta regresiva</span><span>Ubicación del evento</span><span>Confirmación de asistencia</span></div>
+                <p>Elige una confirmación por WhatsApp o cotiza un formulario con registro de invitados. Personalizamos nombres, colores, fotografías y los detalles de tu celebración.</p>
+                <a href="https://wa.me/525588374947?text=Hola%20ONCE9%2C%20quiero%20cotizar%20una%20invitaci%C3%B3n%20digital%20para%20mi%20evento." target="_blank" rel="noopener" class="cta-btn">Cotiza tu invitación <span aria-hidden="true">↗</span></a>
+            </div>
+            <a class="invitation-flyer" href="assets/flyer-invitaciones-once9.jpg" target="_blank" rel="noopener" aria-label="Ver flyer de invitaciones digitales ONCE9"><img src="assets/flyer-invitaciones-once9.jpg" width="1122" height="1402" loading="lazy" alt="ONCE9: invitaciones digitales interactivas para bodas, XV años y cumpleaños."></a>
+        </div>
+        <div class="projects-grid invitation-demos">
+            <article class="project-card reveal">
+                <a href="invitaciones/boda/" target="_blank" rel="noopener" class="invitation-preview boda" aria-label="Abrir demo de boda de Lucía y Mateo"><small>NUESTRA BODA</small><strong>Lucía <em>&</em> Mateo</strong><small>17 · ABRIL · 2027</small></a>
+                <div class="project-content"><div class="project-category">Boda · Demo interactiva</div><h3 class="project-title">Lucía & Mateo</h3><p class="project-desc">Un sobre animado y una estética botánica para compartir el inicio de una nueva historia. Con música, calendario e itinerario.</p><a href="invitaciones/boda/" target="_blank" rel="noopener" class="project-link">Explorar invitación <span aria-hidden="true">↗</span></a></div>
+            </article>
+            <article class="project-card reveal reveal-delay-1">
+                <a href="invitaciones/xv-valentina/" target="_blank" rel="noopener" class="invitation-preview xv" aria-label="Abrir demo de XV años de Valentina"><small>UNA NOCHE PARA BRILLAR</small><strong>Valentina</strong><em>XV</em><small>14 · AGOSTO · 2027</small></a>
+                <div class="project-content"><div class="project-category">XV años · Demo interactiva</div><h3 class="project-title">Los XV de Valentina</h3><p class="project-desc">Rosa, champagne y dorado para una celebración inolvidable. Una experiencia con animaciones, música y todos los detalles de la fiesta.</p><a href="invitaciones/xv-valentina/" target="_blank" rel="noopener" class="project-link">Explorar invitación <span aria-hidden="true">↗</span></a></div>
+            </article>
+        </div>
+        <p class="invitation-demo-note">Estas muestras usan datos ilustrativos. Sus formularios guardan respuestas de prueba solo en el navegador; no envían confirmaciones a organizadores.</p>
+    </section>
+
     <!-- Why ONCE9 -->
     <section class="why-section">
         <div class="section-header">
@@ -1588,6 +1641,21 @@
                     <li><i class="fas fa-check"></i> Soporte y Seguridad 365</li>
                 </ul>
                 <a href="https://wa.me/525588374947?text=Tengo%20un%20proyecto%20a%20medida%20que%20requiere%20panel%20administrativo" target="_blank" class="service-btn">Cotizar Proyecto</a>
+            </div>
+
+            <div class="service-card reveal">
+                <div class="service-badge">Nuevo</div>
+                <i class="fas fa-envelope-open-text service-icon" aria-hidden="true"></i>
+                <h3 class="service-name">Invitaciones digitales</h3>
+                <div class="service-price">A TU MEDIDA</div>
+                <ul class="service-features">
+                    <li><i class="fas fa-check"></i> Bodas, XV años y cumpleaños</li>
+                    <li><i class="fas fa-check"></i> Diseño personalizado para celular</li>
+                    <li><i class="fas fa-check"></i> Música y cuenta regresiva</li>
+                    <li><i class="fas fa-check"></i> Ubicación e itinerario del evento</li>
+                    <li><i class="fas fa-check"></i> Confirmación por WhatsApp o formulario</li>
+                </ul>
+                <a href="#invitaciones" class="service-btn">Ver invitaciones de muestra</a>
             </div>
         </div>
     </section>
@@ -1747,6 +1815,7 @@
                     <li><a href="#servicios">Landing Page</a></li>
                     <li><a href="#servicios">Sitio Web Pro</a></li>
                     <li><a href="#servicios">Custom Dev</a></li>
+                    <li><a href="#invitaciones">Invitaciones digitales</a></li>
                 </ul>
             </div>
             <div class="footer-col">
@@ -1846,3 +1915,4 @@
     </script>
 </body>
 </html>
+
